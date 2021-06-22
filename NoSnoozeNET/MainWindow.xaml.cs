@@ -46,7 +46,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm nameer",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 9h",
-                Margin = new Thickness(0, 10, 0, 0)
+                
             };
 
             AlarmItem a3 = new AlarmItem()
@@ -54,7 +54,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm namerino",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 3h",
-                Margin = new Thickness(0,10,0,0)
+                
             };
 
             AlarmItem a4 = new AlarmItem()
@@ -62,7 +62,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm namerinoas",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 3h",
-                Margin = new Thickness(0, 10, 0, 0)
+                
             };
 
             CreateAlarmItem ca = new();

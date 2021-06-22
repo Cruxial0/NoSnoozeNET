@@ -41,6 +41,8 @@ namespace NoSnoozeNET.GUI.Controls
         {
             InitializeComponent();
 
+            this.Margin = new Thickness(0, 5, 0, 5);
+
             RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
 
             _stopwatchBitmap =
