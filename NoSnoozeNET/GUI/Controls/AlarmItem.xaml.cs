@@ -16,6 +16,7 @@ namespace NoSnoozeNET.GUI.Controls
     /// </summary>
     public partial class AlarmItem : UserControl
     {
+        //Declare local image variables
         private static Bitmap _stopwatchBitmap;
         private static Bitmap _optionsBitmap;
 
@@ -41,55 +42,68 @@ namespace NoSnoozeNET.GUI.Controls
         {
             InitializeComponent();
 
+            //Pre-define margin.
             this.Margin = new Thickness(0, 5, 0, 5);
 
+            //Change BitmapScalingMode to HighQuality.
             RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
 
+            //Find Stopwatch image asset.
             _stopwatchBitmap =
                 (Bitmap)Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\Stopwatch.png"));
 
+            //Find Options image asset.
             _optionsBitmap =
                 (Bitmap)Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\Options.png"));
 
+            //Color assets with Application Resources.
             ColorStopwatch(FindResource("StopwatchColor") as SolidColorBrush);
             ColorOptions(FindResource("OptionsColor") as SolidColorBrush);
         }
 
         public async void ColorStopwatch(SolidColorBrush brush)
         {
+            //Make new instance Stopwatch Image to prevent mutability and coloring issues.
             Bitmap source = _stopwatchBitmap;
 
-
-            var c = Color.FromArgb(255, 255, 255);
+            //Make sure brush isn't null.
             if (brush != null)
             {
+                //Get the System.Drawing.Color equivalent of Application Resource brush.
                 var targetColor = Color.FromArgb(brush.Color.R, brush.Color.G, brush.Color.B);
 
-                //Bitmap bp = Dispatcher.InvokeAsync(() => source.ColorReplace(5, c, targetColor), DispatcherPriority.Render).Result;
-                Bitmap bp = await Dispatcher.InvokeAsync(() => source.FastColorReplace(c, targetColor), DispatcherPriority.Render);
+                //Dispatch task to separate thread, then recolor image with Render DispatcherPriority.
+                source = await Dispatcher.InvokeAsync(() => source.FastColorReplace(Color.White, targetColor), DispatcherPriority.Render);
 
-                Stopwatch.Source = bp.ToBitmapImage();
+                //Convert Bitmap to BitmapImage and set it as ImageSource.
+                Stopwatch.Source = source.ToBitmapImage();
             }
         }
 
         public async void ColorOptions(SolidColorBrush brush)
         {
+            //Make new instance Options Image to prevent mutability and coloring issues.
             Bitmap source = _optionsBitmap;
 
-            Color c = Color.FromArgb(255, 255, 255);
+            //Make sure brush isn't null.
             if (brush != null)
             {
+                //Get the System.Drawing.Color equivalent of Application Resource brush.
                 Color targetColor = Color.FromArgb(brush.Color.R, brush.Color.G, brush.Color.B);
 
-                //Bitmap bp = Dispatcher.InvokeAsync(() => source.ColorReplace(5, c, targetColor), DispatcherPriority.Render).Result;
-                Bitmap bp = await Dispatcher.InvokeAsync(() => source.FastColorReplace(c, targetColor), DispatcherPriority.Render);
+                //Dispatch task to separate thread, then recolor image with Render DispatcherPriority.
+                source = await Dispatcher.InvokeAsync(() => source.FastColorReplace(Color.White, targetColor), DispatcherPriority.Render);
 
-                OptionsImg.Source = bp.ToBitmapImage();
+                //Convert Bitmap to BitmapImage and set it as ImageSource.
+                OptionsImg.Source = source.ToBitmapImage();
             }
         }
 
         private void BtnOptions_OnClick(object sender, RoutedEventArgs e)
         {
+            //DO STUFF
+
+            //Placeholder
             StyleSettings ss = new();
             ss.Show();
         }
