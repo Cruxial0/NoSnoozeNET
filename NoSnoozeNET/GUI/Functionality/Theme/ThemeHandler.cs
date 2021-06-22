@@ -16,7 +16,7 @@ namespace NoSnoozeNET.GUI.Functionality.Theme
             //Check if directory exists. Create new directory if it doesn't.
             DirectoryExt.CreateIfNotExist(ThemeDirectory);
 
-            File.WriteAllText(Path.Combine(ThemeDirectory, $"{theme.ThemeName}.json"), JsonConvert.SerializeObject(theme));
+            File.WriteAllText(Path.Combine(ThemeDirectory, $"{theme.ThemeName}.json"), JsonConvert.SerializeObject(theme, Formatting.Indented));
 
             MainWindow.GlobalConfig.AddTheme(theme);
         }
