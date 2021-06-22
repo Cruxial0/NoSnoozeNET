@@ -11,6 +11,9 @@ using NoSnoozeNET.GUI.Functionality.Theme;
 
 namespace NoSnoozeNET.Config
 {
+    /// <summary>
+    /// Collection of Configs used throughout the project.
+    /// </summary>
     public class GlobalConfig
     {
         public BrushConfig BrushConfig { get; set; }
@@ -19,23 +22,29 @@ namespace NoSnoozeNET.Config
 
         public GlobalConfig()
         {
+            //Un-nullify children
             this.BrushConfig = new BrushConfig();
             this.ThemeConfig = new Dictionary<string, BrushConfig>();
 
+            //Build ThemeConfig
             BuildThemeConfig();
         }
 
         public void BuildThemeConfig()
         {
+            //Declare new ThemeConfig.
             this.ThemeConfig = new Dictionary<string, BrushConfig>();
 
+            //Create instance of ThemeHandler.
             ThemeHandler themeHandler = new ThemeHandler();
 
+            //Add all preset themes.
             foreach (var theme in ThemePresetMethods.LoadPresetThemes())
             {
                 this.ThemeConfig.Add(theme.ThemeName, theme.brushConfig);
             }
 
+            //Add all external themes.
             foreach (var theme in themeHandler.LoadThemes())
             {
                 this.ThemeConfig.Add(theme.ThemeName, theme.brushConfig);
@@ -45,6 +54,10 @@ namespace NoSnoozeNET.Config
 
     public static class BrushConfigMethods
     {
+        /// <summary>
+        /// Applies BrushConfig to Application Resources.
+        /// </summary>
+        /// <param name="brushConfig">BrushConfig to apply from.</param>
         public static void ApplyBrushConfig(this BrushConfig brushConfig)
         {
             //MainColors.xaml
@@ -59,23 +72,33 @@ namespace NoSnoozeNET.Config
             Application.Current.Resources["DescriptionBrush"] = brushConfig.AlarmItemBrush.DescriptionBrush;
             Application.Current.Resources["HeaderBrush"] = brushConfig.AlarmItemBrush.HeaderBrush;
 
+            //Perform garbage collection.
             GC.Collect();
         }
 
         public static void LoadConfig(this BrushConfig brushConfig)
         {
+            //Check if BrushConfig Exists.
             if (File.Exists(BrushConfig.ConfigPath))
             {
+                //Read BrushConfig from json.
                 brushConfig = JsonConvert.DeserializeObject<BrushConfig>(File.ReadAllText(BrushConfig.ConfigPath));
             }
             else
             {
+                //If not exist, set BrushConfig to Application Defaults.
                 brushConfig.BindConfig();
             }
 
+            //Apply the BrushConfig.
             brushConfig.ApplyBrushConfig();
         }
 
+        /// <summary>
+        /// Sets BrushConfig to Application Defaults.
+        /// </summary>
+        /// <param name="brushConfig">BrushConfig to Bind.</param>
+        /// <returns></returns>
         public static BrushConfig BindConfig(this BrushConfig brushConfig)
         {
             //MainColors.xaml
@@ -90,38 +113,48 @@ namespace NoSnoozeNET.Config
             brushConfig.AlarmItemBrush.DescriptionBrush = (SolidColorBrush)Application.Current.Resources["DescriptionBrush"];
             brushConfig.AlarmItemBrush.HeaderBrush = (SolidColorBrush)Application.Current.Resources["HeaderBrush"];
 
+            //Perform Garbage Collection.
             GC.Collect();
 
+            //Return BrushConfig with Application Defaults.
             return brushConfig;
         }
 
         public static void ColorAlarmList(List<AlarmItem> alarmItems)
         {
+            //Color all AlarmItems in a list.
             foreach (var alarm in alarmItems)
             {
-                var item = alarmItems.First(x => alarm == x);
-
-                item.ColorStopwatch(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
-                item.ColorOptions(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.OptionsBrush);
+                alarm.ColorStopwatch(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
+                alarm.ColorOptions(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.OptionsBrush);
             }
         }
     }
 
     public static class ThemePresetMethods
     {
+        /// <summary>
+        /// Loads all pre-defined Themes.
+        /// </summary>
+        /// <returns>List of UserTheme.</returns>
         public static List<UserTheme> LoadPresetThemes()
         {
+            //Declare List of UserTheme
             List<UserTheme> presets = new List<UserTheme>();
 
+            //Check if UserTheme Config exists.
             if (File.Exists(UserTheme.ConfigPath))
             {
-                presets = JsonConvert.DeserializeObject<List<UserTheme>>(File.ReadAllText(BrushConfig.ConfigPath)); ;
+                //Read Config from json.
+                presets = JsonConvert.DeserializeObject<List<UserTheme>>(File.ReadAllText(BrushConfig.ConfigPath));
             }
             else
             {
+                //Generate Default Presets.
                 presets = GenerateDefaultPresets(presets);
             }
 
+            //Return themes.
             return presets;
         }
 
@@ -137,6 +170,7 @@ namespace NoSnoozeNET.Config
             //Color all AlarmItems in MainWindow.xaml2
             BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
 
+            //Perform full Garbage Collection.
             GC.WaitForFullGCApproach();
             GC.WaitForPendingFinalizers();
             GC.Collect();
