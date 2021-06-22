@@ -97,12 +97,12 @@
                   Foreground="Black" Background="{DynamicResource ControlBackgroundBrush}">
         </ComboBox>
 
-        <Button Grid.Row="9" Grid.Column="1" Content="Save theme" Margin="0, 7, 10 ,7" HorizontalAlignment="Left" 
+        <Button Grid.Row="9" Grid.Column="1" Content="Save Theme" Margin="0, 7, 10 ,7" HorizontalAlignment="Left" 
                 Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
                 BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
                 Click="ButtonBase_OnClick"></Button>
 
-        <Button Name="btnOpenFolder" Grid.Row="9" Grid.Column="1" Content="Open Styles" Margin="10, 7, 0 ,7" HorizontalAlignment="Right" 
+        <Button Name="btnOpenFolder" Grid.Row="9" Grid.Column="1" Content="Open Folder" Margin="75,7,0,7" HorizontalAlignment="Left" 
                 Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
                 BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
                 Click="BtnOpenFolder_OnClick" Grid.ColumnSpan="2"></Button>
