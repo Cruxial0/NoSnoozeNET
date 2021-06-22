@@ -1,0 +1,134 @@
+﻿<Window x:Class="NoSnoozeNET.GUI.Windows.StyleSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoSnoozeNET.GUI.Windows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="StyleSettings" Height="Auto" Width="470" FontFamily="Segoe UI Light" SizeToContent="WidthAndHeight"
+        Background="{DynamicResource BackgroundBrush}" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Main Colors" Grid.Column="1" Grid.Row="1" FontSize="16" FontFamily="Segoe UI DemiLight"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+
+        <!--Primary Color Picker-->
+        <Label Content="Primary Color" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrPrimary" Grid.Column="2" Grid.Row="2"  Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource LabelBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrPrimary_OnSelectedColorChanged"/>
+
+        <Label Content="Secondary Color" Grid.Column="1" Grid.Row="3" Margin="0,10,0,0"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrSecondary" Grid.Column="2" Grid.Row="3" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource SecondaryBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrSecondary_OnSelectedColorChanged" IsEnabled="False"/>
+
+        <Label Content="Background Color" Grid.Column="1" Grid.Row="4" Margin="0,10,0,0"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrBackground" Grid.Column="2" Grid.Row="4" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource BackgroundBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrBackground_OnSelectedColorChanged"/>
+
+        <CheckBox Name="UseAdvanced" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Content="Use Advanced Settings"
+                  Margin="0,15,0,0" Checked="UseAdvanced_OnChecked" Unchecked="UseAdvanced_OnUnchecked"
+                  Foreground="{DynamicResource LabelBrush}"></CheckBox>
+
+        <Label Content="Alarm Colors" Grid.Column="3" Grid.Row="1" FontSize="16" FontFamily="Segoe UI DemiLight" Margin="100,0,0,0" HorizontalAlignment="Right"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+
+
+        <Label Content="Stopwatch Color" Grid.Column="3" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Right"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrStopwatch" Grid.Column="4" Grid.Row="2" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource StopwatchColor}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrStopwatch_OnSelectedColorChanged" HorizontalAlignment="Left"/>
+
+        <Label Content="Options Color" Grid.Column="3" Grid.Row="3" Margin="0,10,0,0" HorizontalAlignment="Right"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrOptions" Grid.Column="4" Grid.Row="3" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource OptionsColor}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrOptions_OnSelectedColorChanged" HorizontalAlignment="Left"/>
+
+        <Label Content="Header Color" Grid.Column="3" Grid.Row="4" Margin="0,10,0,0" HorizontalAlignment="Right"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrHeader" Grid.Column="4" Grid.Row="4" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource HeaderBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrHeader_OnSelectedColorChanged" HorizontalAlignment="Left"/>
+
+        <Label Content="Description Color" Grid.Column="3" Grid.Row="5" Margin="0,10,0,0" HorizontalAlignment="Right"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrDescription" Grid.Column="4" Grid.Row="5" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource DescriptionBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrDescription_OnSelectedColorChanged" HorizontalAlignment="Left"/>
+
+        <ListBox Name="ControlContainer" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="Black" 
+                 Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="60,15,0,0" ></ListBox>
+
+
+        <Label Content="Themes:" Grid.Column="1" Grid.Row="7" VerticalAlignment="Bottom"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+
+        <ComboBox Name="cmbThemes" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" DropDownClosed="CmbThemes_OnDropDownClosed"
+                  Foreground="Black" Background="{DynamicResource ControlBackgroundBrush}">
+        </ComboBox>
+
+        <Button Grid.Row="9" Grid.Column="1" Content="Save theme" Margin="0, 7, 10 ,7" HorizontalAlignment="Left" 
+                Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
+                Click="ButtonBase_OnClick"></Button>
+
+        <Button Name="btnOpenFolder" Grid.Row="9" Grid.Column="1" Content="Open Styles" Margin="10, 7, 0 ,7" HorizontalAlignment="Right" 
+                Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
+                Click="BtnOpenFolder_OnClick" Grid.ColumnSpan="2"></Button>
+
+        <Button Content="Force Apply" Grid.Column="7" Grid.Row="9" HorizontalAlignment="Right" Margin="0,7,5,7"
+                Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"></Button>
+
+        <Grid Name="WindowAdvanced" Grid.Column="1" Grid.Row="6" ColumnSpan="3" IsEnabled="False" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Control Background" Grid.Column="0" Grid.Row="0" Margin="0,10,0,0"
+                   Foreground="{DynamicResource LabelBrush}"></Label>
+            <xctk:ColorPicker Name="clrControlBg" Grid.Column="1" Grid.Row="0" Margin="0,10,0,0" 
+                              Width="27" Background="{DynamicResource ControlBackgroundBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                              SelectedColorChanged="ClrControlBg_OnSelectedColorChanged"/>
+
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,27 @@
+﻿<Window x:Class="NoSnoozeNET.GUI.Windows.SaveTheme"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoSnoozeNET.GUI.Windows"
+        mc:Ignorable="d"
+        Title="SaveTheme" Height="150.164" Width="245.492" Background="{DynamicResource BackgroundBrush}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Theme Name:" FontSize="16" Margin="5" Foreground="{DynamicResource LabelBrush}"/>
+        <TextBox Name="txtThemeName" Grid.Column="0" Grid.Row="1" FontSize="16" Margin="10,0,0,0" Grid.ColumnSpan="3" Width="200"></TextBox>
+        <Button Grid.Column="0" Grid.Row="3" Content="Save" FontSize="16" Margin="11,10,30,5"
+                Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2" Click="ButtonBase_OnClick"></Button>
+    </Grid>
+</Window>

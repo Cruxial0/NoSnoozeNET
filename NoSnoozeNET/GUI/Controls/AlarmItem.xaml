@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="NoSnoozeNET.GUI.Controls.AlarmItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
+             xmlns:wpfEx="clr-namespace:NoSnoozeNET.Extensions.WPF"
+             mc:Ignorable="d" Width="auto" Height="105"
+>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32*"/>
+            <ColumnDefinition Width="102*"/>
+            <ColumnDefinition MinWidth="200" Width="250*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Stopwatch Icon-->
+        <Image x:Name="Stopwatch" Grid.Column="0" Source="{Binding DynamicImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,10,10" Grid.ColumnSpan="2"
+               UseLayoutRounding="True"/>
+
+
+        <Button x:Name="BtnOptions" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="0,5,5,0" Height="28" Width="16" Background="Transparent" SnapsToDevicePixels="True" Click="BtnOptions_OnClick">
+            <Image x:Name="OptionsImg" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Source="{Binding DynamicImageOptions}"/>
+        </Button>
+
+        <!--Options Icon-->
+        
+
+        <!--Plugins and Conditions-->
+        <StackPanel x:Name="PluginPanel" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Orientation="Horizontal" Height="20" Margin="0,0,0,0">
+            <Image Source="/Assets/youtube-logo-png-picture-13.png" Margin="0,0,0,0"/>
+            <Image Source="/Assets/SimpleLeague.png" Margin="0,0,0,0"/>
+        </StackPanel>
+
+        <!--Alarm Details-->
+        <StackPanel Grid.Column="2" Margin="0,5,0,10">
+            <Label FontSize="24" Content="{Binding AlarmName, FallbackValue=Alarm}" FontFamily="Segoe UI SemiLight" Foreground="{DynamicResource HeaderBrush}"></Label>
+            <Label FontSize="12" Content="{Binding AlarmCreated, FallbackValue=Created at: 1/1/2021 00:01AM}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
+            <Label FontSize="12" Content="{Binding TimeToRing, FallbackValue=Alarm rings at 12AM (in 7h)}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
+        </StackPanel>
+    </Grid>
+</UserControl>

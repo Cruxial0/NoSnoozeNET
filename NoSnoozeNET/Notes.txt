@@ -1,0 +1,9 @@
+﻿Plugin system:
+	- Interface system with Check() and SetConfig() functions [DONE (revisions might be needed)]
+	- Needed plugin variables: Name, Description, IconPath
+
+For borders and control backgrounds:
+	- Use same color as background if "Use advanced colors" is false.
+	- Otherwise let user customize to their liking.
+
+--> THEME PRESETS!!!
