@@ -24,7 +24,7 @@ namespace NoSnoozeNET.GUI.Windows
         {
             UserTheme ut = new UserTheme()
             {
-                brushConfig = new BrushConfig().BindConfig(),
+                brushConfig = MainWindow.GlobalConfig.BrushConfig,
                 ThemeName = DetermineUnnamedThemeName()
             };
 

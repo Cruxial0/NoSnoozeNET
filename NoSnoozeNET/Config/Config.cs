@@ -7,7 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using NoSnoozeNET.GUI.Functionality.Theme;
+using NoSnoozeNET.GUI.Windows;
 
 namespace NoSnoozeNET.Config
 {
@@ -65,6 +67,7 @@ namespace NoSnoozeNET.Config
             Application.Current.Resources["SecondaryBrush"] = brushConfig.MainBrush.SecondaryColorBrush;
             Application.Current.Resources["BackgroundBrush"] = brushConfig.MainBrush.BackgroundColorBrush;
             Application.Current.Resources["ControlBackgroundBrush"] = brushConfig.MainBrush.ControlBackgroundBrush;
+            Application.Current.Resources["ShadowColor"] = brushConfig.MainBrush.ShadowColorBrush;
 
             //AlarmItem.xaml (UserControlColors.xaml)
             Application.Current.Resources["StopwatchColor"] = brushConfig.AlarmItemBrush.StopwatchBrush;
@@ -87,7 +90,7 @@ namespace NoSnoozeNET.Config
             else
             {
                 //If not exist, set BrushConfig to Application Defaults.
-                brushConfig.BindConfig();
+                //brushConfig.BindConfig();
             }
 
             //Apply the BrushConfig.
@@ -106,6 +109,7 @@ namespace NoSnoozeNET.Config
             brushConfig.MainBrush.SecondaryColorBrush = (SolidColorBrush)Application.Current.Resources["SecondaryBrush"];
             brushConfig.MainBrush.BackgroundColorBrush = (SolidColorBrush)Application.Current.Resources["BackgroundBrush"];
             brushConfig.MainBrush.ControlBackgroundBrush = (SolidColorBrush)Application.Current.Resources["ControlBackgroundBrush"];
+            brushConfig.MainBrush.ShadowColorBrush = (SolidColorBrush)Application.Current.Resources["ShadowColor"];
 
             //AlarmItem.xaml (UserControlColors.xaml)
             brushConfig.AlarmItemBrush.StopwatchBrush = (SolidColorBrush)Application.Current.Resources["StopwatchColor"];
@@ -167,8 +171,9 @@ namespace NoSnoozeNET.Config
             //Refresh MainWindow.xaml
             WindowExt.Refresh(Application.Current.MainWindow);
 
-            //Color all AlarmItems in MainWindow.xaml2
+            //Color all AlarmItems accordingly.
             BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
+            BrushConfigMethods.ColorAlarmList(StyleSettings.previewItem);
 
             //Perform full Garbage Collection.
             GC.WaitForFullGCApproach();
@@ -201,6 +206,13 @@ namespace NoSnoozeNET.Config
                         OptionsBrush = new SolidColorBrush(Colors.White),
                         DescriptionBrush = new SolidColorBrush(Colors.White),
                         HeaderBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#4f79ff")),
+                    },
+                    ShadowConfig = new ShadowConfig()
+                    {
+                        BlurRadius = 8.28071956597608,
+                        Direction = 0.0,
+                        ShadowDepth = 0.0,
+                        Opacity = 4.0927694406548429
                     }
                 }
             };
@@ -230,6 +242,13 @@ namespace NoSnoozeNET.Config
                         OptionsBrush = new SolidColorBrush(Colors.White),
                         DescriptionBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FFFFFF")),
                         HeaderBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#BB86FC"))
+                    },
+                    ShadowConfig = new ShadowConfig()
+                    {
+                        BlurRadius = 8.28071956597608,
+                        Direction = 0.0,
+                        ShadowDepth = 0.0,
+                        Opacity = 4.0927694406548429
                     }
                 }
 

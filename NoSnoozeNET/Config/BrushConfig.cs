@@ -2,6 +2,7 @@
 using NoSnoozeNET.Extensions.IO;
 using System.IO;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace NoSnoozeNET.Config
 {
@@ -12,7 +13,7 @@ namespace NoSnoozeNET.Config
 
         public MainBrush MainBrush { get; set; }
         public AlarmItemBrush AlarmItemBrush { get; set; }
-
+        public ShadowConfig ShadowConfig { get; set; }
 
         public void SaveConfig()
         {
@@ -25,6 +26,7 @@ namespace NoSnoozeNET.Config
         {
             this.AlarmItemBrush = new AlarmItemBrush();
             this.MainBrush = new MainBrush();
+            this.ShadowConfig = new ShadowConfig();
         }
     }
 
@@ -46,5 +48,6 @@ namespace NoSnoozeNET.Config
         public SolidColorBrush SecondaryColorBrush { get; set; }
         public SolidColorBrush BackgroundColorBrush { get; set; }
         public SolidColorBrush ControlBackgroundBrush { get; set; }
+        public SolidColorBrush ShadowColorBrush { get; set; }
     }
 }

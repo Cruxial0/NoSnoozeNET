@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
+using System.Windows.Media.Effects;
+using NoSnoozeNET.Extensions.WPF;
 
 namespace NoSnoozeNET
 {
@@ -83,6 +85,8 @@ namespace NoSnoozeNET
 
                 AlarmList.ItemsSource = createAlarm;
             }
+
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.AlarmList);
         }
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)

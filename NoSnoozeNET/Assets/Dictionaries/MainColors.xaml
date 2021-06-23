@@ -3,6 +3,8 @@
     <SolidColorBrush x:Key="LabelBrush" Color="Black"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="Black"/>
     <SolidColorBrush x:Key="BackgroundBrush" Color="White"/>
-    <SolidColorBrush x:Key="AlarmListBackgroundBrush" Color="Transparent"/>
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="Transparent"/>
+    <!--Shadow Properties-->
+    <SolidColorBrush x:Key="ShadowColor" Color="Black"/>
+    <DropShadowEffect x:Key="ControlShadow" Color="Black" BlurRadius="10" Direction="0" ShadowDepth="1"/>
 </ResourceDictionary>

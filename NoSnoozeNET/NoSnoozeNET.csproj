@@ -128,12 +128,14 @@
     </Compile>
     <Compile Include="Config\BrushConfig.cs" />
     <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\ShadowConfig.cs" />
     <Compile Include="Config\UserTheme.cs" />
     <Compile Include="Extensions\Imaging\BitmapExt.cs" />
     <Compile Include="Extensions\Imaging\ColorExt.cs" />
     <Compile Include="Extensions\Imaging\GraphicsExt.cs" />
     <Compile Include="Extensions\Imaging\LockBitmap.cs" />
     <Compile Include="Extensions\Internal\GlobalConfigExt.cs" />
+    <Compile Include="Extensions\Internal\ShadowConfigExt.cs" />
     <Compile Include="Extensions\IO\Directory.cs" />
     <Compile Include="Extensions\WPF\ButtonEx.xaml.cs">
       <DependentUpon>ButtonEx.xaml</DependentUpon>

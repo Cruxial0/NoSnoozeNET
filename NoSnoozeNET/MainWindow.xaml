@@ -90,16 +90,13 @@
             </Menu>
         </DockPanel>
 
-        <ListBox  Grid.Row="1" Grid.Column="1" Margin="0,20,0,0" x:Name="AlarmList" Height="420" Background="{DynamicResource ControlBackgroundBrush}" ItemsSource="{Binding alarmList}"
-                  ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}" BorderThickness="0">
-            <ListBox.Resources>
-                <DataTemplate DataType="{x:Type controls:AlarmItem}">
-                    <controls:AlarmItem />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type controls:CreateAlarmItem}">
-                    <controls:CreateAlarmItem />
-                </DataTemplate>
-            </ListBox.Resources>
+        <ListBox x:Name="AlarmList" Grid.Row="1" Grid.Column="1" Margin="0,20,0,0" Height="420" Background="{DynamicResource ControlBackgroundBrush}" ItemsSource="{Binding alarmList}"
+                 ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}" BorderThickness="0">
+            <!--<Border>
+                --><!--<Border.Effect>
+                    <DropShadowEffect Color="Black" Direction="90" BlurRadius="10"></DropShadowEffect>
+                </Border.Effect>--><!--
+            </Border>-->
         </ListBox>
         
     </Grid>

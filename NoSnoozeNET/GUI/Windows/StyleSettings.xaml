@@ -29,6 +29,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -36,25 +37,31 @@
                Foreground="{DynamicResource LabelBrush}"></Label>
 
         <!--Primary Color Picker-->
-        <Label Content="Primary Color" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"
+        <Label Content="Label Color" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"
                Foreground="{DynamicResource LabelBrush}"></Label>
         <xctk:ColorPicker Name="clrPrimary" Grid.Column="2" Grid.Row="2"  Margin="0,10,0,0" 
                           Width="27" Background="{DynamicResource LabelBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
                           SelectedColorChanged="ClrPrimary_OnSelectedColorChanged"/>
 
-        <Label Content="Secondary Color" Grid.Column="1" Grid.Row="3" Margin="0,10,0,0"
+        <Label Content="Control Border Color" Grid.Column="1" Grid.Row="3" Margin="0,10,0,0"
                Foreground="{DynamicResource LabelBrush}"></Label>
         <xctk:ColorPicker Name="clrSecondary" Grid.Column="2" Grid.Row="3" Margin="0,10,0,0" 
                           Width="27" Background="{DynamicResource SecondaryBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
                           SelectedColorChanged="ClrSecondary_OnSelectedColorChanged" IsEnabled="False"/>
 
-        <Label Content="Background Color" Grid.Column="1" Grid.Row="4" Margin="0,10,0,0"
+        <Label Content="Control Background" Grid.Column="1" Grid.Row="4" Margin="0,10,0,0"
                Foreground="{DynamicResource LabelBrush}"></Label>
-        <xctk:ColorPicker Name="clrBackground" Grid.Column="2" Grid.Row="4" Margin="0,10,0,0" 
+        <xctk:ColorPicker Name="clrControlBg" Grid.Column="2" Grid.Row="4" Margin="0,10,0,0" 
+                          Width="27" Background="{DynamicResource ControlBackgroundBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                          SelectedColorChanged="ClrControlBg_OnSelectedColorChanged"/>
+
+        <Label Content="Background Color" Grid.Column="1" Grid.Row="5" Margin="0,10,0,0"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+        <xctk:ColorPicker Name="clrBackground" Grid.Column="2" Grid.Row="5" Margin="0,10,0,0" 
                           Width="27" Background="{DynamicResource BackgroundBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
                           SelectedColorChanged="ClrBackground_OnSelectedColorChanged"/>
 
-        <CheckBox Name="UseAdvanced" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Content="Use Advanced Settings"
+        <CheckBox Name="UseAdvanced" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Content="Use Advanced Settings"
                   Margin="0,15,0,0" Checked="UseAdvanced_OnChecked" Unchecked="UseAdvanced_OnUnchecked"
                   Foreground="{DynamicResource LabelBrush}"></CheckBox>
 
@@ -86,32 +93,34 @@
                           Width="27" Background="{DynamicResource DescriptionBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
                           SelectedColorChanged="ClrDescription_OnSelectedColorChanged" HorizontalAlignment="Left"/>
 
-        <ListBox Name="ControlContainer" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="Black" 
+        <ListBox Name="ControlContainer" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource SecondaryBrush}" 
                  Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="60,15,0,0" ></ListBox>
 
 
-        <Label Content="Themes:" Grid.Column="1" Grid.Row="7" VerticalAlignment="Bottom"
+        <Label Content="Themes:" Grid.Column="1" Grid.Row="8" VerticalAlignment="Bottom"
                Foreground="{DynamicResource LabelBrush}"></Label>
 
-        <ComboBox Name="cmbThemes" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" DropDownClosed="CmbThemes_OnDropDownClosed"
+        <ComboBox Name="cmbThemes" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" DropDownClosed="CmbThemes_OnDropDownClosed"
                   Foreground="Black" Background="{DynamicResource ControlBackgroundBrush}">
         </ComboBox>
 
-        <Button Grid.Row="9" Grid.Column="1" Content="Save Theme" Margin="0, 7, 10 ,7" HorizontalAlignment="Left" 
+        <Button Name="btnSaveTheme" Grid.Row="10" Grid.Column="1" Content="Save Theme" Margin="0, 7, 10 ,7" HorizontalAlignment="Left" 
                 Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
                 BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
-                Click="ButtonBase_OnClick"></Button>
+                Click="ButtonBase_OnClick">
+        </Button>
 
-        <Button Name="btnOpenFolder" Grid.Row="9" Grid.Column="1" Content="Open Folder" Margin="75,7,0,7" HorizontalAlignment="Left" 
+        <Button Name="btnOpenFolder" Grid.Row="10" Grid.Column="1" Content="Open Folder" Margin="75,7,0,7" HorizontalAlignment="Left" 
                 Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
                 BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
                 Click="BtnOpenFolder_OnClick" Grid.ColumnSpan="2"></Button>
 
-        <Button Content="Force Apply" Grid.Column="7" Grid.Row="9" HorizontalAlignment="Right" Margin="0,7,5,7"
+        <Button Name="btnForceApply" Content="Force Apply" Grid.Column="7" Grid.Row="10" HorizontalAlignment="Right" Margin="0,7,5,7"
                 Foreground="{DynamicResource LabelBrush}" Background="{DynamicResource ControlBackgroundBrush}"
-                BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"></Button>
+                BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
+                Click="BtnForceApply_OnClick"></Button>
 
-        <Grid Name="WindowAdvanced" Grid.Column="1" Grid.Row="6" ColumnSpan="3" IsEnabled="False" Visibility="Hidden">
+        <Grid Name="WindowAdvanced" Grid.Column="1" Grid.Row="7" ColumnSpan="3" IsEnabled="False" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -123,11 +132,52 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Control Background" Grid.Column="0" Grid.Row="0" Margin="0,10,0,0"
+            <Label Content="Drop Shadow Color" Grid.Column="0" Grid.Row="1" Margin="0,10,0,0"
                    Foreground="{DynamicResource LabelBrush}"></Label>
-            <xctk:ColorPicker Name="clrControlBg" Grid.Column="1" Grid.Row="0" Margin="0,10,0,0" 
-                              Width="27" Background="{DynamicResource ControlBackgroundBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
-                              SelectedColorChanged="ClrControlBg_OnSelectedColorChanged"/>
+            <xctk:ColorPicker Name="clrShadow" Grid.Column="1" Grid.Row="1" Margin="0,10,0,0" 
+                              Width="27" Background="{DynamicResource ShadowColor}" ShowDropDownButton="False" ColorMode="ColorCanvas"
+                              SelectedColorChanged="ClrShadow_OnSelectedColorChanged"/>
+
+            <Grid Name="ShadowControl" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                  Margin="0,10,0,10" Background="{DynamicResource ControlBackgroundBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Shadow Direction" Foreground="{DynamicResource LabelBrush}"
+                       Margin="10,0,0,0"></Label>
+                <Slider Name="sldShadowDirection" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Minimum="0"
+                        Maximum="180" SmallChange="1" LargeChange="10" Value="5" Margin="10,0,10,10"
+                        ValueChanged="SldShadowDirection_OnValueChanged"></Slider>
+
+                <Label Grid.Row="2" Content="Shadow Depth" Foreground="{DynamicResource LabelBrush}"
+                       Margin="10,0,0,0"></Label>
+                <Slider Name="sldShadowDepth" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Minimum="0"
+                        Maximum="10" SmallChange="1" LargeChange="1" Value="5" Margin="10,0,10,10"
+                        ValueChanged="SldShadowDepth_OnValueChanged"></Slider>
+
+                <Label Grid.Row="4" Content="Shadow Blur Radius" Foreground="{DynamicResource LabelBrush}"
+                       Margin="10,0,0,0"></Label>
+                <Slider Name="sldShadowBlurRadius" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Minimum="0"
+                        Maximum="10" SmallChange="1" LargeChange="1" Value="0" Margin="10,0,10,10"
+                        ValueChanged="SldShadowBlurRadius_OnValueChanged"></Slider>
+
+                <Label Grid.Row="6" Content="Shadow Opacity" Foreground="{DynamicResource LabelBrush}"
+                       Margin="10,0,0,0"></Label>
+                <Slider Name="sldShadowOpacity" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Minimum="0"
+                        Maximum="10" SmallChange="1" LargeChange="1" Value="0" Margin="10,0,10,10"
+                        ValueChanged="SldShadowOpacity_OnValueChanged"></Slider>
+            </Grid>
 
         </Grid>
     </Grid>

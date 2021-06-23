@@ -2,7 +2,9 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using NoSnoozeNET.Config;
 
 namespace NoSnoozeNET.Extensions.WPF
 {
@@ -20,6 +22,16 @@ namespace NoSnoozeNET.Extensions.WPF
             GC.WaitForFullGCComplete();
         }
 
-        
+        public static void ApplyShadow(ShadowConfig shadowConfig, UIElement uiElement)
+        {
+            uiElement.Effect = new DropShadowEffect()
+            {
+                BlurRadius = shadowConfig.BlurRadius,
+                Color = Colors.Black, //MainWindow.GlobalConfig.BrushConfig.MainBrush.ShadowColorBrush.Color,
+                Direction = shadowConfig.Direction,
+                ShadowDepth = shadowConfig.ShadowDepth,
+                Opacity = shadowConfig.Opacity
+            };
+        }
     }
 }

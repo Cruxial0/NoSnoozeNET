@@ -22,7 +22,7 @@
         <Label Grid.Column="1" Content="Click to open the alarm wizard" VerticalAlignment="Bottom"
                FontSize="18" Margin="0,0,0,20" Foreground="{DynamicResource DescriptionBrush}" FontFamily="Segoe UI Light"/>
 
-        <Button Grid.ColumnSpan="5" Background="{x:Null}" Click="ButtonBase_OnClick" BorderBrush="{x:Null}" Foreground="{DynamicResource AlarmListBackgroundBrush}"></Button>
+        <Button Grid.ColumnSpan="5" Background="{x:Null}" Click="ButtonBase_OnClick" BorderBrush="{x:Null}"></Button>
 
     </Grid>
 </UserControl>

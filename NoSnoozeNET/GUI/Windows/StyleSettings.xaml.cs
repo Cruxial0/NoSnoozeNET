@@ -8,7 +8,9 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using NoSnoozeNET.Extensions.Internal;
 using NoSnoozeNET.GUI.Functionality.Theme;
 
 namespace NoSnoozeNET.GUI.Windows
@@ -18,11 +20,19 @@ namespace NoSnoozeNET.GUI.Windows
     /// </summary>
     public partial class StyleSettings : Window
     {
-        private List<AlarmItem> previewItem = new List<AlarmItem>();
+        public static List<AlarmItem> previewItem = new List<AlarmItem>();
+        public static UIElement ContainerElement;
+        public static UIElement ThemesBoxElement;
+        public static UIElement ShadowControlElement;
         public StyleSettings()
         {
             InitializeComponent();
             CreatePreview();
+            SetSliders();
+
+            ContainerElement = this.ControlContainer;
+            ThemesBoxElement = this.cmbThemes;
+            ShadowControlElement = this.ShadowControl;
 
             //Sets ItemSource of ComboBox to loaded UserThemes.
             cmbThemes.ItemsSource = MainWindow.GlobalConfig.ThemeConfig.Keys;
@@ -51,6 +61,14 @@ namespace NoSnoozeNET.GUI.Windows
             clrHeader.SelectedColor = ((SolidColorBrush)Application.Current.Resources["HeaderBrush"]).Color;
         }
 
+        public void SetSliders()
+        {
+            sldShadowBlurRadius.Value = MainWindow.GlobalConfig.BrushConfig.ShadowConfig.BlurRadius;
+            sldShadowDirection.Value = MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Direction;
+            sldShadowOpacity.Value = MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Opacity;
+            sldShadowDepth.Value = MainWindow.GlobalConfig.BrushConfig.ShadowConfig.ShadowDepth;
+        }
+
         private void CreatePreview()
         {
             //Make new list of AlarmItem.
@@ -70,8 +88,30 @@ namespace NoSnoozeNET.GUI.Windows
             //Scale AlarmItem by 0.75x.
             a.LayoutTransform = new ScaleTransform(0.75, 0.75);
 
+            AlarmItem a2 = new AlarmItem()
+            {
+                AlarmName = "Straight buzzin'",
+                AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                TimeToRing = "Rings at 9AM (in 18h)",
+            };
+
+            //Scale AlarmItem by 0.75x.
+            a2.LayoutTransform = new ScaleTransform(0.75, 0.75);
+
+            AlarmItem a3 = new AlarmItem()
+            {
+                AlarmName = "Straight buzzin'",
+                AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                TimeToRing = "Rings at 9AM (in 18h)",
+            };
+
+            //Scale AlarmItem by 0.75x.
+            a3.LayoutTransform = new ScaleTransform(0.75, 0.75);
+
             //Add AlarmItem to list.
             previewItem.Add(a);
+            previewItem.Add(a2);
+            previewItem.Add(a3);
         }
 
         //Region to group the CTRL+C/CTRL+V spam
@@ -131,6 +171,13 @@ namespace NoSnoozeNET.GUI.Windows
             MainWindow.GlobalConfig.BrushConfig.ApplyBrushConfig();
         }
 
+        private void ClrShadow_OnSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            MainWindow.GlobalConfig.BrushConfig.MainBrush.ShadowColorBrush = new SolidColorBrush(e.NewValue.Value);
+            MainWindow.GlobalConfig.BrushConfig.ApplyBrushConfig();
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
+        }
+
         #endregion
 
         private void UseAdvanced_OnChecked(object sender, RoutedEventArgs e)
@@ -179,6 +226,7 @@ namespace NoSnoozeNET.GUI.Windows
 
                 //Set color pickers accordingly.
                 SetColorPickers();
+                SetSliders();
             }
         }
 
@@ -193,6 +241,52 @@ namespace NoSnoozeNET.GUI.Windows
         {
             //Open Theme Directory in File Explorer.
             Process.Start("explorer.exe", ThemeHandler.ThemeDirectory);
+        }
+
+        #region ShadowControl
+
+        private void SldShadowDirection_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Direction = sldShadowDirection.Value;
+
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
+            //ShadowConfigExt.ApplyGlobalShadow();
+        }
+
+        private void SldShadowDepth_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MainWindow.GlobalConfig.BrushConfig.ShadowConfig.ShadowDepth = sldShadowDepth.Value;
+
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
+            //ShadowConfigExt.ApplyGlobalShadow();
+        }
+
+        private void SldShadowBlurRadius_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MainWindow.GlobalConfig.BrushConfig.ShadowConfig.BlurRadius = sldShadowBlurRadius.Value;
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
+            //ShadowConfigExt.ApplyGlobalShadow();
+        }
+
+        private void SldShadowOpacity_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Opacity = sldShadowOpacity.Value;
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
+        }
+
+        #endregion
+
+
+        private void BtnForceApply_OnClick(object sender, RoutedEventArgs e)
+        {
+            WindowExt.Refresh(this);
+            WindowExt.Refresh(Application.Current.MainWindow);
+            UIElement al = new MainWindow().AlarmList;
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, al);
         }
     }
 }
