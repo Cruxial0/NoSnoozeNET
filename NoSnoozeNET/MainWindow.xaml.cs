@@ -9,7 +9,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Effects;
 using Newtonsoft.Json;
+using NoSnoozeNET.Extensions.IO;
 using NoSnoozeNET.Extensions.WPF;
+using NoSnoozeNET.GUI.Functionality.Theme;
 
 namespace NoSnoozeNET
 {
@@ -27,17 +29,20 @@ namespace NoSnoozeNET
         public MainWindow()
         {
             InitializeComponent();
+
+
             Startup();
         }
 
         void Startup()
         {
-            GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
+            if(!Directory.Exists(Path.Combine(BinDirectory, @"\Config"))) Directory.CreateDirectory(Path.Combine(BinDirectory, @"\Config"));
 
-            MessageBox.Show(JsonConvert.SerializeObject(GlobalConfig.BrushConfig, Formatting.Indented));
+            GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
 
             alarmList = new List<AlarmItem>();
 
+            #region AlarmSpam
 
             AlarmItem a = new AlarmItem()
             {
@@ -51,7 +56,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm nameer",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 9h",
-                
+
             };
 
             AlarmItem a3 = new AlarmItem()
@@ -59,7 +64,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm namerino",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 3h",
-                
+
             };
 
             AlarmItem a4 = new AlarmItem()
@@ -67,7 +72,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm namerinoas",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 3h",
-                
+
             };
 
             CreateAlarmItem ca = new();
@@ -76,6 +81,8 @@ namespace NoSnoozeNET
             alarmList.Add(a2);
             alarmList.Add(a3);
             alarmList.Add(a4);
+
+            #endregion
 
             AlarmList.ItemsSource = alarmList;
 

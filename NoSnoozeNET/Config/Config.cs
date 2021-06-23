@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using NoSnoozeNET.Extensions.IO;
 using NoSnoozeNET.GUI.Functionality.Theme;
 using NoSnoozeNET.GUI.Windows;
 
@@ -34,6 +35,11 @@ namespace NoSnoozeNET.Config
 
         public void BuildThemeConfig()
         {
+            //Creates Config directories if they don't already exist.
+            DirectoryExt.CreateFolderIfNotExist(Path.Combine(MainWindow.BinDirectory, @"\Config"));
+            DirectoryExt.CreateFolderIfNotExist(BrushConfig.ConfigDirectory);
+            DirectoryExt.CreateFolderIfNotExist(ThemeHandler.ThemeDirectory);
+
             //Declare new ThemeConfig.
             this.ThemeConfig = new Dictionary<string, BrushConfig>();
 
@@ -87,7 +93,6 @@ namespace NoSnoozeNET.Config
             {
                 //Read BrushConfig from json.
                 brushConfig = JsonConvert.DeserializeObject<BrushConfig>(File.ReadAllText(BrushConfig.ConfigPath));
-                MessageBox.Show(File.ReadAllText(BrushConfig.ConfigPath));
             }
             else
             {

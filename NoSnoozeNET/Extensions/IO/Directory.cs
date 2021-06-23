@@ -12,5 +12,10 @@ namespace NoSnoozeNET.Extensions.IO
             if (!Directory.Exists(directoryName))
                 Directory.CreateDirectory(directoryName ?? throw new InvalidOperationException());
         }
+        public static void CreateFolderIfNotExist(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath ?? throw new InvalidOperationException());
+        }
     }
 }

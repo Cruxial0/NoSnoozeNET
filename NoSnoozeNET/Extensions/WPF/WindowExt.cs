@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Drawing;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using NoSnoozeNET.Config;
+using Color = System.Windows.Media.Color;
 
 namespace NoSnoozeNET.Extensions.WPF
 {
@@ -24,10 +26,21 @@ namespace NoSnoozeNET.Extensions.WPF
 
         public static void ApplyShadow(ShadowConfig shadowConfig, UIElement uiElement)
         {
+            Color c = new Color();
+            if (MainWindow.GlobalConfig.BrushConfig.MainBrush.ShadowColorBrush == null)
+            {
+                c = Colors.Black;
+            }
+            else
+            {
+                c = MainWindow.GlobalConfig.BrushConfig.MainBrush.ShadowColorBrush.Color;
+            }
+
+
             uiElement.Effect = new DropShadowEffect()
             {
                 BlurRadius = shadowConfig.BlurRadius,
-                Color = Colors.Black, //MainWindow.GlobalConfig.BrushConfig.MainBrush.ShadowColorBrush.Color,
+                Color = c,
                 Direction = shadowConfig.Direction,
                 ShadowDepth = shadowConfig.ShadowDepth,
                 Opacity = shadowConfig.Opacity
