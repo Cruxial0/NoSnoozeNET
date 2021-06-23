@@ -30,14 +30,11 @@ namespace NoSnoozeNET
         {
             InitializeComponent();
 
-
             Startup();
         }
 
         void Startup()
         {
-            if(!Directory.Exists(Path.Combine(BinDirectory, @"\Config"))) Directory.CreateDirectory(Path.Combine(BinDirectory, @"\Config"));
-
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
 
             alarmList = new List<AlarmItem>();
