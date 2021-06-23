@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NoSnoozeNET.Extensions.IO;
 using System.IO;
+using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
@@ -9,7 +10,8 @@ namespace NoSnoozeNET.Config
 
     public class BrushConfig
     {
-        public static readonly string ConfigPath = Path.Combine(MainWindow.BinDirectory, @"Config\GlobalConfig\BrushConfig.json");
+        public static readonly string ConfigPath = Path.Combine(MainWindow.BinDirectory, @"Config\\GlobalConfig\\BrushConfig.json");
+        public static readonly string ConfigDirectory = Path.Combine(MainWindow.BinDirectory, @"Config\GlobalConfig\");
 
         public MainBrush MainBrush { get; set; }
         public AlarmItemBrush AlarmItemBrush { get; set; }
@@ -17,9 +19,9 @@ namespace NoSnoozeNET.Config
 
         public void SaveConfig()
         {
-            DirectoryExt.CreateIfNotExist(ConfigPath);
+            DirectoryExt.CreateFolderIfNotExist(ConfigDirectory);
 
-            File.WriteAllText(ConfigPath, JsonConvert.SerializeObject(this, Formatting.Indented));
+            File.WriteAllText(Path.GetFullPath(ConfigPath), JsonConvert.SerializeObject(this, Formatting.Indented));
         }
 
         public BrushConfig()

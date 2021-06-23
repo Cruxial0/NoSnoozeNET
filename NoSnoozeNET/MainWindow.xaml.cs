@@ -29,19 +29,18 @@ namespace NoSnoozeNET
         public MainWindow()
         {
             InitializeComponent();
+
+
             Startup();
         }
 
         void Startup()
         {
+            if(!Directory.Exists(Path.Combine(BinDirectory, @"\Config"))) Directory.CreateDirectory(Path.Combine(BinDirectory, @"\Config"));
+
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
 
             alarmList = new List<AlarmItem>();
-
-            //Create all Config Directories if they don't already exist.
-            DirectoryExt.CreateIfNotExist(Path.Combine(BinDirectory, "Config"));
-            DirectoryExt.CreateIfNotExist(BrushConfig.ConfigPath);
-            DirectoryExt.CreateIfNotExist(ThemeHandler.ThemeDirectory);
 
             #region AlarmSpam
 
