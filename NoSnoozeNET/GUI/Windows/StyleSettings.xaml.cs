@@ -4,14 +4,17 @@ using NoSnoozeNET.GUI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.Extensions.Internal;
 using NoSnoozeNET.GUI.Functionality.Theme;
+using Color = System.Windows.Media.Color;
 
 namespace NoSnoozeNET.GUI.Windows
 {
@@ -27,8 +30,12 @@ namespace NoSnoozeNET.GUI.Windows
         public StyleSettings()
         {
             InitializeComponent();
+            Dispatcher.InvokeAsync(() => ColorImages(), DispatcherPriority.Render);
             CreatePreview();
-            SetSliders();
+
+            MainWindow.GlobalConfig.BuildThemeConfig();
+            //ThemePresetMethods.ApplyTheme(MainWindow.GlobalConfig.BrushConfig);
+            WindowExt.Refresh(this);
 
             ContainerElement = this.ControlContainer;
             ThemesBoxElement = this.cmbThemes;
@@ -42,7 +49,6 @@ namespace NoSnoozeNET.GUI.Windows
 
             //Sets the selected theme as SelectedItem.
             cmbThemes.SelectedItem = MainWindow.GlobalConfig.SelectedTheme;
-
         }
 
         /// <summary>
@@ -112,6 +118,25 @@ namespace NoSnoozeNET.GUI.Windows
             previewItem.Add(a);
             previewItem.Add(a2);
             previewItem.Add(a3);
+        }
+
+        private async void ColorImages()
+        {
+            var brush = MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush;
+
+            var source =
+                (Bitmap)Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\Plus.png"));
+
+            var c = System.Drawing.Color.FromArgb(255, 255, 255);
+            if (brush != null)
+            {
+                var targetColor = System.Drawing.Color.FromArgb(brush.Color.R, brush.Color.G, brush.Color.B);
+
+                //Bitmap bp = Dispatcher.InvokeAsync(() => source.ColorReplace(5, c, targetColor), DispatcherPriority.Render).Result;
+                Bitmap bp = await Dispatcher.InvokeAsync(() => source.FastColorReplace(c, targetColor), DispatcherPriority.Render);
+
+                btnAddTheme.Source = bp.ToBitmapImage();
+            }
         }
 
         //Region to group the CTRL+C/CTRL+V spam
@@ -287,6 +312,12 @@ namespace NoSnoozeNET.GUI.Windows
             WindowExt.Refresh(Application.Current.MainWindow);
             UIElement al = new MainWindow().AlarmList;
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, al);
+        }
+
+        private void StyleSettings_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            SetSliders();
+            ColorImages();
         }
     }
 }

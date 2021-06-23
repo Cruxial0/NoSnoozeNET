@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Effects;
+using Newtonsoft.Json;
 using NoSnoozeNET.Extensions.WPF;
 
 namespace NoSnoozeNET
@@ -31,7 +32,9 @@ namespace NoSnoozeNET
 
         void Startup()
         {
-            GlobalConfig.BrushConfig.LoadConfig();
+            GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
+
+            MessageBox.Show(JsonConvert.SerializeObject(GlobalConfig.BrushConfig, Formatting.Indented));
 
             alarmList = new List<AlarmItem>();
 

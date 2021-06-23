@@ -75,26 +75,30 @@ namespace NoSnoozeNET.Config
             Application.Current.Resources["DescriptionBrush"] = brushConfig.AlarmItemBrush.DescriptionBrush;
             Application.Current.Resources["HeaderBrush"] = brushConfig.AlarmItemBrush.HeaderBrush;
 
+
             //Perform garbage collection.
             GC.Collect();
         }
 
-        public static void LoadConfig(this BrushConfig brushConfig)
+        public static BrushConfig LoadConfig(this BrushConfig brushConfig)
         {
             //Check if BrushConfig Exists.
             if (File.Exists(BrushConfig.ConfigPath))
             {
                 //Read BrushConfig from json.
                 brushConfig = JsonConvert.DeserializeObject<BrushConfig>(File.ReadAllText(BrushConfig.ConfigPath));
+                MessageBox.Show(File.ReadAllText(BrushConfig.ConfigPath));
             }
             else
             {
                 //If not exist, set BrushConfig to Application Defaults.
-                //brushConfig.BindConfig();
+                brushConfig.BindConfig();
             }
 
             //Apply the BrushConfig.
             brushConfig.ApplyBrushConfig();
+
+            return brushConfig;
         }
 
         /// <summary>
