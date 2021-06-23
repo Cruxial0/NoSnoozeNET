@@ -8,16 +8,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Ellipse  Stroke="Black"
+                    <Rectangle Stroke="{DynamicResource ShadowColor}"
                           StrokeThickness="1"
-                          Name="Ellipse" 
-                          Fill="OrangeRed" />
+                          Width="12"
+                          Name="Rectangle"
+                          RadiusX="8"
+                          RadiusY="6"
+                          Fill="{DynamicResource BackgroundBrush}"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="Orange"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="Gray"/>
+                            <Setter TargetName="Rectangle" Property="Fill" Value="{DynamicResource StopwatchColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -31,23 +31,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" Name="row" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" Name="column" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
+                        
                         <Border Name="PART_Border"
                            BorderBrush="Black" BorderThickness="1"
                            Padding="2"
                           Grid.Row="1" Grid.Column="1"
                            Width="{TemplateBinding Width}"
                            Height="{TemplateBinding Height}"
-                           Background="GreenYellow"
+                           Background="{DynamicResource OptionsColor}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Center" />
                         <Track Name="PART_Track"
