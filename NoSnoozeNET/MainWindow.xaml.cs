@@ -9,7 +9,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Effects;
 using Newtonsoft.Json;
+using NoSnoozeNET.Extensions.IO;
 using NoSnoozeNET.Extensions.WPF;
+using NoSnoozeNET.GUI.Functionality.Theme;
 
 namespace NoSnoozeNET
 {
@@ -36,6 +38,12 @@ namespace NoSnoozeNET
 
             alarmList = new List<AlarmItem>();
 
+            //Create all Config Directories if they don't already exist.
+            DirectoryExt.CreateIfNotExist(Path.Combine(BinDirectory, "Config"));
+            DirectoryExt.CreateIfNotExist(BrushConfig.ConfigPath);
+            DirectoryExt.CreateIfNotExist(ThemeHandler.ThemeDirectory);
+
+            #region AlarmSpam
 
             AlarmItem a = new AlarmItem()
             {
@@ -49,7 +57,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm nameer",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 9h",
-                
+
             };
 
             AlarmItem a3 = new AlarmItem()
@@ -57,7 +65,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm namerino",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 3h",
-                
+
             };
 
             AlarmItem a4 = new AlarmItem()
@@ -65,7 +73,7 @@ namespace NoSnoozeNET
                 AlarmName = "Alarm namerinoas",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 TimeToRing = "Rings in 3h",
-                
+
             };
 
             CreateAlarmItem ca = new();
@@ -74,6 +82,8 @@ namespace NoSnoozeNET
             alarmList.Add(a2);
             alarmList.Add(a3);
             alarmList.Add(a4);
+
+            #endregion
 
             AlarmList.ItemsSource = alarmList;
 
