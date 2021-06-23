@@ -120,10 +120,10 @@
                 BorderBrush="{DynamicResource ControlBackgroundBrush}" BorderThickness="2"
                 Click="BtnForceApply_OnClick"></Button>
 
-        <Grid Name="WindowAdvanced" Grid.Column="1" Grid.Row="7" ColumnSpan="3" IsEnabled="False" Visibility="Hidden">
+        <Grid Name="WindowAdvanced" Grid.Column="1" Grid.Row="7" ColumnSpan="2" IsEnabled="False" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -136,10 +136,11 @@
                    Foreground="{DynamicResource LabelBrush}"></Label>
             <xctk:ColorPicker Name="clrShadow" Grid.Column="1" Grid.Row="1" Margin="0,10,0,0" 
                               Width="27" Background="{DynamicResource ShadowColor}" ShowDropDownButton="False" ColorMode="ColorCanvas"
-                              SelectedColorChanged="ClrShadow_OnSelectedColorChanged"/>
+                              SelectedColorChanged="ClrShadow_OnSelectedColorChanged" HorizontalAlignment="Right"
+                              />
 
             <Grid Name="ShadowControl" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                  Margin="0,10,0,10" Background="{DynamicResource ControlBackgroundBrush}">
+                  Margin="0,15,0,10" Background="{DynamicResource ControlBackgroundBrush}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -175,7 +176,7 @@
                 <Label Grid.Row="6" Content="Shadow Opacity" Foreground="{DynamicResource LabelBrush}"
                        Margin="10,0,0,0"></Label>
                 <Slider Name="sldShadowOpacity" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Minimum="0"
-                        Maximum="10" SmallChange="1" LargeChange="1" Value="0" Margin="10,0,10,10"
+                        Maximum="1" SmallChange="1" LargeChange="1" Value="0" Margin="10,0,10,10"
                         ValueChanged="SldShadowOpacity_OnValueChanged"></Slider>
             </Grid>
 
