@@ -87,7 +87,6 @@ namespace NoSnoozeNET.Config
             {
                 //Read BrushConfig from json.
                 brushConfig = JsonConvert.DeserializeObject<BrushConfig>(File.ReadAllText(BrushConfig.ConfigPath));
-                MessageBox.Show(File.ReadAllText(BrushConfig.ConfigPath));
             }
             else
             {

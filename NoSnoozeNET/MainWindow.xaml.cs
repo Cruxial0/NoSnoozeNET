@@ -34,8 +34,6 @@ namespace NoSnoozeNET
         {
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
 
-            MessageBox.Show(JsonConvert.SerializeObject(GlobalConfig.BrushConfig, Formatting.Indented));
-
             alarmList = new List<AlarmItem>();
 
 
