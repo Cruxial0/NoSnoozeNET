@@ -44,7 +44,6 @@ namespace NoSnoozeNET.GUI.Controls
 
             //Pre-define margin.
             this.Margin = new Thickness(0, 5, 0, 5);
-
             //Change BitmapScalingMode to HighQuality.
             RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
 

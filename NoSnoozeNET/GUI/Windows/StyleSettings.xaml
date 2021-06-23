@@ -159,25 +159,25 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Shadow Direction" Foreground="{DynamicResource LabelBrush}"
                        Margin="10,0,0,0"></Label>
-                <Slider Name="sldShadowDirection" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Minimum="0"
+                <Slider Name="sldShadowDirection" Style="{StaticResource AppSliderStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Minimum="0"
                         Maximum="180" SmallChange="1" LargeChange="10" Value="5" Margin="10,0,10,10"
                         ValueChanged="SldShadowDirection_OnValueChanged"></Slider>
 
                 <Label Grid.Row="2" Content="Shadow Depth" Foreground="{DynamicResource LabelBrush}"
                        Margin="10,0,0,0"></Label>
-                <Slider Name="sldShadowDepth" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Minimum="0"
+                <Slider Name="sldShadowDepth" Style="{StaticResource AppSliderStyle}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Minimum="0"
                         Maximum="10" SmallChange="1" LargeChange="1" Value="5" Margin="10,0,10,10"
                         ValueChanged="SldShadowDepth_OnValueChanged"></Slider>
 
                 <Label Grid.Row="4" Content="Shadow Blur Radius" Foreground="{DynamicResource LabelBrush}"
                        Margin="10,0,0,0"></Label>
-                <Slider Name="sldShadowBlurRadius" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Minimum="0"
+                <Slider Name="sldShadowBlurRadius" Style="{StaticResource AppSliderStyle}" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Minimum="0"
                         Maximum="10" SmallChange="1" LargeChange="1" Value="0" Margin="10,0,10,10"
                         ValueChanged="SldShadowBlurRadius_OnValueChanged"></Slider>
 
                 <Label Grid.Row="6" Content="Shadow Opacity" Foreground="{DynamicResource LabelBrush}"
                        Margin="10,0,0,0"></Label>
-                <Slider Name="sldShadowOpacity" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Minimum="0"
+                <Slider Name="sldShadowOpacity" Style="{StaticResource AppSliderStyle}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Minimum="0"
                         Maximum="1" SmallChange="1" LargeChange="1" Value="0" Margin="10,0,10,10"
                         ValueChanged="SldShadowOpacity_OnValueChanged"></Slider>
             </Grid>
