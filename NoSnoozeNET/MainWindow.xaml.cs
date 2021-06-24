@@ -25,6 +25,7 @@ namespace NoSnoozeNET
         public static ICollection<AlarmItem> alarmList;
         public static List<UserTheme> Themes = new List<UserTheme>();
         public static GlobalConfig GlobalConfig = new();
+        public static UIElement AlarmLisElement = new UIElement();
 
         public MainWindow()
         {
@@ -36,6 +37,8 @@ namespace NoSnoozeNET
         void Startup()
         {
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
+
+            AlarmLisElement = AlarmList;
 
             alarmList = new List<AlarmItem>();
 

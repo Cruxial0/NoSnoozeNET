@@ -8,16 +8,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Ellipse  Stroke="Black"
+                    <Ellipse  Stroke="{DynamicResource SecondaryBrush}"
                           StrokeThickness="1"
                           Name="Ellipse" 
-                          Fill="OrangeRed" />
+                          Fill="{DynamicResource StopwatchColor}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="Orange"/>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{DynamicResource StopwatchColor}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="Gray"/>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{DynamicResource StopwatchColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -47,7 +47,7 @@
                           Grid.Row="1" Grid.Column="1"
                            Width="{TemplateBinding Width}"
                            Height="{TemplateBinding Height}"
-                           Background="GreenYellow"
+                           Background="{DynamicResource BackgroundBrush}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Center" />
                         <Track Name="PART_Track"

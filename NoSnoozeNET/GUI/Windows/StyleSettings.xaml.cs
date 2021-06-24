@@ -252,6 +252,7 @@ namespace NoSnoozeNET.GUI.Windows
                 //Set color pickers accordingly.
                 SetColorPickers();
                 SetSliders();
+                ColorImages();
             }
         }
 
@@ -301,6 +302,7 @@ namespace NoSnoozeNET.GUI.Windows
             MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Opacity = sldShadowOpacity.Value;
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, MainWindow.AlarmLisElement);
         }
 
         #endregion
