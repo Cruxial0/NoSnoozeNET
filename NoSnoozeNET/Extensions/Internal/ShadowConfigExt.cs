@@ -11,16 +11,12 @@ namespace NoSnoozeNET.Extensions.Internal
 {
     public static class ShadowConfigExt
     {
-        public static void ApplyGlobalShadow()
+        public static void ApplyGlobalShadow(List<UIElement> shadowElements)
         {
-            StyleSettings ST = new StyleSettings();
-            var mw = (MainWindow)Application.Current.MainWindow;
-
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, StyleSettings.ContainerElement);
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, StyleSettings.ThemesBoxElement);
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, StyleSettings.ShadowControlElement);
-
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, mw.AlarmList);
+            foreach (var element in shadowElements)
+            {
+                WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, element);
+            }
         }
     }
 }
