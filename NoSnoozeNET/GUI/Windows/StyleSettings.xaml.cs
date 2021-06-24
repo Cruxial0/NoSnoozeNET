@@ -49,9 +49,9 @@ namespace NoSnoozeNET.GUI.Windows
             WindowExt.Refresh(this);
 
             //Assign global UIElement variables.
-            ContainerElement = this.ControlContainer;
+            ContainerElement = this.ControlContainerBorder;
             ThemesBoxElement = this.cmbThemes;
-            ShadowControlElement = this.ShadowControl;
+            ShadowControlElement = this.ShadowControlBorder;
 
             //Add Elements to shadow into list.
             _shadowElements.Add(ContainerElement);

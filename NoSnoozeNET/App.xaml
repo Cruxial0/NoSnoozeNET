@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Assets/Dictionaries/UserControlColors.xaml"/>
                 <ResourceDictionary Source="Assets/Dictionaries/MainColors.xaml"/>
                 <ResourceDictionary Source="Assets/Dictionaries/ShadowControlStyle.xaml"/>
+                <ResourceDictionary Source="Assets/Dictionaries/ListBoxResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
