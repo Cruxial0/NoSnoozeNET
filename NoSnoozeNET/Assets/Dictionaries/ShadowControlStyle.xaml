@@ -8,6 +8,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
+                    <Rectangle Stroke="{DynamicResource ShadowColor}"
+                               StrokeThickness="1"
+                               Width="12"
+                               Name="Rectangle"
+                               RadiusX="8"
+                               RadiusY="6"
+                               Fill="{DynamicResource BackgroundBrush}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Rectangle" Property="Fill" Value="{DynamicResource StopwatchColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

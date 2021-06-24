@@ -70,7 +70,7 @@ namespace NoSnoozeNET.Config
         {
             //MainColors.xaml
             Application.Current.Resources["LabelBrush"] = brushConfig.MainBrush.LabelBrush;
-            Application.Current.Resources["SecondaryBrush"] = brushConfig.MainBrush.SecondaryColorBrush;
+            Application.Current.Resources["BorderBrush"] = brushConfig.MainBrush.ControlBorderBrush;
             Application.Current.Resources["BackgroundBrush"] = brushConfig.MainBrush.BackgroundColorBrush;
             Application.Current.Resources["ControlBackgroundBrush"] = brushConfig.MainBrush.ControlBackgroundBrush;
             Application.Current.Resources["ShadowColor"] = brushConfig.MainBrush.ShadowColorBrush;
@@ -115,7 +115,7 @@ namespace NoSnoozeNET.Config
         {
             //MainColors.xaml
             brushConfig.MainBrush.LabelBrush = (SolidColorBrush)Application.Current.Resources["LabelBrush"];
-            brushConfig.MainBrush.SecondaryColorBrush = (SolidColorBrush)Application.Current.Resources["SecondaryBrush"];
+            brushConfig.MainBrush.ControlBorderBrush = (SolidColorBrush)Application.Current.Resources["BorderBrush"];
             brushConfig.MainBrush.BackgroundColorBrush = (SolidColorBrush)Application.Current.Resources["BackgroundBrush"];
             brushConfig.MainBrush.ControlBackgroundBrush = (SolidColorBrush)Application.Current.Resources["ControlBackgroundBrush"];
             brushConfig.MainBrush.ShadowColorBrush = (SolidColorBrush)Application.Current.Resources["ShadowColor"];
@@ -182,7 +182,7 @@ namespace NoSnoozeNET.Config
 
             //Color all AlarmItems accordingly.
             BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
-            BrushConfigMethods.ColorAlarmList(StyleSettings.previewItem);
+            BrushConfigMethods.ColorAlarmList(StyleSettings.PreviewItems);
 
             //Perform full Garbage Collection.
             GC.WaitForFullGCApproach();
@@ -205,7 +205,7 @@ namespace NoSnoozeNET.Config
                     {
                         UsingAdvanced = false,
                         LabelBrush = new SolidColorBrush(Colors.White),
-                        SecondaryColorBrush = new SolidColorBrush(Colors.Transparent),
+                        ControlBorderBrush = new SolidColorBrush(Colors.Transparent),
                         BackgroundColorBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#3f3f4d")),
                         ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#2f2f3d"))
                     },
@@ -241,7 +241,7 @@ namespace NoSnoozeNET.Config
                     {
                         UsingAdvanced = false,
                         LabelBrush = new SolidColorBrush(Colors.White),
-                        SecondaryColorBrush = new SolidColorBrush(Colors.Transparent),
+                        ControlBorderBrush = new SolidColorBrush(Colors.Transparent),
                         BackgroundColorBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#121212")),
                         ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#1e1e1e"))
                     },
