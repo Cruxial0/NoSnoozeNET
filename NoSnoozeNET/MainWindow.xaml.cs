@@ -42,7 +42,7 @@ namespace NoSnoozeNET
             GlobalConfig.SelectedTheme = new ThemeHandler().LoadSelectedTheme();
 
 
-            AlarmLisElement = AlarmListBorder;
+            AlarmListElement = AlarmListBorder;
 
             TopBarElement = dckTopBar;
 
