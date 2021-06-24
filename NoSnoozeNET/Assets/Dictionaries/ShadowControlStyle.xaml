@@ -31,11 +31,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">
                     <Grid>
-                        
                         <Border Name="PART_Border"
                            BorderBrush="Black" BorderThickness="1"
                            Padding="2"
-                          Grid.Row="1" Grid.Column="1"
+                           Grid.Row="1" Grid.Column="1"
+                           Background="{DynamicResource OptionsColor}"
                            Width="{TemplateBinding Width}"
                            Height="{TemplateBinding Height}"
                            HorizontalAlignment="Stretch"
