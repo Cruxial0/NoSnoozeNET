@@ -63,7 +63,7 @@ namespace NoSnoozeNET.GUI.Windows
             _shadowElements.Add(btnAddTheme);
 
             //Add references from MainWindow
-            _shadowElements.Add(MainWindow.AlarmLisElement);
+            _shadowElements.Add(MainWindow.AlarmListElement);
             _shadowElements.Add(MainWindow.TopBarElement);
 
             //Apply Shadows

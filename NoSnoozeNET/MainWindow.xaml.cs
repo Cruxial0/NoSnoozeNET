@@ -26,7 +26,7 @@ namespace NoSnoozeNET
         public static ICollection<AlarmItem> alarmList;
         public static List<UserTheme> Themes = new List<UserTheme>();
         public static GlobalConfig GlobalConfig = new();
-        public static UIElement AlarmLisElement = new UIElement();
+        public static UIElement AlarmListElement = new UIElement();
         public static UIElement TopBarElement = new UIElement();
 
         public MainWindow()
@@ -41,7 +41,7 @@ namespace NoSnoozeNET
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
             GlobalConfig.SelectedTheme = new ThemeHandler().LoadSelectedTheme();
 
-            AlarmLisElement = AlarmList;
+            AlarmListElement = AlarmList;
             TopBarElement = dckTopBar;
 
             alarmList = new List<AlarmItem>();
