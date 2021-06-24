@@ -79,8 +79,8 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.ColumnSpan="5">
-            <Menu DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
+        <DockPanel Name="dckTopBar" Grid.ColumnSpan="5">
+            <Menu  DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
                 <MenuItem Header="Settings">
                     <MenuItem Header="Style Settings" Click="MenuItem_OnClick" 
                               Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
@@ -91,8 +91,9 @@
         </DockPanel>
 
 
-        <ListBox x:Name="AlarmList" Grid.Row="1" Grid.Column="1" Margin="0,20,0,0" Height="420" Background="{DynamicResource ControlBackgroundBrush}" ItemsSource="{Binding alarmList}"
-                 ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}" BorderThickness="0">
+        <ListBox x:Name="AlarmList" Grid.Row="1" Grid.Column="1" Margin="0,20,0,0" Height="420" Background="{DynamicResource ControlBackgroundBrush}"
+                 BorderBrush="{DynamicResource BorderBrush}"
+                 ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
             <!--<Border>
                 --><!--<Border.Effect>
                     <DropShadowEffect Color="Black" Direction="90" BlurRadius="10"></DropShadowEffect>

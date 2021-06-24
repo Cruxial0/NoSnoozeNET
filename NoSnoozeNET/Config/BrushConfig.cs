@@ -47,7 +47,7 @@ namespace NoSnoozeNET.Config
     {
         public bool UsingAdvanced { get; set; }
         public SolidColorBrush LabelBrush { get; set; }
-        public SolidColorBrush SecondaryColorBrush { get; set; }
+        public SolidColorBrush ControlBorderBrush { get; set; }
         public SolidColorBrush BackgroundColorBrush { get; set; }
         public SolidColorBrush ControlBackgroundBrush { get; set; }
         public SolidColorBrush ShadowColorBrush { get; set; }
