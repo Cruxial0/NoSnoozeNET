@@ -103,7 +103,7 @@ namespace NoSnoozeNET
                 AlarmList.ItemsSource = createAlarm;
             }
 
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.AlarmList);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.AlarmListBorder);
         }
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)

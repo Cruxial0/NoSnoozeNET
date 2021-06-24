@@ -207,7 +207,8 @@ namespace NoSnoozeNET.Config
                         LabelBrush = new SolidColorBrush(Colors.White),
                         ControlBorderBrush = new SolidColorBrush(Colors.Transparent),
                         BackgroundColorBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#3f3f4d")),
-                        ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#2f2f3d"))
+                        ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#2f2f3d")),
+                        ShadowColorBrush = new SolidColorBrush(Colors.Black)
                     },
                     AlarmItemBrush = new AlarmItemBrush()
                     {
@@ -234,7 +235,7 @@ namespace NoSnoozeNET.Config
 
             UserTheme testTheme = new()
             {
-                ThemeName = "Test Theme by Cruxial",
+                ThemeName = "Dark Theme by Cruxial",
                 brushConfig = new()
                 {
                     MainBrush = new MainBrush
@@ -243,7 +244,8 @@ namespace NoSnoozeNET.Config
                         LabelBrush = new SolidColorBrush(Colors.White),
                         ControlBorderBrush = new SolidColorBrush(Colors.Transparent),
                         BackgroundColorBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#121212")),
-                        ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#1e1e1e"))
+                        ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#1e1e1e")),
+                        ShadowColorBrush = new SolidColorBrush(Colors.Black)
                     },
                     AlarmItemBrush = new AlarmItemBrush()
                     {
@@ -266,6 +268,45 @@ namespace NoSnoozeNET.Config
             presets.Add(testTheme);
 
             #endregion
+
+            #region Light Theme by Cruxial
+
+            UserTheme lightTheme = new()
+            {
+                ThemeName = "Light Theme by Cruxial",
+                brushConfig = new()
+                {
+                    MainBrush = new MainBrush
+                    {
+                        UsingAdvanced = false,
+                        LabelBrush = new SolidColorBrush(Colors.Black),
+                        ControlBorderBrush = new SolidColorBrush(Colors.Transparent),
+                        BackgroundColorBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FFF2F3F5")),
+                        ControlBackgroundBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FFE3E5E8")),
+                        ShadowColorBrush = new SolidColorBrush(Colors.Black)
+                    },
+                    AlarmItemBrush = new AlarmItemBrush()
+                    {
+                        StopwatchBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FF000000")),
+                        OptionsBrush = new SolidColorBrush(Colors.Black),
+                        DescriptionBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FF717988")),
+                        HeaderBrush = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#FF000000"))
+                    },
+                    ShadowConfig = new ShadowConfig()
+                    {
+                        BlurRadius = 10.0,
+                        Direction = 5.0,
+                        ShadowDepth = 0.0,
+                        Opacity = 0.047110552763819105
+                    }
+                }
+
+            };
+
+            presets.Add(lightTheme);
+
+            #endregion
+
 
             return presets;
         }
