@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using NoSnoozeNET.Config;
 using NoSnoozeNET.Extensions.IO;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Windows;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using NoSnoozeNET.Extensions.Internal;
@@ -32,6 +35,7 @@ namespace NoSnoozeNET.GUI.Functionality.Theme
 
             //Declare new list of UserTheme.
             List<UserTheme> themes = new List<UserTheme>();
+            List<string> loadingFailed = new List<string>();
 
             //Create json validation schema.
             var schema = NJsonSchema.JsonSchema.FromType<UserTheme>();
@@ -45,6 +49,16 @@ namespace NoSnoozeNET.GUI.Functionality.Theme
                 //Check if there were no errors, if not, add theme to list.
                 if(errors.Count == 0)
                     themes.Add(JsonConvert.DeserializeObject<UserTheme>(File.ReadAllText(Path.Combine(ThemeDirectory, file))));
+                else
+                {
+                    loadingFailed.Add(file.Split('\\').Last());
+                }
+            }
+
+            if(loadingFailed.Count != 0)
+            {
+                MessageBox.Show(
+                    $"Following Themes failed to load.\nThis will not impact application performance, but consider re-creating or deleting following themes:\n{String.Join(Environment.NewLine, loadingFailed)}", "Loading Themes Failed!", MessageBoxButton.OK);
             }
 
             //Return list of UserTheme.
