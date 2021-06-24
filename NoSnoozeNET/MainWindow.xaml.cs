@@ -25,20 +25,20 @@ namespace NoSnoozeNET
         public static ICollection<AlarmItem> alarmList;
         public static List<UserTheme> Themes = new List<UserTheme>();
         public static GlobalConfig GlobalConfig = new();
+        public static UIElement AlarmLisElement = new UIElement();
 
         public MainWindow()
         {
             InitializeComponent();
-
 
             Startup();
         }
 
         void Startup()
         {
-            if(!Directory.Exists(Path.Combine(BinDirectory, @"\Config"))) Directory.CreateDirectory(Path.Combine(BinDirectory, @"\Config"));
-
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
+
+            AlarmLisElement = AlarmList;
 
             alarmList = new List<AlarmItem>();
 

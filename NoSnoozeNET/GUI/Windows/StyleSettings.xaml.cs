@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
@@ -27,12 +28,18 @@ namespace NoSnoozeNET.GUI.Windows
         public static UIElement ContainerElement;
         public static UIElement ThemesBoxElement;
         public static UIElement ShadowControlElement;
+
+        private List<UIElement> shadowElements = new List<UIElement>();
         public StyleSettings()
         {
             InitializeComponent();
-            Dispatcher.InvokeAsync(() => ColorImages(), DispatcherPriority.Render);
+            Dispatcher.InvokeAsync(async () => await ColorImages(), DispatcherPriority.Render);
             CreatePreview();
+            Dispatcher.InvokeAsync(async() => await Startup(), DispatcherPriority.Background);
+        }
 
+        public async Task Startup()
+        {
             MainWindow.GlobalConfig.BuildThemeConfig();
             //ThemePresetMethods.ApplyTheme(MainWindow.GlobalConfig.BrushConfig);
             WindowExt.Refresh(this);
@@ -40,6 +47,11 @@ namespace NoSnoozeNET.GUI.Windows
             ContainerElement = this.ControlContainer;
             ThemesBoxElement = this.cmbThemes;
             ShadowControlElement = this.ShadowControl;
+
+            shadowElements.Add(ContainerElement);
+            shadowElements.Add(ThemesBoxElement);
+            shadowElements.Add(ShadowControlElement);
+            shadowElements.Add(MainWindow.AlarmLisElement);
 
             //Sets ItemSource of ComboBox to loaded UserThemes.
             cmbThemes.ItemsSource = MainWindow.GlobalConfig.ThemeConfig.Keys;
@@ -120,7 +132,7 @@ namespace NoSnoozeNET.GUI.Windows
             previewItem.Add(a3);
         }
 
-        private async void ColorImages()
+        private async Task ColorImages()
         {
             var brush = MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush;
 
@@ -200,7 +212,7 @@ namespace NoSnoozeNET.GUI.Windows
         {
             MainWindow.GlobalConfig.BrushConfig.MainBrush.ShadowColorBrush = new SolidColorBrush(e.NewValue.Value);
             MainWindow.GlobalConfig.BrushConfig.ApplyBrushConfig();
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
+            ShadowConfigExt.ApplyGlobalShadow(shadowElements);
         }
 
         #endregion
@@ -252,6 +264,7 @@ namespace NoSnoozeNET.GUI.Windows
                 //Set color pickers accordingly.
                 SetColorPickers();
                 SetSliders();
+                await ColorImages();
             }
         }
 
@@ -273,34 +286,25 @@ namespace NoSnoozeNET.GUI.Windows
         private void SldShadowDirection_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Direction = sldShadowDirection.Value;
-
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
-            //ShadowConfigExt.ApplyGlobalShadow();
+            ShadowConfigExt.ApplyGlobalShadow(shadowElements);
         }
 
         private void SldShadowDepth_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MainWindow.GlobalConfig.BrushConfig.ShadowConfig.ShadowDepth = sldShadowDepth.Value;
-
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
-            //ShadowConfigExt.ApplyGlobalShadow();
+            ShadowConfigExt.ApplyGlobalShadow(shadowElements);
         }
 
         private void SldShadowBlurRadius_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MainWindow.GlobalConfig.BrushConfig.ShadowConfig.BlurRadius = sldShadowBlurRadius.Value;
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
-            //ShadowConfigExt.ApplyGlobalShadow();
+            ShadowConfigExt.ApplyGlobalShadow(shadowElements);
         }
 
         private void SldShadowOpacity_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MainWindow.GlobalConfig.BrushConfig.ShadowConfig.Opacity = sldShadowOpacity.Value;
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ControlContainer);
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.ShadowControl);
+            ShadowConfigExt.ApplyGlobalShadow(shadowElements);
         }
 
         #endregion
@@ -310,14 +314,13 @@ namespace NoSnoozeNET.GUI.Windows
         {
             WindowExt.Refresh(this);
             WindowExt.Refresh(Application.Current.MainWindow);
-            UIElement al = new MainWindow().AlarmList;
-            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, al);
+            ShadowConfigExt.ApplyGlobalShadow(shadowElements);
         }
 
-        private void StyleSettings_OnLoaded(object sender, RoutedEventArgs e)
+        private async void StyleSettings_OnLoaded(object sender, RoutedEventArgs e)
         {
             SetSliders();
-            ColorImages();
+            await ColorImages();
         }
     }
 }
