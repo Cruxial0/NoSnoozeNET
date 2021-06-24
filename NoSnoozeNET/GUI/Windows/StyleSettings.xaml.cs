@@ -37,12 +37,14 @@ namespace NoSnoozeNET.GUI.Windows
             InitializeComponent();
             Dispatcher.InvokeAsync(async () => await ColorImages(), DispatcherPriority.Render);
             CreatePreview();
+            SetSliders();
             Dispatcher.InvokeAsync(async() => await Startup(), DispatcherPriority.Background);
         }
 
         public async Task Startup()
         {
             MainWindow.GlobalConfig.BuildThemeConfig();
+
             ThemePresetMethods.ApplyTheme(MainWindow.GlobalConfig.BrushConfig);
             WindowExt.Refresh(this);
 

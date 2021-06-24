@@ -166,7 +166,7 @@
                 <Label Grid.Row="2" Content="Shadow Depth" Foreground="{DynamicResource LabelBrush}"
                        Margin="10,0,0,0"></Label>
                 <Slider Name="sldShadowDepth" Style="{StaticResource AppSliderStyle}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Minimum="0"
-                        Maximum="10" SmallChange="1" LargeChange="1" Value="5" Margin="10,0,10,10"
+                        Maximum="10" SmallChange="1" LargeChange="1" Margin="10,0,10,10"
                         ValueChanged="SldShadowDepth_OnValueChanged"></Slider>
 
                 <Label Grid.Row="4" Content="Shadow Blur Radius" Foreground="{DynamicResource LabelBrush}"

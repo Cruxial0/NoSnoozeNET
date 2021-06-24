@@ -22,6 +22,7 @@ namespace NoSnoozeNET
     {
         public static readonly string BinDirectory = Environment.CurrentDirectory;
         public static readonly string StartupDirectory = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).FullName;
+
         public static ICollection<AlarmItem> alarmList;
         public static List<UserTheme> Themes = new List<UserTheme>();
         public static GlobalConfig GlobalConfig = new();
@@ -38,6 +39,7 @@ namespace NoSnoozeNET
         void Startup()
         {
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
+            GlobalConfig.SelectedTheme = new ThemeHandler().LoadSelectedTheme();
 
             AlarmLisElement = AlarmList;
             TopBarElement = dckTopBar;
