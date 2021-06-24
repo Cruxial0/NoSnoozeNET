@@ -93,7 +93,7 @@
                           Width="27" Background="{DynamicResource DescriptionBrush}" ShowDropDownButton="False" ColorMode="ColorCanvas"
                           SelectedColorChanged="ClrDescription_OnSelectedColorChanged" HorizontalAlignment="Left"/>
 
-        <ListBox Name="ControlContainer" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" 
+        <ListBox Name="ControlContainer" Style="{DynamicResource RoundedListBoxStyle}" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" 
                  Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="60,15,0,0" ></ListBox>
 
 
