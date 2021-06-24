@@ -22,6 +22,7 @@ namespace NoSnoozeNET.Config
             DirectoryExt.CreateFolderIfNotExist(ConfigDirectory);
 
             File.WriteAllText(Path.GetFullPath(ConfigPath), JsonConvert.SerializeObject(this, Formatting.Indented));
+            File.WriteAllText(Path.Combine(BrushConfig.ConfigDirectory, "SelectedTheme.json"), JsonConvert.SerializeObject(MainWindow.GlobalConfig.SelectedTheme, Formatting.Indented));
         }
 
         public BrushConfig()

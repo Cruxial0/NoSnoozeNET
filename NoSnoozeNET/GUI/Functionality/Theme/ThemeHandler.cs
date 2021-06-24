@@ -28,6 +28,13 @@ namespace NoSnoozeNET.GUI.Functionality.Theme
             MainWindow.GlobalConfig.AddTheme(theme);
         }
 
+        public string LoadSelectedTheme()
+        {
+            if (!File.Exists(Path.Combine(BrushConfig.ConfigDirectory, "SelectedTheme.json"))) return null;
+            return JsonConvert.DeserializeObject<string>(
+                File.ReadAllText(Path.Combine(BrushConfig.ConfigDirectory, "SelectedTheme.json"))) ?? null;
+        }
+
         public List<UserTheme> LoadThemes()
         {
             //Get all files with .json extension.
