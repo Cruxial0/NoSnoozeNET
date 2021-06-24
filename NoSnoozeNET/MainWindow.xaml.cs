@@ -39,8 +39,9 @@ namespace NoSnoozeNET
         {
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
 
-            AlarmLisElement = AlarmList;
+            AlarmLisElement = AlarmListBorder;
             TopBarElement = dckTopBar;
+
 
             alarmList = new List<AlarmItem>();
 
