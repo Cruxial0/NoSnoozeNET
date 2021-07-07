@@ -4,9 +4,115 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoSnoozeNET.GUI.Windows"
-        mc:Ignorable="d"
-        Title="CreateAlarm" Height="450" Width="800">
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d" 
+        Window.Background="{DynamicResource BackgroundBrush}"
+        Title="CreateAlarm" Height="450" Width="800"
+        SizeToContent="WidthAndHeight">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="1"
+               Content="Create an Alarm"
+               FontSize="20" 
+               FontFamily="Segoe UI DemiLight"
+               Foreground="{DynamicResource HeaderBrush}">
+
+        </Label>
+
+        <Label Grid.Column="1" Grid.Row="2"
+               Content="Alarm Name:"
+               Margin="0,5,0,0"
+               FontFamily="Segoe UI Light"
+               Foreground="{DynamicResource LabelBrush}">
+
+        </Label>
+
+        <TextBox Grid.Column="1" Grid.Row="2"
+                 Name="txtAlarmName"
+                 Margin="80,5,0,0"
+                 Foreground="{DynamicResource LabelBrush}"
+                 Background="{DynamicResource ControlBackgroundBrush}"
+                 TextChanged="TextBoxBase_OnTextChanged">
+
+        </TextBox>
+
+        <Label Grid.Column="1" Grid.Row="3"
+               Content="Ring time"
+               Margin="0,5,0,0"
+               FontFamily="Segoe UI Light"
+               Foreground="{DynamicResource LabelBrush}">
+
+        </Label>
+
+        <xctk:TimePicker Grid.Column="1" Grid.Row="3"
+                         Name="TimePicker"
+                         Margin="80,5,0,0"
+                         Foreground="{DynamicResource LabelBrush}"
+                         Background="{DynamicResource ControlBackgroundBrush}"
+                         ValueChanged="UpDownBase_OnValueChanged">
+        </xctk:TimePicker>
+
+        <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="3"
+              Margin="10,0,20,0"
+              Background="{DynamicResource ControlBackgroundBrush}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Name="PluginList" Grid.Column="0" Grid.Row="0"
+                     Background="{DynamicResource ControlBackgroundBrush}"
+                     Width="150">
+
+            </ListBox>
+        </Grid>
+
+        <ListBox Name="PreviewContainer"
+                 Grid.Row="4" Grid.Column="1"
+                 Margin="0,5,0,0"
+                 Background="{DynamicResource ControlBackgroundBrush}">
+
+        </ListBox>
+
+        <Button Name="btnSave"
+                Grid.Column="1" Grid.Row="5"
+                Content="Save" Margin="0,10,0,5"
+                FontFamily="Segoe UI Light"
+                Width="75"
+                HorizontalAlignment="Left"
+                Foreground="{DynamicResource LabelBrush}"
+                Background="{DynamicResource ControlBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlBackgroundBrush}"
+                BorderThickness="2"
+                Click="BtnSave_OnClick"></Button>
+
     </Grid>
 </Window>

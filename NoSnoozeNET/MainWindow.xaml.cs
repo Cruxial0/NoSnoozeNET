@@ -117,5 +117,11 @@ namespace NoSnoozeNET
             GlobalConfig.BrushConfig.BindConfig();
             GlobalConfig.BrushConfig.SaveConfig();
         }
+
+        private void CreateAlarm_OnClick(object sender, RoutedEventArgs e)
+        {
+            CreateAlarm ca = new CreateAlarm();
+            ca.Show();
+        }
     }
 }

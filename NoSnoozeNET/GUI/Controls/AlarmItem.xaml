@@ -49,9 +49,9 @@
 
         <!--Alarm Details-->
         <StackPanel Grid.Column="2" Margin="0,5,0,10">
-            <Label FontSize="24" Content="{Binding AlarmName, FallbackValue=Alarm}" FontFamily="Segoe UI SemiLight" Foreground="{DynamicResource HeaderBrush}"></Label>
-            <Label FontSize="12" Content="{Binding AlarmCreated, FallbackValue=Created at: 1/1/2021 00:01AM}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
-            <Label FontSize="12" Content="{Binding TimeToRing, FallbackValue=Alarm rings at 12AM (in 7h)}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
+            <Label Name="lblAlarmName" FontSize="24" Content="{Binding AlarmName, FallbackValue=Alarm}" FontFamily="Segoe UI SemiLight" Foreground="{DynamicResource HeaderBrush}"></Label>
+            <Label Name="lblCreatedAt" FontSize="12" Content="{Binding AlarmCreated, FallbackValue=Created at: 1/1/2021 00:01AM}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
+            <Label Name="lblRingsAt" FontSize="12" Content="{Binding TimeToRing, FallbackValue=Alarm rings at 12AM (in 7h)}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
         </StackPanel>
     </Grid>
 </UserControl>

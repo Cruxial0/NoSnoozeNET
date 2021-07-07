@@ -23,13 +23,25 @@ namespace NoSnoozeNET.GUI.Controls
         #region properties
 
         [Category("Custom Props")]
-        public string AlarmName { get; set; }
+        public string AlarmName
+        {
+            get => (string)lblAlarmName.Content;
+            set => lblAlarmName.Content = value;
+        }
 
         [Category("Custom Props")]
-        public string AlarmCreated { get; set; }
+        public string AlarmCreated
+        {
+            get => (string) lblCreatedAt.Content;
+            set => lblCreatedAt.Content = value;
+        }
 
         [Category("Custom Props")]
-        public string TimeToRing { get; set; }
+        public string TimeToRing
+        {
+            get => (string)lblRingsAt.Content;
+            set => lblRingsAt.Content = value;
+        }
 
         [Category("Custom Props")]
         public ImageSource DynamicImage { get; set; }

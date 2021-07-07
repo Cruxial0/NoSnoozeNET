@@ -86,6 +86,8 @@
                               Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
                     <MenuItem Header="Plugin Settings" 
                               Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
+                    <MenuItem Header="Create Alarm" Click="CreateAlarm_OnClick"
+                              Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

@@ -118,6 +118,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Windows\CreateAlarm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Windows\SaveTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +160,9 @@
       <DependentUpon>CreateAlarmItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Functionality\Theme\ThemeHandler.cs" />
+    <Compile Include="GUI\Windows\CreateAlarm.xaml.cs">
+      <DependentUpon>CreateAlarm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Windows\SaveTheme.xaml.cs">
       <DependentUpon>SaveTheme.xaml</DependentUpon>
     </Compile>
