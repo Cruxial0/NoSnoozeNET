@@ -183,6 +183,7 @@ namespace NoSnoozeNET.Config
             //Color all AlarmItems accordingly.
             BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
             BrushConfigMethods.ColorAlarmList(StyleSettings.PreviewItems);
+            BrushConfigMethods.ColorAlarmList(CreateAlarm.PreviewItemList);
 
             //Perform full Garbage Collection.
             GC.WaitForFullGCApproach();

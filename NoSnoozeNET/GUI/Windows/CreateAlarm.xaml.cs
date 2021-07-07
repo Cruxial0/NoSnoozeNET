@@ -18,6 +18,7 @@ namespace NoSnoozeNET.GUI.Windows
     /// </summary>
     public partial class CreateAlarm : Window
     {
+        public static List<AlarmItem> PreviewItemList = new List<AlarmItem>();
         public AlarmItem PreviewItem = new AlarmItem();
 
         public CreateAlarm()
@@ -38,6 +39,17 @@ namespace NoSnoozeNET.GUI.Windows
             alarmList.Add(PreviewItem);
 
             PreviewContainer.ItemsSource = alarmList;
+
+            List<PluginListItem> plugins = new List<PluginListItem>();
+
+            plugins.Add(new PluginListItem());
+            plugins.Add(new PluginListItem());
+            plugins.Add(new PluginListItem());
+            plugins.Add(new PluginListItem());
+
+            PluginList.ItemsSource = plugins;
+
+            PreviewItemList.Add(PreviewItem);
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -60,7 +72,7 @@ namespace NoSnoozeNET.GUI.Windows
             }
             
 
-            PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm} (in {Math.Round(totalHours)})";
+            PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm} (in {Math.Round(totalHours)}h)";
             PreviewItem.AlarmCreated = $"Created: {DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}";
         }
 

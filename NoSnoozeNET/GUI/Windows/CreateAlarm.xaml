@@ -8,7 +8,8 @@
         mc:Ignorable="d" 
         Window.Background="{DynamicResource BackgroundBrush}"
         Title="CreateAlarm" Height="450" Width="800"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -57,7 +58,7 @@
         </TextBox>
 
         <Label Grid.Column="1" Grid.Row="3"
-               Content="Ring time"
+               Content="Ring time:"
                Margin="0,5,0,0"
                FontFamily="Segoe UI Light"
                Foreground="{DynamicResource LabelBrush}">
@@ -72,8 +73,8 @@
                          ValueChanged="UpDownBase_OnValueChanged">
         </xctk:TimePicker>
 
-        <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="3"
-              Margin="10,0,20,0"
+        <Grid Name="ParentGrid" Grid.Row="2" Grid.Column="2" Grid.RowSpan="3"
+              Margin="10,5,20,0"
               Background="{DynamicResource ControlBackgroundBrush}">
 
             <Grid.ColumnDefinitions>
@@ -90,7 +91,8 @@
 
             <ListBox Name="PluginList" Grid.Column="0" Grid.Row="0"
                      Background="{DynamicResource ControlBackgroundBrush}"
-                     Width="150">
+                     Width="150"
+                     Height="{Binding ActualHeight, ElementName=ParentGrid}">
 
             </ListBox>
         </Grid>

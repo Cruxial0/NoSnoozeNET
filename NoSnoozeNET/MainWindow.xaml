@@ -97,7 +97,9 @@
                 Background="{DynamicResource ControlBackgroundBrush}">
             <ListBox x:Name="AlarmList"  Height="420" Background="{x:Null}" 
                      BorderBrush="{DynamicResource BorderBrush}"
-                     ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
+                     ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}"
+                     >
+                <ScrollViewer.CanContentScroll>False</ScrollViewer.CanContentScroll>
             </ListBox>
         </Border>
         <!--OMEGALUL-->
