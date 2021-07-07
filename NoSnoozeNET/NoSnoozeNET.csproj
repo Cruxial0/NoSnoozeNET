@@ -118,6 +118,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Controls\PluginListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Windows\CreateAlarm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,6 +162,9 @@
     </Compile>
     <Compile Include="GUI\Controls\CreateAlarmItem.xaml.cs">
       <DependentUpon>CreateAlarmItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\PluginListItem.xaml.cs">
+      <DependentUpon>PluginListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Functionality\Theme\ThemeHandler.cs" />
     <Compile Include="GUI\Windows\CreateAlarm.xaml.cs">

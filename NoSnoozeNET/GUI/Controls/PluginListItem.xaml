@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="NoSnoozeNET.GUI.Controls.PluginListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="../../Assets/SimpleLeague.png"></Image>
+        <Label Grid.Column="1" Content="Test Plugin" Foreground="{DynamicResource LabelBrush}" Margin="5,-2,0,-1" FontSize="10"></Label>
+    </Grid>
+</UserControl>
