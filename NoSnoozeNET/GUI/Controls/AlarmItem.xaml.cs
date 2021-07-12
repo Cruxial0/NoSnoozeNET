@@ -2,10 +2,12 @@
 using NoSnoozeNET.GUI.Windows;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using NoSnoozeNET.Annotations;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 
@@ -14,7 +16,7 @@ namespace NoSnoozeNET.GUI.Controls
     /// <summary>
     /// Interaction logic for AlarmItem.xaml
     /// </summary>
-    public partial class AlarmItem : UserControl
+    public partial class AlarmItem : UserControl, INotifyPropertyChanged
     {
         //Declare local image variables
         private static Bitmap _stopwatchBitmap;
@@ -26,21 +28,21 @@ namespace NoSnoozeNET.GUI.Controls
         public string AlarmName
         {
             get => (string)lblAlarmName.Content;
-            set => lblAlarmName.Content = value;
+            set { lblAlarmName.Content = value; NotifyPropertyChanged(nameof(AlarmName)); } 
         }
 
         [Category("Custom Props")]
         public string AlarmCreated
         {
             get => (string) lblCreatedAt.Content;
-            set => lblCreatedAt.Content = value;
+            set { lblCreatedAt.Content = value; NotifyPropertyChanged(nameof(AlarmCreated)); }
         }
 
         [Category("Custom Props")]
         public string TimeToRing
         {
             get => (string)lblRingsAt.Content;
-            set => lblRingsAt.Content = value;
+            set { lblRingsAt.Content = value; NotifyPropertyChanged(nameof(TimeToRing)); }
         }
 
         [Category("Custom Props")]
@@ -117,6 +119,17 @@ namespace NoSnoozeNET.GUI.Controls
             //Placeholder
             StyleSettings ss = new();
             ss.Show();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+                PropertyChanged(this, new PropertyChangedEventArgs("DisplayMember"));
+            }
         }
     }
 }

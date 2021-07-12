@@ -20,6 +20,7 @@ namespace NoSnoozeNET.GUI.Windows
     {
         public static List<AlarmItem> PreviewItemList = new List<AlarmItem>();
         public AlarmItem PreviewItem = new AlarmItem();
+        public AlarmItem OutputAlarmItem;
 
         public CreateAlarm()
         {
@@ -78,7 +79,16 @@ namespace NoSnoozeNET.GUI.Windows
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            OutputAlarmItem = new AlarmItem()
+            {
+                AlarmCreated = PreviewItem.AlarmCreated,
+                AlarmName = PreviewItem.AlarmName,
+                TimeToRing = PreviewItem.TimeToRing
+            };
+            this.DialogResult = true;
+            this.Close();
         }
+
+        public AlarmItem SavedItem => OutputAlarmItem;
     }
 }

@@ -194,7 +194,7 @@ namespace NoSnoozeNET.GUI.Windows
             MainWindow.GlobalConfig.BrushConfig.ApplyBrushConfig();
 
             PreviewItems.First().ColorStopwatch(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
-            BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
+            BrushConfigMethods.ColorAlarmList(MainWindow.AlarmColorList.ToList());
         }
 
         private void ClrOptions_OnSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
@@ -203,7 +203,7 @@ namespace NoSnoozeNET.GUI.Windows
             MainWindow.GlobalConfig.BrushConfig.ApplyBrushConfig();
 
             PreviewItems.First().ColorOptions(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.OptionsBrush);
-            BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
+            BrushConfigMethods.ColorAlarmList(MainWindow.AlarmColorList.ToList());
         }
 
         private void ClrDescription_OnSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)

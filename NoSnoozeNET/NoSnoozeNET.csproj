@@ -187,6 +187,7 @@
     <Compile Include="PluginSystem\PluginLoader.cs" />
     <Compile Include="PluginSystem\Plugins\HelpPlugin.cs" />
     <Compile Include="PluginSystem\Utils\Logger.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

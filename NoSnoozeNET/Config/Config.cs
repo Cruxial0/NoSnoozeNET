@@ -181,7 +181,7 @@ namespace NoSnoozeNET.Config
             WindowExt.Refresh(Application.Current.MainWindow);
 
             //Color all AlarmItems accordingly.
-            BrushConfigMethods.ColorAlarmList(MainWindow.alarmList.ToList());
+            BrushConfigMethods.ColorAlarmList(MainWindow.AlarmColorList.ToList());
             BrushConfigMethods.ColorAlarmList(StyleSettings.PreviewItems);
             BrushConfigMethods.ColorAlarmList(CreateAlarm.PreviewItemList);
 

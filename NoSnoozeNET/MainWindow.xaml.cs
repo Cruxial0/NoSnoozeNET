@@ -3,6 +3,8 @@ using NoSnoozeNET.GUI.Controls;
 using NoSnoozeNET.GUI.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -18,13 +20,16 @@ namespace NoSnoozeNET
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public static readonly string BinDirectory = Environment.CurrentDirectory;
         public static readonly string StartupDirectory = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).FullName;
 
-        public static ICollection<AlarmItem> alarmList;
-        public static List<UserTheme> Themes = new List<UserTheme>();
+        public static ObservableCollection<AlarmItem> AlarmColorList = new ObservableCollection<AlarmItem>();
+
+        private ObservableCollection<AlarmItem> _alarmItemList;
+        private AlarmItem _selectedAlarmItem;
+
         public static GlobalConfig GlobalConfig = new();
         public static UIElement AlarmListElement = new UIElement();
         public static UIElement TopBarElement = new UIElement();
@@ -46,8 +51,7 @@ namespace NoSnoozeNET
 
             TopBarElement = dckTopBar;
 
-
-            alarmList = new List<AlarmItem>();
+            _alarmItemList = new ObservableCollection<AlarmItem>();
 
             #region AlarmSpam
 
@@ -84,16 +88,16 @@ namespace NoSnoozeNET
 
             CreateAlarmItem ca = new();
 
-            alarmList.Add(a);
-            alarmList.Add(a2);
-            alarmList.Add(a3);
-            alarmList.Add(a4);
+            AlarmItemCollection.Add(a);
+            AlarmItemCollection.Add(a2);
+            AlarmItemCollection.Add(a3);
+            AlarmItemCollection.Add(a4);
 
             #endregion
 
-            AlarmList.ItemsSource = alarmList;
+            AlarmList.ItemsSource = AlarmItemCollection;
 
-            if (alarmList.Count == 0)
+            if (AlarmItemCollection.Count == 0)
             {
                 var createAlarm = new List<CreateAlarmItem>();
 
@@ -102,6 +106,8 @@ namespace NoSnoozeNET
 
                 AlarmList.ItemsSource = createAlarm;
             }
+
+            AlarmItemCollection.CollectionChanged += AlarmItemCollection_PropertyChanged;
 
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.AlarmListBorder);
         }
@@ -121,7 +127,38 @@ namespace NoSnoozeNET
         private void CreateAlarm_OnClick(object sender, RoutedEventArgs e)
         {
             CreateAlarm ca = new CreateAlarm();
-            ca.Show();
+            if (ca.ShowDialog() == true)
+            {
+                if (ca.SavedItem != null)
+                {
+                    
+                }
+                AlarmItemCollection.Add(ca.SavedItem);
+            }
+        }
+
+        public ObservableCollection<AlarmItem> AlarmItemCollection
+        {
+            get => _alarmItemList;
+            set => _alarmItemList = value;
+        }
+
+        public AlarmItem SelectedAlarmItem
+        {
+            get => _selectedAlarmItem;
+            set { _selectedAlarmItem = value; NotifyPropertyChanged(nameof(SelectedAlarmItem)); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+            AlarmColorList = AlarmItemCollection;
+        }
+
+        private void AlarmItemCollection_PropertyChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            AlarmList.Items.Refresh();
         }
     }
 }
