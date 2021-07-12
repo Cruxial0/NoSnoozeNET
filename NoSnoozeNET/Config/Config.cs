@@ -1,16 +1,15 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NoSnoozeNET.Extensions.IO;
 using NoSnoozeNET.Extensions.WPF;
 using NoSnoozeNET.GUI.Controls;
+using NoSnoozeNET.GUI.Functionality.Theme;
+using NoSnoozeNET.GUI.Windows;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
-using NoSnoozeNET.Extensions.IO;
-using NoSnoozeNET.GUI.Functionality.Theme;
-using NoSnoozeNET.GUI.Windows;
 
 namespace NoSnoozeNET.Config
 {

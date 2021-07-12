@@ -1,15 +1,10 @@
-﻿using System;
+﻿using NoSnoozeNET.GUI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Newtonsoft.Json;
-using NoSnoozeNET.Config;
-using NoSnoozeNET.Extensions.IO;
-using NoSnoozeNET.GUI.Controls;
-using NoSnoozeNET.GUI.Functionality.Theme;
 
 namespace NoSnoozeNET.GUI.Windows
 {
@@ -71,7 +66,7 @@ namespace NoSnoozeNET.GUI.Windows
             {
                 totalHours = (TimePicker.Value.Value - now).TotalHours;
             }
-            
+
 
             PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm} (in {Math.Round(totalHours)}h)";
             PreviewItem.AlarmCreated = $"Created: {DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}";

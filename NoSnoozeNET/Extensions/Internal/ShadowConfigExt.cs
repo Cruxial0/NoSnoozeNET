@@ -1,11 +1,6 @@
-﻿using System;
+﻿using NoSnoozeNET.Extensions.WPF;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using NoSnoozeNET.Extensions.WPF;
-using NoSnoozeNET.GUI.Windows;
 
 namespace NoSnoozeNET.Extensions.Internal
 {

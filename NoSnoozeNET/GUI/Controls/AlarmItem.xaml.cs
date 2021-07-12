@@ -2,12 +2,10 @@
 using NoSnoozeNET.GUI.Windows;
 using System.ComponentModel;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using NoSnoozeNET.Annotations;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 
@@ -28,13 +26,13 @@ namespace NoSnoozeNET.GUI.Controls
         public string AlarmName
         {
             get => (string)lblAlarmName.Content;
-            set { lblAlarmName.Content = value; NotifyPropertyChanged(nameof(AlarmName)); } 
+            set { lblAlarmName.Content = value; NotifyPropertyChanged(nameof(AlarmName)); }
         }
 
         [Category("Custom Props")]
         public string AlarmCreated
         {
-            get => (string) lblCreatedAt.Content;
+            get => (string)lblCreatedAt.Content;
             set { lblCreatedAt.Content = value; NotifyPropertyChanged(nameof(AlarmCreated)); }
         }
 

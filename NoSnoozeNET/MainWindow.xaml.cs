@@ -1,5 +1,7 @@
 ﻿using NoSnoozeNET.Config;
+using NoSnoozeNET.Extensions.WPF;
 using NoSnoozeNET.GUI.Controls;
+using NoSnoozeNET.GUI.Functionality.Theme;
 using NoSnoozeNET.GUI.Windows;
 using System;
 using System.Collections.Generic;
@@ -9,11 +11,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
-using System.Windows.Media.Effects;
-using Newtonsoft.Json;
-using NoSnoozeNET.Extensions.IO;
-using NoSnoozeNET.Extensions.WPF;
-using NoSnoozeNET.GUI.Functionality.Theme;
 
 namespace NoSnoozeNET
 {
@@ -131,7 +128,7 @@ namespace NoSnoozeNET
             {
                 if (ca.SavedItem != null)
                 {
-                    
+
                 }
                 AlarmItemCollection.Add(ca.SavedItem);
             }

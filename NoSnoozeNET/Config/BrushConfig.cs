@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NoSnoozeNET.Extensions.IO;
 using System.IO;
-using System.Linq;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 
 namespace NoSnoozeNET.Config
 {

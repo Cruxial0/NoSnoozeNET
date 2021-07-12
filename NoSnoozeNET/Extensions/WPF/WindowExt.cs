@@ -1,11 +1,9 @@
-﻿using System;
-using System.Drawing;
-using System.Text;
+﻿using NoSnoozeNET.Config;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
-using NoSnoozeNET.Config;
 using Color = System.Windows.Media.Color;
 
 namespace NoSnoozeNET.Extensions.WPF

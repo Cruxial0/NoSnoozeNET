@@ -1,10 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using Newtonsoft.Json;
-using NoSnoozeNET.Config;
+﻿using NoSnoozeNET.Config;
 using NoSnoozeNET.Extensions.IO;
 using NoSnoozeNET.GUI.Functionality.Theme;
+using System.IO;
+using System.Windows;
 
 namespace NoSnoozeNET.GUI.Windows
 {

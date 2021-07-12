@@ -1,6 +1,9 @@
 ﻿using NoSnoozeNET.Config;
+using NoSnoozeNET.Extensions.Imaging;
+using NoSnoozeNET.Extensions.Internal;
 using NoSnoozeNET.Extensions.WPF;
 using NoSnoozeNET.GUI.Controls;
+using NoSnoozeNET.GUI.Functionality.Theme;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,11 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Threading;
-using NoSnoozeNET.Extensions.Imaging;
-using NoSnoozeNET.Extensions.Internal;
-using NoSnoozeNET.GUI.Functionality.Theme;
 using Color = System.Windows.Media.Color;
 
 namespace NoSnoozeNET.GUI.Windows
@@ -38,7 +37,7 @@ namespace NoSnoozeNET.GUI.Windows
             Dispatcher.InvokeAsync(async () => await ColorImages(), DispatcherPriority.Render);
             CreatePreview();
             SetSliders();
-            Dispatcher.InvokeAsync(async() => await Startup(), DispatcherPriority.Background);
+            Dispatcher.InvokeAsync(async () => await Startup(), DispatcherPriority.Background);
         }
 
         public async Task Startup()
