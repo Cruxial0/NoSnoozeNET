@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using NoSnoozeNET.Extensions.WPF;
 
 namespace NoSnoozeNET.GUI.Windows
 {
@@ -46,6 +48,9 @@ namespace NoSnoozeNET.GUI.Windows
             PluginList.ItemsSource = plugins;
 
             PreviewItemList.Add(PreviewItem);
+
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.TopBar);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.btnSave);
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -67,8 +72,8 @@ namespace NoSnoozeNET.GUI.Windows
                 totalHours = (TimePicker.Value.Value - now).TotalHours;
             }
 
-
-            PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm} (in {Math.Round(totalHours)}h)";
+            PreviewItem.RingsAt = TimePicker.Value.Value;
+            PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm}";
             PreviewItem.AlarmCreated = $"Created: {DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}";
         }
 
@@ -78,12 +83,23 @@ namespace NoSnoozeNET.GUI.Windows
             {
                 AlarmCreated = PreviewItem.AlarmCreated,
                 AlarmName = PreviewItem.AlarmName,
-                TimeToRing = PreviewItem.TimeToRing
+                TimeToRing = PreviewItem.TimeToRing,
+                RingsAt = PreviewItem.RingsAt
             };
             this.DialogResult = true;
             this.Close();
         }
 
         public AlarmItem SavedItem => OutputAlarmItem;
+
+        private void TopBar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void BtnClose_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

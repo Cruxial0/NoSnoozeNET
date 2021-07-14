@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:NoSnoozeNET"
         xmlns:controls="clr-namespace:NoSnoozeNET.GUI.Controls"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="MainWindow" Height="520" Width="500" ResizeMode="CanMinimize"
         SizeToContent="Width" Background="{DynamicResource BackgroundBrush}"
-        Closing="MainWindow_OnClosing" Name="UI">
+        Name="UI" WindowStyle="None">
 
-    <Window.Resources>
+<Window.Resources>
         <Style x:Key="ListBoxItemStyleTransparentSelect" TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="12"/>
@@ -79,20 +80,40 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Name="dckTopBar" Grid.ColumnSpan="5">
-            <Menu  DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
-                <MenuItem Header="Settings">
-                    <MenuItem Header="Style Settings" Click="MenuItem_OnClick" 
-                              Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
-                    <MenuItem Header="Plugin Settings" 
-                              Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
-                    <MenuItem Header="Create Alarm" Click="CreateAlarm_OnClick"
-                              Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
-                </MenuItem>
-            </Menu>
-        </DockPanel>
+        <Grid Name="dckTopBar" Grid.ColumnSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Border x:Name="AlarmListBorder" Grid.Row="1" Grid.Column="1" Style="{DynamicResource RoundedListBoxStyle}"
+            <StackPanel Background="{DynamicResource ControlBackgroundBrush}"
+                        Height="25" Grid.ColumnSpan="5" FlowDirection="RightToLeft" MouseDown="UIElement_OnMouseDown" Orientation="Horizontal">
+                <Button Name="btnPower" 
+                        Width="25" 
+                        Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                        Click="BtnPower_OnClick">
+                    <iconPacks:PackIconModern 
+                        Kind="Power" 
+                        Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
+
+                </Button>
+                </StackPanel>
+
+            <DockPanel Grid.Row="1"  Grid.ColumnSpan="5">
+                <Menu  DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
+                    <MenuItem Header="Settings">
+                        <MenuItem Header="Style Settings" Click="MenuItem_OnClick" 
+                                  Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
+                        <MenuItem Header="Plugin Settings" 
+                                  Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
+                        <MenuItem Header="Create Alarm" Click="CreateAlarm_OnClick"
+                                  Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
+        </Grid>
+        
+        <Border x:Name="AlarmListBorder" Grid.Row="2" Grid.Column="1" Style="{DynamicResource RoundedListBoxStyle}"
                 Margin="0,20,0,0"
                 Background="{DynamicResource ControlBackgroundBrush}">
             <ListBox x:Name="AlarmList"

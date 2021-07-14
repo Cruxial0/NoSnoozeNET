@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Color = System.Windows.Media.Color;
@@ -28,6 +29,7 @@ namespace NoSnoozeNET.GUI.Windows
         public static UIElement ContainerElement;
         public static UIElement ThemesBoxElement;
         public static UIElement ShadowControlElement;
+        public static UIElement TopBarElement;
 
         private readonly List<UIElement> _shadowElements = new List<UIElement>();
 
@@ -51,6 +53,7 @@ namespace NoSnoozeNET.GUI.Windows
             ContainerElement = this.ControlContainerBorder;
             ThemesBoxElement = this.cmbThemes;
             ShadowControlElement = this.ShadowControlBorder;
+            TopBarElement = this.TopBar;
 
             //Add Elements to shadow into list.
             _shadowElements.Add(ContainerElement);
@@ -60,6 +63,7 @@ namespace NoSnoozeNET.GUI.Windows
             _shadowElements.Add(btnSaveTheme);
             _shadowElements.Add(btnForceApply);
             _shadowElements.Add(btnAddTheme);
+            _shadowElements.Add(TopBarElement);
 
             //Add references from MainWindow
             _shadowElements.Add(MainWindow.AlarmListElement);
@@ -336,6 +340,16 @@ namespace NoSnoozeNET.GUI.Windows
         {
             SetSliders();
             await ColorImages();
+        }
+
+        private void BtnClose_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TopBar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

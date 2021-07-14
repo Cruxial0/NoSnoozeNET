@@ -1,10 +1,12 @@
-﻿using NoSnoozeNET.Extensions.Imaging;
+﻿using System;
+using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.GUI.Windows;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
@@ -16,9 +18,14 @@ namespace NoSnoozeNET.GUI.Controls
     /// </summary>
     public partial class AlarmItem : UserControl, INotifyPropertyChanged
     {
-        //Declare local image variables
+        //Declare inheritants
         private static Bitmap _stopwatchBitmap;
         private static Bitmap _optionsBitmap;
+        private DateTime _ringsAt;
+
+        //Declare local image variables
+        private BitmapImage _stopwatchImageSource;
+        private BitmapImage _optionsImageSource;
 
         #region properties
 
@@ -43,11 +50,23 @@ namespace NoSnoozeNET.GUI.Controls
             set { lblRingsAt.Content = value; NotifyPropertyChanged(nameof(TimeToRing)); }
         }
 
-        [Category("Custom Props")]
-        public ImageSource DynamicImage { get; set; }
+        public DateTime RingsAt
+        {
+            get => _ringsAt;
+            set { _ringsAt = value; NotifyPropertyChanged(nameof(RingsAt)); }
+        }
 
-        [Category("Custom Props")]
-        public ImageSource DynamicImageOptions { get; set; }
+        public BitmapImage StopwatchImageSource
+        {
+            get => _stopwatchImageSource;
+            set { _stopwatchImageSource = value; NotifyPropertyChanged(nameof(StopwatchImageSource)); }
+        }
+
+        public BitmapImage OptionsImageSource
+        {
+            get => _optionsImageSource;
+            set { _optionsImageSource = value; NotifyPropertyChanged(nameof(OptionsImageSource)); }
+        }
         #endregion
 
         public AlarmItem()
@@ -65,7 +84,7 @@ namespace NoSnoozeNET.GUI.Controls
 
             //Find Options image asset.
             _optionsBitmap =
-                (Bitmap)Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\Options.png"));
+                (Bitmap) Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\Options.png"));
 
             //Color assets with Application Resources.
             ColorStopwatch(FindResource("StopwatchColor") as SolidColorBrush);
@@ -87,7 +106,8 @@ namespace NoSnoozeNET.GUI.Controls
                 source = await Dispatcher.InvokeAsync(() => source.FastColorReplace(Color.White, targetColor), DispatcherPriority.Render);
 
                 //Convert Bitmap to BitmapImage and set it as ImageSource.
-                Stopwatch.Source = source.ToBitmapImage();
+                //Stopwatch.Source = source.ToBitmapImage();
+                StopwatchImageSource = source.ToBitmapImage();
             }
         }
 
@@ -106,7 +126,8 @@ namespace NoSnoozeNET.GUI.Controls
                 source = await Dispatcher.InvokeAsync(() => source.FastColorReplace(Color.White, targetColor), DispatcherPriority.Render);
 
                 //Convert Bitmap to BitmapImage and set it as ImageSource.
-                OptionsImg.Source = source.ToBitmapImage();
+                //OptionsImg.Source = source.ToBitmapImage();
+                OptionsImageSource = source.ToBitmapImage();
             }
         }
 

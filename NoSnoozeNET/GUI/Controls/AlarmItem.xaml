@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
              xmlns:wpfEx="clr-namespace:NoSnoozeNET.Extensions.WPF"
-             mc:Ignorable="d" Width="auto" Height="105"
+             mc:Ignorable="d" Width="auto" Height="105" Name="UI"
 >
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
@@ -27,14 +27,15 @@
         </Grid.ColumnDefinitions>
 
         <!--Stopwatch Icon-->
-        <Image x:Name="Stopwatch" Grid.Column="0" Source="{Binding DynamicImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,10,10" Grid.ColumnSpan="2"
+        <Image x:Name="Stopwatch" Grid.Column="0" Source="{Binding ElementName=UI, Path=StopwatchImageSource, UpdateSourceTrigger=PropertyChanged}"
+               Margin="10,10,10,10" Grid.ColumnSpan="2" SnapsToDevicePixels="True"
                UseLayoutRounding="True"/>
 
 
         <Button x:Name="BtnOptions" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top"
                         Margin="0,5,5,0" Height="28" Width="16" Background="Transparent" SnapsToDevicePixels="True" Click="BtnOptions_OnClick">
             <Image x:Name="OptionsImg" HorizontalAlignment="Right" VerticalAlignment="Top"
-                   Source="{Binding DynamicImageOptions}"/>
+                   Source="{Binding ElementName=UI, Path=OptionsImageSource, UpdateSourceTrigger=PropertyChanged}"/>
         </Button>
 
         <!--Options Icon-->
