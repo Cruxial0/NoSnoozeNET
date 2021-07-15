@@ -86,6 +86,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
+            <Label Content="NoSnoozeNET" FontFamily="Segoe UI Light" Margin="5,0,0,0" Foreground="{DynamicResource LabelBrush}"></Label>
+
             <StackPanel 
                         Height="25" Grid.ColumnSpan="5" FlowDirection="RightToLeft"  Orientation="Horizontal">
                 <Button Name="btnPower" 
