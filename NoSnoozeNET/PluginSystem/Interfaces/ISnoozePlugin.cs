@@ -5,17 +5,17 @@
         /// <summary>
         /// Plugin Name.
         /// </summary>
-        string Name { get; set; }
+        string Name { get; }
 
         /// <summary>
         /// Plugin Description.
         /// </summary>
-        string Description { get; set; }
+        string Description { get; }
 
         /// <summary>
         /// Info for associated icon.
         /// </summary>
-        IconInfo Icon { get; set; }
+        IconInfo Icon { get; }
 
         /// <summary>
         /// Execution function for plugins.

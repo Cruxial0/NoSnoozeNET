@@ -243,6 +243,7 @@
     <Compile Include="Extensions\Imaging\BitmapExt.cs" />
     <Compile Include="Extensions\Imaging\ColorExt.cs" />
     <Compile Include="Extensions\Imaging\GraphicsExt.cs" />
+    <Compile Include="Extensions\Imaging\ImageExt.cs" />
     <Compile Include="Extensions\Imaging\LockBitmap.cs" />
     <Compile Include="Extensions\Internal\GlobalConfigExt.cs" />
     <Compile Include="Extensions\Internal\ShadowConfigExt.cs" />
@@ -278,8 +279,10 @@
   <ItemGroup>
     <Compile Include="PluginSystem\Constants.cs" />
     <Compile Include="PluginSystem\Interfaces\ISnoozePlugin.cs" />
+    <Compile Include="PluginSystem\Plugin.cs" />
     <Compile Include="PluginSystem\PluginLoader.cs" />
-    <Compile Include="PluginSystem\Plugins\HelpPlugin.cs" />
+    <Compile Include="PluginSystem\Plugins\TestPlugin.cs" />
+    <Compile Include="PluginSystem\Plugins\TestPlugin2.cs" />
     <Compile Include="PluginSystem\Utils\Logger.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,14 +1,19 @@
 ﻿using NoSnoozeNET.GUI.Controls;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.Extensions.WPF;
+using NoSnoozeNET.PluginSystem;
+using Image = System.Windows.Controls.Image;
 
 namespace NoSnoozeNET.GUI.Windows
 {
@@ -45,10 +50,19 @@ namespace NoSnoozeNET.GUI.Windows
 
             List<PluginListItem> plugins = new List<PluginListItem>();
 
-            plugins.Add(new PluginListItem());
-            plugins.Add(new PluginListItem());
-            plugins.Add(new PluginListItem());
-            plugins.Add(new PluginListItem());
+
+            foreach (var plugin in PluginLoader.PluginObjects)
+            {
+                var listItem = new PluginListItem()
+                {
+                    PluginName = plugin.PluginInfo.PluginName,
+                    PluginImage = ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes)
+                };
+
+                listItem.SetImage();
+                plugins.Add(listItem);
+            }
+
 
             PluginList.ItemsSource = plugins;
 
@@ -101,10 +115,25 @@ namespace NoSnoozeNET.GUI.Windows
                 AlarmName = PreviewItem.AlarmName,
                 TimeToRing = PreviewItem.TimeToRing,
                 RingsAt = PreviewItem.RingsAt,
-                PluginElements = PreviewItem.PluginElements
+                PluginElements = generateNewElements(PreviewItem.PluginElements)
             };
             this.DialogResult = true;
             this.Close();
+        }
+
+        private List<UIElement> generateNewElements(List<UIElement> elements)
+        {
+            List<UIElement> newList = new List<UIElement>();
+
+            foreach (var element in elements)
+            {
+                Image img = new Image();
+                img.Source = ((Image)element).Source;
+
+                newList.Add(img);
+            }
+
+            return newList;
         }
 
         public AlarmItem SavedItem => OutputAlarmItem;

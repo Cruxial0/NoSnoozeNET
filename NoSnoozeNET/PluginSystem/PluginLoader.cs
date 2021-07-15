@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
+using Newtonsoft.Json;
+using NoSnoozeNET.Extensions.Imaging;
+using NoSnoozeNET.Extensions.WPF;
 
 namespace NoSnoozeNET.PluginSystem
 {
     public class PluginLoader
     {
         public static List<ISnoozePlugin> Plugins { get; set; }
+        public static List<Plugin> PluginObjects = new List<Plugin>();
 
         public void LoadPlugins()
         {
@@ -38,6 +43,21 @@ namespace NoSnoozeNET.PluginSystem
             {
                 //Create a new instance of all found types
                 Plugins.Add((ISnoozePlugin)Activator.CreateInstance(type));
+            }
+
+            foreach (var plugin in Plugins)
+            {
+                var pluginItem = new Plugin()
+                {
+                    //ImageIcon = ImageExt.ByteArrayToImage(plugin.Icon.IconBytes),
+                    PluginInfo = new SnoozePluginInfo()
+                    {
+                        PluginDescription = plugin.Description,
+                        PluginName = plugin.Name,
+                        PluginIconInfo = plugin.Icon
+                    }
+                };
+                PluginObjects.Add(pluginItem);
             }
         }
     }

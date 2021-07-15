@@ -100,10 +100,10 @@ namespace NoSnoozeNET.GUI.Controls
 
             _pluginElements = new List<UIElement>();
 
-            foreach (var plugin in PluginElements)
-            {
-                AddPlugin(plugin);
-            }
+            //foreach (var plugin in PluginElements)
+            //{
+            //    AddPlugin(plugin);
+            //}
         }
 
         public async void ColorStopwatch(SolidColorBrush brush)
