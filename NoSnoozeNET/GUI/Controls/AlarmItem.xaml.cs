@@ -171,9 +171,11 @@ namespace NoSnoozeNET.GUI.Controls
             //DO STUFF
 
             //Placeholder
+            
             StyleSettings ss = new();
             ss.Show();
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

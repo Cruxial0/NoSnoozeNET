@@ -6,15 +6,25 @@
              xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
              mc:Ignorable="d" 
              Height="110" d:DesignWidth="420">
+    <UserControl.Resources>
+        <Style TargetType="Image">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             
             <ColumnDefinition Width="102"/>
             <ColumnDefinition Width="251"/>
         </Grid.ColumnDefinitions>
-
+        
         <Image x:Name="Plus" Grid.Column="0" Source="{Binding DynamicImagePlus}" Margin="15"
                UseLayoutRounding="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
 
         <Label Grid.Column="1" Content="Create new alarm" FontSize="32" 
                FontFamily="Segoe UI SemiLight" Margin="0,15,0,0" Foreground="{DynamicResource HeaderBrush}"/>

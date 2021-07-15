@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="StyleSettings" Height="Auto" Width="470" FontFamily="Segoe UI Light" SizeToContent="WidthAndHeight"
         Background="{DynamicResource BackgroundBrush}" ResizeMode="NoResize" Loaded="StyleSettings_OnLoaded" WindowStyle="None">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
