@@ -104,8 +104,8 @@
             <ListBox Name="PluginList" Grid.Column="0" Grid.Row="0"
                      Background="{DynamicResource ControlBackgroundBrush}"
                      Width="150"
-                     Height="{Binding ActualHeight, ElementName=ParentGrid}">
-
+                     Height="{Binding ActualHeight, ElementName=ParentGrid}"
+                     SelectionChanged="PluginList_OnSelectionChanged">
             </ListBox>
         </Grid>
 

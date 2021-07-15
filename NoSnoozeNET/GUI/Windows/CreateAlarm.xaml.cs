@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using NoSnoozeNET.Extensions.WPF;
 
 namespace NoSnoozeNET.GUI.Windows
@@ -16,8 +18,11 @@ namespace NoSnoozeNET.GUI.Windows
     public partial class CreateAlarm : Window
     {
         public static List<AlarmItem> PreviewItemList = new List<AlarmItem>();
-        public AlarmItem PreviewItem = new AlarmItem();
+        public AlarmItem PreviewItem = new();
         public AlarmItem OutputAlarmItem;
+
+        private List<PluginListItem> _pluginListItems = new List<PluginListItem>();
+        private List<Image> _pluginImages = new List<Image>();
 
         public CreateAlarm()
         {
@@ -48,6 +53,17 @@ namespace NoSnoozeNET.GUI.Windows
             PluginList.ItemsSource = plugins;
 
             PreviewItemList.Add(PreviewItem);
+
+            foreach (var plugin in PluginList.Items)
+            {
+                var pluginItem = plugin as PluginListItem;
+
+                Image img = new Image();
+                img.Source = pluginItem.Image.Source;
+
+                _pluginListItems.Add(pluginItem);
+                _pluginImages.Add(img);
+            }
 
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.TopBar);
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.btnSave);
@@ -84,7 +100,8 @@ namespace NoSnoozeNET.GUI.Windows
                 AlarmCreated = PreviewItem.AlarmCreated,
                 AlarmName = PreviewItem.AlarmName,
                 TimeToRing = PreviewItem.TimeToRing,
-                RingsAt = PreviewItem.RingsAt
+                RingsAt = PreviewItem.RingsAt,
+                PluginElements = PreviewItem.PluginElements
             };
             this.DialogResult = true;
             this.Close();
@@ -100,6 +117,16 @@ namespace NoSnoozeNET.GUI.Windows
         private void BtnClose_OnClick(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void PluginList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = PluginList.SelectedIndex;
+
+            bool toggle = _pluginListItems.ElementAt(item).Toggle();
+
+            if(!toggle) PreviewItem.RemovePlugin(_pluginImages.ElementAt(item));
+            if(toggle) PreviewItem.AddPlugin(_pluginImages.ElementAt(item));
         }
     }
 }

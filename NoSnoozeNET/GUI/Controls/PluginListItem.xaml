@@ -11,7 +11,7 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="../../Assets/SimpleLeague.png"></Image>
+        <Image Name="Image" Source="../../Assets/SimpleLeague.png"></Image>
         <Label Grid.Column="1" Content="Test Plugin" Foreground="{DynamicResource LabelBrush}" Margin="5,-2,0,-1" FontSize="10"></Label>
     </Grid>
 </UserControl>

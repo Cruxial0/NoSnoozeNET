@@ -138,8 +138,10 @@ namespace NoSnoozeNET
             {
                 if (ca.SavedItem != null)
                 {
+                    //ca.SavedItem.InitializePlugins();
                     AlarmItemCollection.Add(ca.SavedItem);
                     AlarmItemCollection.Save();
+                    WindowExt.Refresh(ca.SavedItem);
                 }
             }
         }

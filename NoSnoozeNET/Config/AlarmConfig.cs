@@ -35,9 +35,14 @@ namespace NoSnoozeNET.Config
             DirectoryExt.CreateFolderIfNotExist(AlarmConfigDirectoryPath);
             DirectoryExt.CreateIfNotExist(AlarmConfigPath);
 
+            if (!File.Exists(AlarmConfigPath)) File.Create(AlarmConfigPath);
+
             var schema = NJsonSchema.JsonSchema.FromType<IEnumerable<AlarmItem>>();
 
-            var errors = schema.Validate(File.ReadAllText(AlarmConfigPath));
+            if (File.ReadAllText(AlarmConfigPath) != string.Empty)
+            {
+                var errors = schema.Validate(File.ReadAllText(AlarmConfigPath));
+            }
 
             //if (errors.Count != 0) return null;
 

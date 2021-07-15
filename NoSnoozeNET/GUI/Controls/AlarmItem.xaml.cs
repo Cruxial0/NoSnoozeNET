@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.GUI.Windows;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace NoSnoozeNET.GUI.Controls
         private static Bitmap _stopwatchBitmap;
         private static Bitmap _optionsBitmap;
         private DateTime _ringsAt;
+        private List<UIElement> _pluginElements;
 
         //Declare local image variables
         private BitmapImage _stopwatchImageSource;
@@ -54,6 +56,12 @@ namespace NoSnoozeNET.GUI.Controls
         {
             get => _ringsAt;
             set { _ringsAt = value; NotifyPropertyChanged(nameof(RingsAt)); }
+        }
+
+        public List<UIElement> PluginElements
+        {
+            get => _pluginElements;
+            set { _pluginElements = value; NotifyPropertyChanged(nameof(PluginElements)); }
         }
 
         public BitmapImage StopwatchImageSource
@@ -89,6 +97,13 @@ namespace NoSnoozeNET.GUI.Controls
             //Color assets with Application Resources.
             ColorStopwatch(FindResource("StopwatchColor") as SolidColorBrush);
             ColorOptions(FindResource("OptionsColor") as SolidColorBrush);
+
+            _pluginElements = new List<UIElement>();
+
+            foreach (var plugin in PluginElements)
+            {
+                AddPlugin(plugin);
+            }
         }
 
         public async void ColorStopwatch(SolidColorBrush brush)
@@ -110,6 +125,26 @@ namespace NoSnoozeNET.GUI.Controls
                 StopwatchImageSource = source.ToBitmapImage();
             }
         }
+
+        public void InitializePlugins()
+        {
+            foreach (var plugin in PluginElements)
+            {
+                PluginPanel.Children.Add(plugin);
+            }
+        }
+
+        public void AddPlugin(UIElement img)
+        {
+            PluginElements.Add(img);
+            PluginPanel.Children.Add(img);
+        }
+
+        public void RemovePlugin(UIElement img)
+        {
+            PluginElements.Remove(img);
+            PluginPanel.Children.Remove(img);
+        } 
 
         public async void ColorOptions(SolidColorBrush brush)
         {
