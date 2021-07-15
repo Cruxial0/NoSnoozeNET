@@ -145,13 +145,17 @@ namespace NoSnoozeNET
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            CreateAlarm ss = new CreateAlarm();
-            ss.Show();
+            CreateAlarm ca = new CreateAlarm();
+            if (ca.ShowDialog() == true)
+            {
+                if (ca.SavedItem != null)
+                {
+                    ca.SavedItem.InitializePlugins();
+                    AlarmItemCollection.Add(ca.SavedItem);
+                    AlarmItemCollection.Save();
+                }
+            }
         }
 
-        private void icon_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
