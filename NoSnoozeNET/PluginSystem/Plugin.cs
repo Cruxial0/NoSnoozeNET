@@ -11,7 +11,7 @@ namespace NoSnoozeNET.PluginSystem
 {
     public class Plugin
     {
-        public System.Drawing.Image ImageIcon { get; set; }
+        //public System.Drawing.Image ImageIcon { get; set; }
         public SnoozePluginInfo PluginInfo { get; set; }
 
         public Plugin()
@@ -19,7 +19,7 @@ namespace NoSnoozeNET.PluginSystem
             this.PluginInfo = new SnoozePluginInfo();
             if (PluginInfo.PluginIconInfo.IconBytes != null)
             {
-                this.ImageIcon = ImageExt.ByteArrayToImage(PluginInfo.PluginIconInfo.IconBytes);
+                //this.ImageIcon = ImageExt.ByteArrayToImage(PluginInfo.PluginIconInfo.IconBytes);
             }
         }
     }

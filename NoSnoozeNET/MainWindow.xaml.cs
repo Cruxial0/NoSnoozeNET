@@ -57,6 +57,10 @@ namespace NoSnoozeNET
             AlarmListElement = AlarmListBorder;
             TopBarElement = dckTopBar;
 
+            foreach (var alarmItem in _alarmItemList)
+            {
+                alarmItem.InitializePlugins();
+            }
 
             if (AlarmItemCollection.Count == 0)
             {

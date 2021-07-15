@@ -28,6 +28,9 @@ namespace NoSnoozeNET.GUI.Windows
 
         private List<PluginListItem> _pluginListItems = new List<PluginListItem>();
         private List<Image> _pluginImages = new List<Image>();
+        private List<Plugin> _plugins = new List<Plugin>();
+
+        private Dictionary<Plugin, Image> pluginImages = new Dictionary<Plugin, Image>();
 
         public CreateAlarm()
         {
@@ -53,14 +56,22 @@ namespace NoSnoozeNET.GUI.Windows
 
             foreach (var plugin in PluginLoader.PluginObjects)
             {
+                //plugin.ImageIcon = ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes);
                 var listItem = new PluginListItem()
                 {
                     PluginName = plugin.PluginInfo.PluginName,
                     PluginImage = ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes)
                 };
+                Image img = new Image()
+                {
+                    Source = ((Bitmap) listItem.PluginImage).ToBitmapImage()
+                };
+
+                pluginImages.Add(plugin, img);
 
                 listItem.SetImage();
                 plugins.Add(listItem);
+                _plugins.Add(plugin);
             }
 
 
@@ -78,6 +89,7 @@ namespace NoSnoozeNET.GUI.Windows
                 _pluginListItems.Add(pluginItem);
                 _pluginImages.Add(img);
             }
+
 
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.TopBar);
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, this.btnSave);
@@ -115,7 +127,7 @@ namespace NoSnoozeNET.GUI.Windows
                 AlarmName = PreviewItem.AlarmName,
                 TimeToRing = PreviewItem.TimeToRing,
                 RingsAt = PreviewItem.RingsAt,
-                PluginElements = generateNewElements(PreviewItem.PluginElements)
+                PluginElements = PreviewItem.PluginElements
             };
             this.DialogResult = true;
             this.Close();
@@ -154,8 +166,8 @@ namespace NoSnoozeNET.GUI.Windows
 
             bool toggle = _pluginListItems.ElementAt(item).Toggle();
 
-            if(!toggle) PreviewItem.RemovePlugin(_pluginImages.ElementAt(item));
-            if(toggle) PreviewItem.AddPlugin(_pluginImages.ElementAt(item));
+            if(!toggle) PreviewItem.RemovePlugin(pluginImages.ElementAt(item).Value, pluginImages.ElementAt(item).Key);
+            if(toggle) PreviewItem.AddPlugin(pluginImages.ElementAt(item).Value, pluginImages.ElementAt(item).Key);
         }
     }
 }

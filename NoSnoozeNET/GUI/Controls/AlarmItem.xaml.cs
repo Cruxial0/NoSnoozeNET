@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using NoSnoozeNET.PluginSystem;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 
@@ -23,7 +24,7 @@ namespace NoSnoozeNET.GUI.Controls
         private static Bitmap _stopwatchBitmap;
         private static Bitmap _optionsBitmap;
         private DateTime _ringsAt;
-        private List<UIElement> _pluginElements;
+        private List<Plugin> _pluginElements;
 
         //Declare local image variables
         private BitmapImage _stopwatchImageSource;
@@ -58,7 +59,7 @@ namespace NoSnoozeNET.GUI.Controls
             set { _ringsAt = value; NotifyPropertyChanged(nameof(RingsAt)); }
         }
 
-        public List<UIElement> PluginElements
+        public List<Plugin> PluginElements
         {
             get => _pluginElements;
             set { _pluginElements = value; NotifyPropertyChanged(nameof(PluginElements)); }
@@ -98,7 +99,7 @@ namespace NoSnoozeNET.GUI.Controls
             ColorStopwatch(FindResource("StopwatchColor") as SolidColorBrush);
             ColorOptions(FindResource("OptionsColor") as SolidColorBrush);
 
-            _pluginElements = new List<UIElement>();
+            _pluginElements = new List<Plugin>();
 
             //foreach (var plugin in PluginElements)
             //{
@@ -130,19 +131,23 @@ namespace NoSnoozeNET.GUI.Controls
         {
             foreach (var plugin in PluginElements)
             {
-                PluginPanel.Children.Add(plugin);
+                System.Windows.Controls.Image img = new System.Windows.Controls.Image
+                {
+                    Source = ((Bitmap) ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes)).ToBitmapImage()
+                };
+                PluginPanel.Children.Add(img);
             }
         }
 
-        public void AddPlugin(UIElement img)
+        public void AddPlugin(UIElement img, Plugin plugin)
         {
-            PluginElements.Add(img);
+            PluginElements.Add(plugin);
             PluginPanel.Children.Add(img);
         }
 
-        public void RemovePlugin(UIElement img)
+        public void RemovePlugin(UIElement img, Plugin plugin)
         {
-            PluginElements.Remove(img);
+            PluginElements.Remove(plugin);
             PluginPanel.Children.Remove(img);
         } 
 
