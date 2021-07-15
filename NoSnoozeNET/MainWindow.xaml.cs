@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using NoSnoozeNET.PluginSystem;
 
 namespace NoSnoozeNET
 {
@@ -46,68 +47,20 @@ namespace NoSnoozeNET
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
             GlobalConfig.SelectedTheme = new ThemeHandler().LoadSelectedTheme();
 
-            AlarmItemCollection.CollectionChanged += AlarmItemCollection_PropertyChanged;
+            PluginLoader pluginLoader = new PluginLoader();
+            pluginLoader.LoadPlugins();
 
-            //AlarmItemCollection = new ObservableCollection<AlarmItem>().Load();
+            AlarmItemCollection.CollectionChanged += AlarmItemCollection_PropertyChanged;
+            _alarmItemList = new ObservableCollection<AlarmItem>().Load();
+            AlarmList.ItemsSource = AlarmItemCollection;
 
             AlarmListElement = AlarmListBorder;
-
             TopBarElement = dckTopBar;
 
-            _alarmItemList = new ObservableCollection<AlarmItem>().Load();
-
-            //#region AlarmSpam
-
-            //AlarmItem a = new AlarmItem()
-            //{
-            //    AlarmName = "Alarm name",
-            //    AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-            //    TimeToRing = "Rings in 7h",
-            //    RingsAt = DateTime.Now.AddHours(7)
-            //};
-
-            //AlarmItem a2 = new AlarmItem()
-            //{
-            //    AlarmName = "Alarm nameer",
-            //    AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-            //    TimeToRing = "Rings in 9h",
-            //    RingsAt = DateTime.Now.AddHours(9)
-
-            //};
-
-            //AlarmItem a3 = new AlarmItem()
-            //{
-            //    AlarmName = "Alarm namerino",
-            //    AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-            //    TimeToRing = "Rings in 3h",
-            //    RingsAt = DateTime.Now.AddHours(3)
-
-            //};
-
-            //AlarmItem a4 = new AlarmItem()
-            //{
-            //    AlarmName = "Alarm namerinoas",
-            //    AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-            //    TimeToRing = "Rings in 3h",
-            //    RingsAt = DateTime.Now.AddHours(3)
-
-            //};
-
-            //CreateAlarmItem ca = new();
-
-            //AlarmItemCollection.Add(a);
-            //AlarmItemCollection.Add(a2);
-            //AlarmItemCollection.Add(a3);
-            //AlarmItemCollection.Add(a4);
-
-            //#endregion
-
-            //foreach (var alarm in _alarmItemList)
-            //{
-            //    AlarmItemCollection.Add(alarm);
-            //}
-
-            AlarmList.ItemsSource = AlarmItemCollection;
+            foreach (var alarmItem in _alarmItemList)
+            {
+                alarmItem.InitializePlugins();
+            }
 
             if (AlarmItemCollection.Count == 0)
             {
@@ -138,7 +91,7 @@ namespace NoSnoozeNET
             {
                 if (ca.SavedItem != null)
                 {
-                    //ca.SavedItem.InitializePlugins();
+                    ca.SavedItem.InitializePlugins();
                     AlarmItemCollection.Add(ca.SavedItem);
                     AlarmItemCollection.Save();
                     WindowExt.Refresh(ca.SavedItem);

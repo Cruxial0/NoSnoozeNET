@@ -47,8 +47,9 @@
         
 
         <!--Plugins and Conditions-->
-        <StackPanel x:Name="PluginPanel" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    Orientation="Horizontal" FlowDirection="RightToLeft" Height="20" Margin="0,0,0,0">
+        <StackPanel x:Name="PluginPanel" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Orientation="Horizontal" FlowDirection="RightToLeft" Height="20" Margin="0,0,0,0"
+                    Grid.ColumnSpan="2">
             
         </StackPanel>
 

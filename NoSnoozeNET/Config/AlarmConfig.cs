@@ -6,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.Extensions.IO;
 using NoSnoozeNET.GUI.Controls;
+using NoSnoozeNET.PluginSystem;
 using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace NoSnoozeNET.Config
@@ -57,7 +59,8 @@ namespace NoSnoozeNET.Config
                     AlarmCreated = info.CreatedAt,
                     AlarmName = info.AlarmName,
                     RingsAt = info.RingsAt,
-                    TimeToRing = DetermineNextRing(info.RingsAt)
+                    TimeToRing = DetermineNextRing(info.RingsAt),
+                    PluginElements = info.Plugins,
                 });
             }
 
@@ -73,13 +76,27 @@ namespace NoSnoozeNET.Config
                 {
                     AlarmName = alarmItem.AlarmName,
                     CreatedAt = alarmItem.AlarmCreated,
-                    RingsAt = alarmItem.RingsAt, 
+                    RingsAt = alarmItem.RingsAt,
+                    Plugins = FixPlugins(alarmItem.PluginElements)
                 };
 
                 infoList.Add(alarmInfo);
             }
 
             return infoList;
+        }
+
+        internal static List<Plugin> FixPlugins(List<Plugin> plugins)
+        {
+            var pluginList = new List<Plugin>();
+
+            foreach (var plugin in plugins)
+            {
+                //plugin.ImageIcon = ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes);
+                pluginList.Add(plugin);
+            }
+
+            return pluginList;
         }
 
         private static string DetermineNextRing(DateTime nextRing)
@@ -106,6 +123,7 @@ namespace NoSnoozeNET.Config
         public string AlarmName { get; set; }
         public string CreatedAt { get; set; }
         public DateTime RingsAt { get; set; }
+        public List<Plugin> Plugins { get; set; }
 
         public AlarmInfo()
         {
