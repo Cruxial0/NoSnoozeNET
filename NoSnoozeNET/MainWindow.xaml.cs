@@ -136,5 +136,26 @@ namespace NoSnoozeNET
             AlarmItemCollection.Save();
             Application.Current.Shutdown();
         }
+
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            StyleSettings ss = new StyleSettings();
+            ss.Show();
+        }
+
+        private void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CreateAlarm ca = new CreateAlarm();
+            if (ca.ShowDialog() == true)
+            {
+                if (ca.SavedItem != null)
+                {
+                    ca.SavedItem.InitializePlugins();
+                    AlarmItemCollection.Add(ca.SavedItem);
+                    AlarmItemCollection.Save();
+                }
+            }
+        }
+
     }
 }

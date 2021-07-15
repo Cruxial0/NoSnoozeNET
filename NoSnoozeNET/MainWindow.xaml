@@ -60,7 +60,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-
+    
     <Grid>
         <!--Columns of width 20 not intended for use-->
         <Grid.ColumnDefinitions>
@@ -95,13 +95,25 @@
                     <iconPacks:PackIconModern 
                         Kind="Power" 
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
-
                 </Button>
-                </StackPanel>
-
-            <DockPanel Grid.Row="1"  Grid.ColumnSpan="5">
-                <Menu  DockPanel.Dock="Top" Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
-                    <MenuItem Header="Settings">
+                <Button Name="btnSetting" 
+                        Width="25" 
+                        Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"
+                        Click="btnSetting_Click">
+                    <iconPacks:PackIconModern
+                        Kind="Settings"
+                        Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
+                </Button>
+                <Button Name="btnCreate" 
+                        Width="25" 
+                        Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"
+                        Click="btnCreate_Click">
+                    <iconPacks:PackIconModern
+                        Kind="Clock"
+                        Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
+                </Button>
+                <Menu Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
+                    <MenuItem>
                         <MenuItem Header="Style Settings" Click="MenuItem_OnClick" 
                                   Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
                         <MenuItem Header="Plugin Settings" 
@@ -110,7 +122,7 @@
                                   Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
                     </MenuItem>
                 </Menu>
-            </DockPanel>
+            </StackPanel>
         </Grid>
         
         <Border x:Name="AlarmListBorder" Grid.Row="2" Grid.Column="1" Style="{DynamicResource RoundedListBoxStyle}"
