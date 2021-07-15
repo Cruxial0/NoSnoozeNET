@@ -65,7 +65,8 @@
                  Margin="80,5,0,0"
                  Foreground="{DynamicResource LabelBrush}"
                  Background="{DynamicResource ControlBackgroundBrush}"
-                 TextChanged="TextBoxBase_OnTextChanged">
+                 TextChanged="TextBoxBase_OnTextChanged"
+                 VerticalContentAlignment="Center">
 
         </TextBox>
 
