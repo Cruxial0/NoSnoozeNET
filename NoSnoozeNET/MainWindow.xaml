@@ -80,14 +80,14 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Grid Name="dckTopBar" Grid.ColumnSpan="5">
+        <Grid Name="dckTopBar" Grid.ColumnSpan="5" Background="{DynamicResource ControlBackgroundBrush}" MouseDown="UIElement_OnMouseDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Background="{DynamicResource ControlBackgroundBrush}"
-                        Height="25" Grid.ColumnSpan="5" FlowDirection="RightToLeft" MouseDown="UIElement_OnMouseDown" Orientation="Horizontal">
+            <StackPanel 
+                        Height="25" Grid.ColumnSpan="5" FlowDirection="RightToLeft"  Orientation="Horizontal">
                 <Button Name="btnPower" 
                         Width="25" 
                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
@@ -96,6 +96,16 @@
                         Kind="Power" 
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
+                <Button Name="btnMinimize" 
+                        Width="25"
+                        Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                        Click="btnMinimize_Click" Padding="0,10,0,0">
+                    <iconPacks:PackIconModern 
+                        Kind="Minus" 
+                        Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
+                </Button>
+                <iconPacks:PackIconRadixIcons Kind="DividerVertical" Foreground="{DynamicResource BackgroundBrush}"
+                                              Height="25" Width="15" Margin="0,2,0,2"/>
                 <Button Name="btnSetting" 
                         Width="25" 
                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"
