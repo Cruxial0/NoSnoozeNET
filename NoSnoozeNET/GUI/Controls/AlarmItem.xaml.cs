@@ -4,6 +4,7 @@ using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.GUI.Windows;
 using System.ComponentModel;
 using System.Drawing;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -25,6 +26,7 @@ namespace NoSnoozeNET.GUI.Controls
         private static Bitmap _optionsBitmap;
         private DateTime _ringsAt;
         private List<Plugin> _pluginElements;
+        private string _alarmName;
 
         //Declare local image variables
         private BitmapImage _stopwatchImageSource;
@@ -32,11 +34,15 @@ namespace NoSnoozeNET.GUI.Controls
 
         #region properties
 
+
+        public bool IsPreviewItem = false;
+
+
         [Category("Custom Props")]
         public string AlarmName
         {
-            get => (string)lblAlarmName.Content;
-            set { lblAlarmName.Content = value; NotifyPropertyChanged(nameof(AlarmName)); }
+            get => _alarmName;
+            set { _alarmName = value; NotifyPropertyChanged(nameof(AlarmName)); }
         }
 
         [Category("Custom Props")]
@@ -101,10 +107,6 @@ namespace NoSnoozeNET.GUI.Controls
 
             _pluginElements = new List<Plugin>();
 
-            //foreach (var plugin in PluginElements)
-            //{
-            //    AddPlugin(plugin);
-            //}
         }
 
         public async void ColorStopwatch(SolidColorBrush brush)
@@ -190,6 +192,31 @@ namespace NoSnoozeNET.GUI.Controls
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
                 PropertyChanged(this, new PropertyChangedEventArgs("DisplayMember"));
+            }
+        }
+
+        private void AlarmItem_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show($"{_alarmName}: {_ringsAt}");
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1);
+            timer.Start();
+
+            timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            var now = DateTime.Now;
+            var secondsNow = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
+            var secondsTarget = new DateTime(RingsAt.Year, RingsAt.Month, RingsAt.Day, RingsAt.Hour, RingsAt.Minute, RingsAt.Second);
+
+            if (TimeSpan.Compare(secondsNow.TimeOfDay, secondsTarget.TimeOfDay) == 0 && !IsPreviewItem)
+            {
+                SoundPlayer player = new SoundPlayer(@"C:\Users\Benjamin\Music\歌ってみたKING 百鬼あやめ cover.mp3");
+                player.Load();
+                player.Play();
             }
         }
     }

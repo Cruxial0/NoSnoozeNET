@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Newtonsoft.Json;
 using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.Extensions.IO;

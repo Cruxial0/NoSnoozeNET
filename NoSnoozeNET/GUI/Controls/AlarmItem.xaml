@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
              xmlns:wpfEx="clr-namespace:NoSnoozeNET.Extensions.WPF"
              mc:Ignorable="d" Width="auto" Height="105" Name="UI"
+             Loaded="AlarmItem_OnLoaded"
 >
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
@@ -55,7 +56,7 @@
 
         <!--Alarm Details-->
         <StackPanel Grid.Column="2" Margin="0,5,0,10">
-            <Label Name="lblAlarmName" FontSize="24" Content="{Binding AlarmName, FallbackValue=Alarm}" FontFamily="Segoe UI SemiLight" Foreground="{DynamicResource HeaderBrush}"></Label>
+            <Label Name="lblAlarmName" FontSize="24" Content="{Binding ElementName=UI, Path=AlarmName, FallbackValue=Alarm}" FontFamily="Segoe UI SemiLight" Foreground="{DynamicResource HeaderBrush}"></Label>
             <Label Name="lblCreatedAt" FontSize="12" Content="{Binding AlarmCreated, FallbackValue=Created at: 1/1/2021 00:01AM}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
             <Label Name="lblRingsAt" FontSize="12" Content="{Binding TimeToRing, FallbackValue=Alarm rings at 12AM (in 7h)}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
         </StackPanel>

@@ -114,6 +114,7 @@ namespace NoSnoozeNET.GUI.Windows
                 totalHours = (TimePicker.Value.Value - now).TotalHours;
             }
 
+            PreviewItem.IsPreviewItem = true;
             PreviewItem.RingsAt = TimePicker.Value.Value;
             PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm}";
             PreviewItem.AlarmCreated = $"Created: {DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}";
@@ -127,7 +128,8 @@ namespace NoSnoozeNET.GUI.Windows
                 AlarmName = PreviewItem.AlarmName,
                 TimeToRing = PreviewItem.TimeToRing,
                 RingsAt = PreviewItem.RingsAt,
-                PluginElements = PreviewItem.PluginElements
+                PluginElements = PreviewItem.PluginElements,
+                IsPreviewItem = false
             };
             this.DialogResult = true;
             this.Close();
