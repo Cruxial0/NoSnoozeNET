@@ -41,12 +41,8 @@ namespace NoSnoozeNET.PluginSystem
                 .ToArray();
             foreach (Type type in types)
             {
-                //Create a new instance of all found types
-                Plugins.Add((ISnoozePlugin)Activator.CreateInstance(type));
-            }
+                var plugin = (ISnoozePlugin) Activator.CreateInstance(type);
 
-            foreach (var plugin in Plugins)
-            {
                 var pluginItem = new Plugin()
                 {
                     //ImageIcon = ImageExt.ByteArrayToImage(plugin.Icon.IconBytes),
@@ -54,11 +50,15 @@ namespace NoSnoozeNET.PluginSystem
                     {
                         PluginDescription = plugin.Description,
                         PluginName = plugin.Name,
-                        PluginIconInfo = plugin.Icon
-                    }
+                        PluginIconInfo = plugin.Icon,
+                    },
                 };
                 PluginObjects.Add(pluginItem);
+
+                //Create a new instance of all found types
+                Plugins.Add(plugin);
             }
+
         }
     }
 }

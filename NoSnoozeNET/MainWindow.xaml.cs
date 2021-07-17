@@ -159,7 +159,9 @@ namespace NoSnoozeNET
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            //this.WindowState = WindowState.Minimized;
+            var window =  MainWindow.GetWindow(this);
+            window = new StyleSettings();
         }
     }
 }

@@ -4,6 +4,7 @@ using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.GUI.Windows;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Media;
 using System.Windows;
 using System.Windows.Controls;
@@ -214,7 +215,12 @@ namespace NoSnoozeNET.GUI.Controls
 
             if (TimeSpan.Compare(secondsNow.TimeOfDay, secondsTarget.TimeOfDay) == 0 && !IsPreviewItem)
             {
-                SoundPlayer player = new SoundPlayer(@"C:\Users\Benjamin\Music\歌ってみたKING 百鬼あやめ cover.mp3");
+                foreach (var plugin in PluginElements)
+                {
+                    PluginLoader.Plugins.First(x => x.Name == plugin.PluginInfo.PluginName).Execute(new string[0]);
+                }
+
+                SoundPlayer player = new SoundPlayer(@"C:\Users\Benjamin\OneDrive\Documents\Audacity\歌ってみたKING 百鬼あやめ cover.wav");
                 player.Load();
                 player.Play();
             }
