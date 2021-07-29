@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using NoSnoozeNET.Extensions.WPF;
 using NoSnoozeNET.GUI.Windows;
 using Xceed.Wpf.Toolkit;
 
@@ -42,6 +43,8 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
             innerPanel.Children.Add(lbl);
             innerPanel.Children.Add(txt);
 
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, innerPanel);
+
             return innerPanel;
         }
 
@@ -73,6 +76,8 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
 
             innerPanel.Children.Add(lbl);
             innerPanel.Children.Add(txt);
+
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, innerPanel);
 
             return innerPanel;
         }
@@ -106,6 +111,8 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
             innerPanel.Children.Add(lbl);
             innerPanel.Children.Add(dtp);
 
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, innerPanel);
+
             return innerPanel;
         }
 
@@ -134,6 +141,8 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
 
                 innerPanel.Children.Add(chk);
             }
+
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, innerPanel);
 
             return innerPanel;
         }

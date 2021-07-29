@@ -20,6 +20,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -38,11 +40,23 @@
                FontSize="16" FontFamily="Segoe UI Light"
                Foreground="{DynamicResource LabelBrush}"></Label>
 
-        <StackPanel Grid.Column="1" Grid.Row="3" 
-                    MinWidth="200" Name="StackPanel"
-                    Margin="0,0,0,20"
+        <StackPanel Name="StackPanel"
+                    Grid.Column="1" Grid.Row="3" 
+                    MinWidth="200" 
+                    Margin="0,0,15,20"
                     Background="{x:Null}"
                     HorizontalAlignment="Left"
         ></StackPanel>
+
+        <Button Name="btnSave"
+                Grid.Row="4" Grid.Column="1"
+                Content="Save"
+                Foreground="{DynamicResource LabelBrush}"
+                Background="{DynamicResource ControlBackgroundBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="2"
+                Width="75"
+                HorizontalAlignment="Left"
+                Margin="0,5"></Button>
     </Grid>
 </Window>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Namotion.Reflection;
+using NoSnoozeNET.Extensions.WPF;
 using NoSnoozeNET.GUI.Functionality.PluginSettings;
 using NoSnoozeNET.PluginSystem;
 using Xceed.Wpf.Toolkit;
@@ -32,10 +33,27 @@ namespace NoSnoozeNET.GUI.Windows
             InitializeComponent();
 
             GenerateControls(plugin);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, TopBar);
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, btnSave);
         }
 
         private void GenerateControls(Plugin plugin)
         {
+            if (plugin.PluginInfo.PluginConfig.BoolConfig.Count == 0 &&
+                plugin.PluginInfo.PluginConfig.DateTimeConfig.Count == 0 &&
+                plugin.PluginInfo.PluginConfig.StringConfig.Count == 0 &&
+                plugin.PluginInfo.PluginConfig.IntConfig.Count == 0 || plugin.PluginInfo.PluginConfig == null)
+            {
+                Label lbl = new Label();
+                lbl.Content = "No settings available :'(";
+                lbl.Foreground = MainWindow.GlobalConfig.BrushConfig.MainBrush.LabelBrush;
+                lbl.Margin = new Thickness(5, 10, 5, 0);
+                lbl.FontSize = 12;
+                lbl.FontFamily = new FontFamily("Segoe UI Light");
+
+                StackPanel.Children.Add(lbl);
+            }
+
             ControlDesigner controlDesigner = new ControlDesigner();
 
             if (plugin.PluginInfo.PluginConfig.StringConfig.Count != 0)
