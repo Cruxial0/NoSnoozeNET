@@ -219,6 +219,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Windows\DynamicPluginSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Windows\PluginSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Windows\SaveTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +256,7 @@
     <Compile Include="Extensions\Internal\GlobalConfigExt.cs" />
     <Compile Include="Extensions\Internal\ShadowConfigExt.cs" />
     <Compile Include="Extensions\IO\Directory.cs" />
+    <Compile Include="Extensions\Reflection\ReflectionExt.cs" />
     <Compile Include="Extensions\WPF\ButtonEx.xaml.cs">
       <DependentUpon>ButtonEx.xaml</DependentUpon>
     </Compile>
@@ -261,9 +270,16 @@
     <Compile Include="GUI\Controls\PluginListItem.xaml.cs">
       <DependentUpon>PluginListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Functionality\PluginSettings\ControlDesigner.cs" />
     <Compile Include="GUI\Functionality\Theme\ThemeHandler.cs" />
     <Compile Include="GUI\Windows\CreateAlarm.xaml.cs">
       <DependentUpon>CreateAlarm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Windows\DynamicPluginSettings.xaml.cs">
+      <DependentUpon>DynamicPluginSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Windows\PluginSettings.xaml.cs">
+      <DependentUpon>PluginSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Windows\SaveTheme.xaml.cs">
       <DependentUpon>SaveTheme.xaml</DependentUpon>
@@ -279,6 +295,7 @@
   <ItemGroup>
     <Compile Include="PluginSystem\Constants.cs" />
     <Compile Include="PluginSystem\Interfaces\ISnoozePlugin.cs" />
+    <Compile Include="PluginSystem\Interfaces\ISnoozePluginConfig.cs" />
     <Compile Include="PluginSystem\Plugin.cs" />
     <Compile Include="PluginSystem\PluginLoader.cs" />
     <Compile Include="PluginSystem\Plugins\TestPlugin.cs" />

@@ -1,4 +1,6 @@
-﻿namespace NoSnoozeNET.PluginSystem.Interfaces
+﻿using System.Collections.Generic;
+
+namespace NoSnoozeNET.PluginSystem.Interfaces
 {
     public interface ISnoozePlugin
     {
@@ -11,6 +13,11 @@
         /// Plugin Description.
         /// </summary>
         string Description { get; }
+
+        /// <summary>
+        /// Config surrounding the plugin.
+        /// </summary>
+        PluginConfig Config { get; set; }
 
         /// <summary>
         /// Info for associated icon.

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using NoSnoozeNET.Extensions.Imaging;
 using NoSnoozeNET.PluginSystem.Interfaces;
+using Image = System.Drawing.Image;
 
 namespace NoSnoozeNET.PluginSystem.Plugins
 {
@@ -13,6 +14,8 @@ namespace NoSnoozeNET.PluginSystem.Plugins
     {
         public string Name => "Test Plugin 2";
         public string Description => "Test plugin for NoSnoozeNET.";
+
+        public PluginConfig Config { get; set; }
 
         public IconInfo Icon => new IconInfo()
         {
@@ -26,7 +29,12 @@ namespace NoSnoozeNET.PluginSystem.Plugins
 
         public void CommitConfig()
         {
-            throw new NotImplementedException();
+            this.Config = new PluginConfig();
+            PluginConfig config = new PluginConfig()
+            {
+                StringConfig = new Dictionary<string, string>()
+            };
+            config.StringConfig.Add("Some path", string.Empty);
         }
     }
 }

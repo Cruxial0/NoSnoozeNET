@@ -11,16 +11,11 @@ namespace NoSnoozeNET.PluginSystem
 {
     public class Plugin
     {
-        //public System.Drawing.Image ImageIcon { get; set; }
         public SnoozePluginInfo PluginInfo { get; set; }
 
         public Plugin()
         {
             this.PluginInfo = new SnoozePluginInfo();
-            if (PluginInfo.PluginIconInfo.IconBytes != null)
-            {
-                //this.ImageIcon = ImageExt.ByteArrayToImage(PluginInfo.PluginIconInfo.IconBytes);
-            }
         }
     }
 
@@ -29,10 +24,12 @@ namespace NoSnoozeNET.PluginSystem
         public string PluginName { get; set; }
         public string PluginDescription { get; set; }
         public IconInfo PluginIconInfo { get; set; }
+        public PluginConfig PluginConfig { get; set; }
 
         public SnoozePluginInfo()
         {
             this.PluginIconInfo = new IconInfo();
+            this.PluginConfig = new PluginConfig();
         }
     }
 }

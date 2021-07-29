@@ -159,9 +159,9 @@ namespace NoSnoozeNET
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
+            PluginSettings PS = new PluginSettings();
+            PS.Show();
             //this.WindowState = WindowState.Minimized;
-            var window =  MainWindow.GetWindow(this);
-            window = new StyleSettings();
         }
     }
 }

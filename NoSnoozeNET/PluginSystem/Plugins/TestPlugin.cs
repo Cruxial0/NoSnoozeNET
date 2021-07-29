@@ -17,6 +17,8 @@ namespace NoSnoozeNET.PluginSystem.Plugins
         public string Name => "Test Plugin";
         public string Description => "Test plugin for NoSnoozeNET.";
 
+        public PluginConfig Config { get; set; }
+
         public IconInfo Icon => new IconInfo()
         {
             IconBytes = ImageExt.ImageToByteArray(Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\youtube-logo-png-picture-13.png"))),
@@ -29,7 +31,26 @@ namespace NoSnoozeNET.PluginSystem.Plugins
 
         public void CommitConfig()
         {
-            throw new NotImplementedException();
+            TextBox tb = new TextBox();
+            tb.Width = 100;
+            tb.Height = 20;
+            tb.Text = "Test";
+
+            this.Config = new PluginConfig()
+            {
+                StringConfig = new Dictionary<string, string>(),
+                DateTimeConfig = new Dictionary<string, DateTime>(),
+                BoolConfig = new Dictionary<string, bool>(),
+            };
+            Config.StringConfig.Add("Test settings", string.Empty);
+            Config.StringConfig.Add("Test settings 2", string.Empty);
+            Config.StringConfig.Add("Test settings 3434", string.Empty);
+            Config.DateTimeConfig.Add("DateTime", new DateTime());
+            Config.BoolConfig.Add("Use setting 1", new bool());
+            Config.BoolConfig.Add("Use setting 2", new bool());
+            Config.BoolConfig.Add("Use setting 3", new bool());
         }
     }
+
+
 }

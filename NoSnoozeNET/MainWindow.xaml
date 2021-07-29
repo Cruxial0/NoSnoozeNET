@@ -62,6 +62,8 @@
     </Window.Resources>
     
     <Grid>
+
+
         <!--Columns of width 20 not intended for use-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -79,6 +81,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+
+        <ContentControl x:Name="contentControl" Grid.Row="1" Grid.RowSpan="10"
+                        Grid.ColumnSpan="10"/>
 
         <Grid Name="dckTopBar" Grid.ColumnSpan="5" Background="{DynamicResource ControlBackgroundBrush}" MouseDown="UIElement_OnMouseDown">
             <Grid.RowDefinitions>

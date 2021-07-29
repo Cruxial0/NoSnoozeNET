@@ -43,6 +43,8 @@ namespace NoSnoozeNET.PluginSystem
             {
                 var plugin = (ISnoozePlugin) Activator.CreateInstance(type);
 
+                plugin.CommitConfig();
+
                 var pluginItem = new Plugin()
                 {
                     //ImageIcon = ImageExt.ByteArrayToImage(plugin.Icon.IconBytes),
@@ -51,6 +53,7 @@ namespace NoSnoozeNET.PluginSystem
                         PluginDescription = plugin.Description,
                         PluginName = plugin.Name,
                         PluginIconInfo = plugin.Icon,
+                        PluginConfig = plugin.Config
                     },
                 };
                 PluginObjects.Add(pluginItem);
