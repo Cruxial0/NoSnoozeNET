@@ -107,6 +107,7 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
             dtp.FontFamily = new FontFamily("Segoe UI Light");
             dtp.HorizontalAlignment = HorizontalAlignment.Right;
             dtp.VerticalContentAlignment = VerticalAlignment.Center;
+            dtp.Value = pair.Value;
 
             innerPanel.Children.Add(lbl);
             innerPanel.Children.Add(dtp);

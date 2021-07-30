@@ -40,10 +40,7 @@ namespace NoSnoozeNET.PluginSystem
             DirectoryExt.CreateFolderIfNotExist(PluginDirectory);
         }
 
-        public void SaveConfig()
-        {
-            File.WriteAllText(Path.Combine(this.PluginDirectory, this.PluginName + ".json"), JsonConvert.SerializeObject(this.PluginConfig, Formatting.Indented));
-        }
+        public void SaveConfig() => File.WriteAllText(Path.Combine(this.PluginDirectory, this.PluginName + ".json"), JsonConvert.SerializeObject(this.PluginConfig, Formatting.Indented));
 
         public bool ConfigExists() => File.Exists(Path.Combine(this.PluginDirectory, this.PluginName + ".json"));
 
