@@ -185,6 +185,33 @@ namespace NoSnoozeNET.GUI.Controls
             ss.Show();
         }
 
+        public async void ColorPlugins(SolidColorBrush brush)
+        {
+            PluginPanel.Children.RemoveRange(0, PluginElements.Count);
+
+            foreach (var plugin in PluginElements)
+            {
+                //Make new instance Options Image to prevent mutability and coloring issues.
+                Bitmap source = ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes) as Bitmap;
+
+                //Make sure brush isn't null.
+                if (brush != null)
+                {
+                    //Get the System.Drawing.Color equivalent of Application Resource brush.
+                    Color targetColor = Color.FromArgb(brush.Color.R, brush.Color.G, brush.Color.B);
+
+                    //Dispatch task to separate thread, then recolor image with Render DispatcherPriority.
+                    source = await Dispatcher.InvokeAsync(() => source.FastColorReplace(Color.White, targetColor), DispatcherPriority.Render);
+
+                    //Convert Bitmap to BitmapImage and set it as ImageSource.
+                    System.Windows.Controls.Image img = new System.Windows.Controls.Image()
+                    {
+                        Source = source.ToBitmapImage()
+                    };
+                    PluginPanel.Children.Add(img);
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -206,6 +233,8 @@ namespace NoSnoozeNET.GUI.Controls
             timer.Start();
 
             timer.Tick += Timer_Tick;
+
+            ColorPlugins(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
         }
 
         private void Timer_Tick(object sender, EventArgs e)

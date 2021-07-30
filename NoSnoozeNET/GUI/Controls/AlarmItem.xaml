@@ -23,6 +23,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Thickness x:Key="pluginMargin">2,0,0,0</Thickness>
+
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -49,9 +52,13 @@
 
         <!--Plugins and Conditions-->
         <StackPanel x:Name="PluginPanel" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    Orientation="Horizontal" FlowDirection="RightToLeft" Height="20" Margin="0,0,0,0"
+                    Orientation="Horizontal" FlowDirection="LeftToRight" Height="20" Margin="0,0,0,0"
                     Grid.ColumnSpan="2">
-            
+            <StackPanel.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Margin" Value="{StaticResource pluginMargin}"></Setter>
+                </Style>
+            </StackPanel.Resources>
         </StackPanel>
 
         <!--Alarm Details-->

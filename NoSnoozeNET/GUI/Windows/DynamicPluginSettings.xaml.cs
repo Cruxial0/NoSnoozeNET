@@ -36,6 +36,8 @@ namespace NoSnoozeNET.GUI.Windows
         {
             InitializeComponent();
 
+            RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
+
             GenerateControls(plugin);
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, TopBar);
             WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, btnSave);

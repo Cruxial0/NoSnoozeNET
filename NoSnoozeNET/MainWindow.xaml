@@ -9,7 +9,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="MainWindow" Height="520" Width="500" ResizeMode="CanMinimize"
-        SizeToContent="Width" Background="{DynamicResource BackgroundBrush}"
+        SizeToContent="WidthAndHeight" Background="{DynamicResource BackgroundBrush}"
         Name="UI" WindowStyle="None">
 
 <Window.Resources>
@@ -75,7 +75,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Name="ListRow" Height="auto" MinHeight="475"/>
+            <RowDefinition Name="ListRow" Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -156,11 +156,12 @@
             <ListBox x:Name="AlarmList"
                      SelectedItem="{Binding ElementName=UI, Path=SelectedAlarmItem}"
                      SelectedIndex="0"
-                     Height="{Binding ElementName=ListRow, Path=Height}" Background="{x:Null}" 
+                     Height="475" Background="{x:Null}" 
                      BorderBrush="{x:Null}"
                      ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}"
                      >
                 <ScrollViewer.CanContentScroll>False</ScrollViewer.CanContentScroll>
+                <ScrollViewer Margin="0,0,5,0"></ScrollViewer>
             </ListBox>
         </Border>
         <!--OMEGALUL-->
