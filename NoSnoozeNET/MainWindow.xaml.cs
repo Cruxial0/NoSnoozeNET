@@ -47,15 +47,17 @@ namespace NoSnoozeNET
             GlobalConfig.BrushConfig = new BrushConfig().LoadConfig();
             GlobalConfig.SelectedTheme = new ThemeHandler().LoadSelectedTheme();
 
-            PluginLoader pluginLoader = new PluginLoader();
-            pluginLoader.LoadPlugins();
-
             AlarmItemCollection.CollectionChanged += AlarmItemCollection_PropertyChanged;
             _alarmItemList = new ObservableCollection<AlarmItem>().Load();
             AlarmList.ItemsSource = AlarmItemCollection;
 
+            MessageBox.Show(BinDirectory);
+
             AlarmListElement = AlarmListBorder;
             TopBarElement = dckTopBar;
+
+            PluginLoader pluginLoader = new PluginLoader();
+            pluginLoader.LoadPlugins();
 
             foreach (var alarmItem in _alarmItemList)
             {

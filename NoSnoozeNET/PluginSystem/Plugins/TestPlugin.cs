@@ -49,6 +49,7 @@ namespace NoSnoozeNET.PluginSystem.Plugins
             Config.BoolConfig.Add("Use setting 1", new bool());
             Config.BoolConfig.Add("Use setting 2", new bool());
             Config.BoolConfig.Add("Use setting 3", new bool());
+            Config.IntConfig.Add("Int setting", new int());
         }
     }
 

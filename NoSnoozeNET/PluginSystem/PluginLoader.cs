@@ -43,8 +43,6 @@ namespace NoSnoozeNET.PluginSystem
             {
                 var plugin = (ISnoozePlugin) Activator.CreateInstance(type);
 
-                plugin.CommitConfig();
-
                 var pluginItem = new Plugin()
                 {
                     //ImageIcon = ImageExt.ByteArrayToImage(plugin.Icon.IconBytes),
@@ -53,9 +51,17 @@ namespace NoSnoozeNET.PluginSystem
                         PluginDescription = plugin.Description,
                         PluginName = plugin.Name,
                         PluginIconInfo = plugin.Icon,
-                        PluginConfig = plugin.Config
+                        PluginConfig = new PluginConfig()
                     },
                 };
+
+                if (!pluginItem.PluginInfo.ConfigExists())
+                {
+                    plugin.CommitConfig();
+                    pluginItem.PluginInfo.PluginConfig = plugin.Config;
+                }
+                else pluginItem.PluginInfo.LoadConfig();
+
                 PluginObjects.Add(pluginItem);
 
                 //Create a new instance of all found types

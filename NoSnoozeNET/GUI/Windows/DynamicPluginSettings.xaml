@@ -57,6 +57,7 @@
                 BorderThickness="2"
                 Width="75"
                 HorizontalAlignment="Left"
-                Margin="0,5"></Button>
+                Margin="0,5"
+                Click="BtnSave_OnClick"></Button>
     </Grid>
 </Window>

@@ -17,7 +17,7 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
         public StackPanel GenerateStringConfig(KeyValuePair<string, string> pair)
         {
             StackPanel innerPanel = new StackPanel();
-            innerPanel.Name = pair.Key.Replace(" ", "");
+            innerPanel.Name = pair.Key.Replace(" ", "_");
             innerPanel.Background = MainWindow.GlobalConfig.BrushConfig.MainBrush.ControlBackgroundBrush;
             innerPanel.Orientation = Orientation.Horizontal;
             innerPanel.FlowDirection = FlowDirection.LeftToRight;
@@ -51,7 +51,7 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
         public StackPanel GenerateIntConfig(KeyValuePair<string, int> pair)
         {
             StackPanel innerPanel = new StackPanel();
-            innerPanel.Name = pair.Key.Replace(" ", "");
+            innerPanel.Name = pair.Key.Replace(" ", "_");
             innerPanel.Background = MainWindow.GlobalConfig.BrushConfig.MainBrush.ControlBackgroundBrush;
             innerPanel.Orientation = Orientation.Horizontal;
             innerPanel.FlowDirection = FlowDirection.LeftToRight;
@@ -85,7 +85,7 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
         public StackPanel GenerateDateTimeConfig(KeyValuePair<string, DateTime> pair)
         {
             StackPanel innerPanel = new StackPanel();
-            innerPanel.Name = pair.Key.Replace(" ", "");
+            innerPanel.Name = pair.Key.Replace(" ", "_");
             innerPanel.Background = MainWindow.GlobalConfig.BrushConfig.MainBrush.ControlBackgroundBrush;
             innerPanel.Orientation = Orientation.Horizontal;
             innerPanel.FlowDirection = FlowDirection.LeftToRight;
@@ -130,7 +130,7 @@ namespace NoSnoozeNET.GUI.Functionality.PluginSettings
             foreach (var pair in boolConfig)
             {
                 CheckBox chk = new CheckBox();
-                chk.Name = pair.Key.Replace(" ", "");
+                chk.Name = pair.Key.Replace(" ", "_");
                 chk.Margin = new Thickness(5);
                 chk.Content = pair.Key;
                 chk.IsChecked = pair.Value;
