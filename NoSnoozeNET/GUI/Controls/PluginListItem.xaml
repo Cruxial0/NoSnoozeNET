@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="200" Name="UI">
+             d:DesignHeight="25" d:DesignWidth="200" Name="UI">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Image Name="Image" Source="{Binding ElementName=UI, Path=PluginImage}"></Image>
-        <Label Grid.Column="1" Content="{Binding ElementName=UI, Path=PluginName, FallbackValue=Plugin}" Foreground="{DynamicResource LabelBrush}" Margin="5,-2,0,-1" FontSize="10"></Label>
+        <Label Grid.Column="1" Content="{Binding ElementName=UI, Path=PluginName, FallbackValue=Plugin}" Foreground="{DynamicResource LabelBrush}" Margin="5,-2,0,-1" FontSize="12" VerticalAlignment="Center"></Label>
     </Grid>
 </UserControl>

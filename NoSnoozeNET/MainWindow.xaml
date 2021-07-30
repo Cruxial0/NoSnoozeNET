@@ -121,6 +121,14 @@
                         Kind="Settings"
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
+                <Button Name="btnPlugin" 
+                        Width="25" 
+                        Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"
+                        Click="BtnPlugin_OnClick">
+                    <iconPacks:PackIconModern
+                        Kind="AppPlus"
+                        Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
+                </Button>
                 <Button Name="btnCreate" 
                         Width="25" 
                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"

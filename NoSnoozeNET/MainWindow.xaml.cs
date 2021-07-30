@@ -51,8 +51,6 @@ namespace NoSnoozeNET
             _alarmItemList = new ObservableCollection<AlarmItem>().Load();
             AlarmList.ItemsSource = AlarmItemCollection;
 
-            MessageBox.Show(BinDirectory);
-
             AlarmListElement = AlarmListBorder;
             TopBarElement = dckTopBar;
 
@@ -161,9 +159,13 @@ namespace NoSnoozeNET
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void BtnPlugin_OnClick(object sender, RoutedEventArgs e)
+        {
             PluginSettings PS = new PluginSettings();
             PS.Show();
-            //this.WindowState = WindowState.Minimized;
         }
     }
 }
