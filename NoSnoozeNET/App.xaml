@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Assets/Dictionaries/ShadowControlStyle.xaml"/>
                 <ResourceDictionary Source="Assets/Dictionaries/ListBoxResources.xaml"/>
                 <ResourceDictionary Source="Assets/Dictionaries/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="Assets/Dictionaries/ContextMenuStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

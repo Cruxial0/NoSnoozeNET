@@ -139,6 +139,7 @@ namespace NoSnoozeNET.Config
             {
                 alarm.ColorStopwatch(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
                 alarm.ColorOptions(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.OptionsBrush);
+                alarm.ColorPlugins(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
             }
         }
     }

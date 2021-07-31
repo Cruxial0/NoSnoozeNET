@@ -4,8 +4,11 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using NoSnoozeNET.Annotations;
 using NoSnoozeNET.Extensions.Imaging;
+using Color = System.Drawing.Color;
 
 namespace NoSnoozeNET.GUI.Controls
 {
@@ -41,6 +44,28 @@ namespace NoSnoozeNET.GUI.Controls
         public void SetImage()
         {
             Image.Source = ((Bitmap)_pluginImage).ToBitmapImage();
+        }
+
+        private void SetImage(BitmapImage img)
+        {
+            Image.Source = img;
+        }
+
+        public async void ColorImage(SolidColorBrush brush)
+        {
+            Bitmap source = PluginImage as Bitmap;
+
+            //Make sure brush isn't null.
+            if (brush != null)
+            {
+                //Get the System.Drawing.Color equivalent of Application Resource brush.
+                Color targetColor = Color.FromArgb(brush.Color.R, brush.Color.G, brush.Color.B);
+
+                //Dispatch task to separate thread, then recolor image with Render DispatcherPriority.
+                source = await Dispatcher.InvokeAsync(() => source.FastColorReplace(Color.White, targetColor), DispatcherPriority.Render);
+
+                SetImage(source.ToBitmapImage());
+            }
         }
 
         public bool Toggle()

@@ -283,6 +283,7 @@ namespace NoSnoozeNET.GUI.Windows
                 //Set color pickers accordingly.
                 SetColorPickers();
                 SetSliders();
+
                 await ColorImages();
             }
         }

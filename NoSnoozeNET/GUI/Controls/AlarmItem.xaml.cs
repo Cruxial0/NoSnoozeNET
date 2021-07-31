@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using NoSnoozeNET.Extensions.WPF;
 using NoSnoozeNET.PluginSystem;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
@@ -91,7 +92,7 @@ namespace NoSnoozeNET.GUI.Controls
             InitializeComponent();
 
             //Pre-define margin.
-            this.Margin = new Thickness(0, 5, 0, 5);
+            this.Margin = new Thickness(0, 5, 0, 3);
             //Change BitmapScalingMode to HighQuality.
             RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
 
@@ -177,18 +178,15 @@ namespace NoSnoozeNET.GUI.Controls
 
         private void BtnOptions_OnClick(object sender, RoutedEventArgs e)
         {
-            //DO STUFF
-
-            //Placeholder
-            
-            StyleSettings ss = new();
-            ss.Show();
+            ContextMenu cm = this.FindResource("cmOptions") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            WindowExt.ApplyShadow(MainWindow.GlobalConfig.BrushConfig.ShadowConfig, cm);
+            cm.IsOpen = true;
         }
 
         public async void ColorPlugins(SolidColorBrush brush)
         {
-            PluginPanel.Children.RemoveRange(0, PluginElements.Count);
-
+            List<UIElement> newImages = new List<UIElement>();
             foreach (var plugin in PluginElements)
             {
                 //Make new instance Options Image to prevent mutability and coloring issues.
@@ -206,8 +204,16 @@ namespace NoSnoozeNET.GUI.Controls
                     //Convert Bitmap to BitmapImage and set it as ImageSource.
                     System.Windows.Controls.Image img = new System.Windows.Controls.Image()
                     {
-                        Source = source.ToBitmapImage()
+                        Source = source.ToBitmapImage(),
+                        ToolTip = plugin.PluginInfo.PluginDescription,
                     };
+                    newImages.Add(img);
+                }
+
+                PluginPanel.Children.Clear();
+
+                foreach (var img in newImages)
+                {
                     PluginPanel.Children.Add(img);
                 }
             }
@@ -254,6 +260,46 @@ namespace NoSnoozeNET.GUI.Controls
                 player.Load();
                 player.Play();
             }
+        }
+
+        private void miDelete_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow._alarmItemList.Remove(this);
+        }
+
+        private void miEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+            CreateAlarm ca = new CreateAlarm(this);
+            if (ca.ShowDialog() == true)
+            {
+                if (ca.SavedItem != null)
+                {
+                    ca.SavedItem.InitializePlugins();
+                    this.AlarmName = ca.SavedItem.AlarmName;
+                    this.RingsAt = ca.SavedItem.RingsAt;
+                    this.TimeToRing = $"Rings at {this.RingsAt:HH:mm}";
+
+                    PluginElements.RemoveRange(0, PluginElements.Count);
+                    PluginPanel.Children.RemoveRange(0, PluginPanel.Children.Count);
+
+                    this.PluginElements = new List<Plugin>();
+                    foreach (var plugin in ca.SavedItem.PluginElements)
+                    {
+                        System.Windows.Controls.Image img = new System.Windows.Controls.Image()
+                        {
+                            Source = ((Bitmap) ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes)).ToBitmapImage()
+                        };
+                        this.AddPlugin(img, plugin);
+                    }
+                    this.ColorPlugins(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
+                }
+            }
+        }
+
+        private void miStyleSettings_Click(object sender, RoutedEventArgs e)
+        {
+            StyleSettings SS = new StyleSettings();
+            SS.Show();
         }
     }
 }

@@ -32,18 +32,55 @@ namespace NoSnoozeNET.GUI.Windows
 
         private Dictionary<Plugin, Image> pluginImages = new Dictionary<Plugin, Image>();
 
+        private AlarmItem outputItem = null;
+
         public CreateAlarm()
         {
             InitializeComponent();
-
-            var alarmList = new List<AlarmItem>();
 
             PreviewItem = new AlarmItem()
             {
                 AlarmName = "Alarm name",
                 AlarmCreated = "Created: " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-                TimeToRing = "Rings in 7h",
+                TimeToRing = "Rings at NaN",
             };
+
+            Setup();
+        }
+
+        public CreateAlarm(AlarmItem alarmItem)
+        {
+            InitializeComponent();
+
+            outputItem = alarmItem;
+
+            txtAlarmName.Text = alarmItem.AlarmName;
+            TimePicker.Value = alarmItem.RingsAt;
+
+            PreviewItem.AlarmName = txtAlarmName.Text;
+            PreviewItem.RingsAt = TimePicker.Value.Value;
+            PreviewItem.TimeToRing = $"Rings at {TimePicker.Value.Value:HH:mm}";
+
+            foreach (var plugin in alarmItem.PluginElements)
+            {
+                Image img = new Image()
+                {
+                    Source = ((Bitmap) ImageExt.ByteArrayToImage(plugin.PluginInfo.PluginIconInfo.IconBytes)).ToBitmapImage(),
+                    ToolTip = plugin.PluginInfo.PluginDescription,
+                };
+                PreviewItem.AddPlugin(img, plugin);
+            }
+
+            Header.Content = "Edit Alarm";
+
+            PluginBlock.Visibility = Visibility.Visible;
+
+            Setup();
+        }
+
+        private void Setup()
+        {
+            var alarmList = new List<AlarmItem>();
 
             PreviewItem.LayoutTransform = new ScaleTransform(0.75, 0.75);
 
@@ -64,12 +101,13 @@ namespace NoSnoozeNET.GUI.Windows
                 };
                 Image img = new Image()
                 {
-                    Source = ((Bitmap) listItem.PluginImage).ToBitmapImage()
+                    Source = ((Bitmap) listItem.PluginImage).ToBitmapImage(),
+                    ToolTip = plugin.PluginInfo.PluginDescription,
                 };
 
                 pluginImages.Add(plugin, img);
 
-                listItem.SetImage();
+                listItem.ColorImage(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
                 plugins.Add(listItem);
                 _plugins.Add(plugin);
             }
@@ -85,6 +123,7 @@ namespace NoSnoozeNET.GUI.Windows
 
                 Image img = new Image();
                 img.Source = pluginItem.Image.Source;
+                img.ToolTip = pluginItem.Image.ToolTip;
 
                 _pluginListItems.Add(pluginItem);
                 _pluginImages.Add(img);
@@ -131,7 +170,8 @@ namespace NoSnoozeNET.GUI.Windows
                 PluginElements = PreviewItem.PluginElements,
                 IsPreviewItem = false
             };
-            this.DialogResult = true;
+            if (outputItem != null) outputItem.AlarmCreated = outputItem.AlarmCreated;
+                this.DialogResult = true;
             this.Close();
         }
 

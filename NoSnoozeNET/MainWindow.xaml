@@ -103,6 +103,7 @@
                         Kind="Power" 
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
+
                 <Button Name="btnMinimize" 
                         Width="25"
                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
@@ -111,6 +112,7 @@
                         Kind="Minus" 
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
+
                 <iconPacks:PackIconRadixIcons Kind="DividerVertical" Foreground="{DynamicResource BackgroundBrush}"
                                               Height="25" Width="15" Margin="0,2,0,2"/>
                 <Button Name="btnSetting" 
@@ -121,6 +123,7 @@
                         Kind="Settings"
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
+
                 <Button Name="btnPlugin" 
                         Width="25" 
                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"
@@ -129,6 +132,7 @@
                         Kind="AppPlus"
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
+
                 <Button Name="btnCreate" 
                         Width="25" 
                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="25"
@@ -137,16 +141,6 @@
                         Kind="Clock"
                         Foreground="{DynamicResource StopwatchColor}"></iconPacks:PackIconModern>
                 </Button>
-                <Menu Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource LabelBrush}">
-                    <MenuItem>
-                        <MenuItem Header="Style Settings" Click="MenuItem_OnClick" 
-                                  Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
-                        <MenuItem Header="Plugin Settings" 
-                                  Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
-                        <MenuItem Header="Create Alarm" Click="CreateAlarm_OnClick"
-                                  Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{DynamicResource BackgroundBrush}"/>
-                    </MenuItem>
-                </Menu>
             </StackPanel>
         </Grid>
         
@@ -161,7 +155,6 @@
                      ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}"
                      >
                 <ScrollViewer.CanContentScroll>False</ScrollViewer.CanContentScroll>
-                <ScrollViewer Margin="0,0,5,0"></ScrollViewer>
             </ListBox>
         </Border>
         <!--OMEGALUL-->

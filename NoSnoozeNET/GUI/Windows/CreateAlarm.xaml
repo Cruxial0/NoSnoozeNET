@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:NoSnoozeNET.GUI.Windows"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:converters="clr-namespace:NoSnoozeNET.GUI.Converters"
         mc:Ignorable="d" 
         Window.Background="{DynamicResource BackgroundBrush}"
         Title="CreateAlarm" Height="450" Width="800"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize" WindowStyle="None">
+        ResizeMode="NoResize" WindowStyle="None"
+        Name="UI">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -44,7 +46,8 @@
             </Button>
         </StackPanel>
 
-        <Label Grid.Column="1" Grid.Row="2"
+        <Label Name="Header"
+               Grid.Column="1" Grid.Row="2"
                Content="Create an Alarm"
                FontSize="20" 
                FontFamily="Segoe UI DemiLight"
@@ -108,6 +111,13 @@
                      Height="{Binding ActualHeight, ElementName=ParentGrid}"
                      SelectionChanged="PluginList_OnSelectionChanged">
             </ListBox>
+
+            <Rectangle Name="PluginBlock" 
+                       Width="{Binding ElementName=PluginList, Path=Width}"
+                       Height="{Binding ElementName=PluginList, Path=Height}"
+                       Visibility="Hidden"
+                       Fill="Transparent"></Rectangle>
+
         </Grid>
 
         <ListBox Name="PreviewContainer"

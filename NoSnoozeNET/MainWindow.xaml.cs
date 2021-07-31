@@ -26,7 +26,7 @@ namespace NoSnoozeNET
 
         public static ObservableCollection<AlarmItem> AlarmColorList = new ObservableCollection<AlarmItem>();
 
-        private ObservableCollection<AlarmItem> _alarmItemList;
+        public static ObservableCollection<AlarmItem> _alarmItemList;
         private AlarmItem _selectedAlarmItem;
 
         public static GlobalConfig GlobalConfig = new();

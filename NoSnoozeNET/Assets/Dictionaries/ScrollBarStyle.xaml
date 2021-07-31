@@ -9,7 +9,6 @@
     <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
     <SolidColorBrush x:Key="NormalBrush" Color="#888" />
     <SolidColorBrush x:Key="NormalBorderBrush" Color="#888" />
-    <SolidColorBrush x:Key="HorizontalNormalBrush" Color="{DynamicResource StopwatchColor}" />
     <SolidColorBrush x:Key="HorizontalNormalBorderBrush" Color="#888" />
 
     <LinearGradientBrush x:Key="ListBoxBackgroundBrush" StartPoint="0,0" EndPoint="1,0.001">
@@ -141,6 +140,7 @@
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Margin" Value="0,0,2,0"></Setter>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto"/>
@@ -151,6 +151,9 @@
                 <Setter Property="Width" Value="18"/>
                 <Setter Property="Height" Value="Auto" />
                 <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource StopwatchColor}"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NoSnoozeNET.GUI.Controls"
              xmlns:wpfEx="clr-namespace:NoSnoozeNET.Extensions.WPF"
-             mc:Ignorable="d" Width="auto" Height="105" Name="UI"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" Width="auto" Height="115" Name="UI"
              Loaded="AlarmItem_OnLoaded"
 >
     <UserControl.Resources>
@@ -26,6 +27,37 @@
 
         <Thickness x:Key="pluginMargin">2,0,0,0</Thickness>
 
+        <ContextMenu x:Key="cmOptions" Background="{DynamicResource BorderBrush}">
+            <MenuItem Header="Edit Alarm"
+                      FontFamily="Segoe UI DemiLight"
+                      Background="{DynamicResource ControlBackgroundBrush}"
+                      Foreground="{DynamicResource LabelBrush}"
+                      Click="miEdit_OnClick">
+                <MenuItem.Icon>
+                    <iconPacks:PackIconModern Kind="Edit" Foreground="{DynamicResource StopwatchColor}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete Alarm" x:Name="miDelete"
+                      FontFamily="Segoe UI DemiLight"
+                      Background="{DynamicResource ControlBackgroundBrush}"
+                      Foreground="{DynamicResource LabelBrush}"
+                      Click="miDelete_OnClick">
+                <MenuItem.Icon>
+                    <iconPacks:PackIconModern Kind="Delete" Foreground="{DynamicResource StopwatchColor}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Background="{DynamicResource BackgroundBrush}"/>
+                <MenuItem Header="Open Style Settings"
+                          FontFamily="Segoe UI DemiLight"
+                          Background="{DynamicResource ControlBackgroundBrush}"
+                          Foreground="{DynamicResource LabelBrush}"
+                          Click="miStyleSettings_Click">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconModern Kind="DrawPen" Foreground="{DynamicResource StopwatchColor}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+        </ContextMenu>
+
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,23 +68,24 @@
         </Grid.ColumnDefinitions>
 
         <!--Stopwatch Icon-->
-        <Image x:Name="Stopwatch" Grid.Column="0" Source="{Binding ElementName=UI, Path=StopwatchImageSource, UpdateSourceTrigger=PropertyChanged}"
-               Margin="10,10,10,10" Grid.ColumnSpan="2" SnapsToDevicePixels="True"
+        <Image Grid.Row="0" x:Name="Stopwatch" Grid.Column="0" Source="{Binding ElementName=UI, Path=StopwatchImageSource, UpdateSourceTrigger=PropertyChanged}"
+               Margin="10,5,10,25" Grid.ColumnSpan="2" SnapsToDevicePixels="True"
                UseLayoutRounding="True"/>
 
 
-        <Button x:Name="BtnOptions" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top"
+        <Button Grid.Row="0" x:Name="BtnOptions" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top"
                         Margin="0,5,5,0" Height="28" Width="16" Background="Transparent" SnapsToDevicePixels="True" Click="BtnOptions_OnClick">
             <Image x:Name="OptionsImg" HorizontalAlignment="Right" VerticalAlignment="Top"
                    Source="{Binding ElementName=UI, Path=OptionsImageSource, UpdateSourceTrigger=PropertyChanged}"/>
+            
         </Button>
 
         <!--Options Icon-->
         
 
         <!--Plugins and Conditions-->
-        <StackPanel x:Name="PluginPanel" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    Orientation="Horizontal" FlowDirection="LeftToRight" Height="20" Margin="0,0,0,0"
+        <StackPanel Grid.Row="0" x:Name="PluginPanel" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Orientation="Horizontal" FlowDirection="LeftToRight" Height="20" Margin="0,0,0,15"
                     Grid.ColumnSpan="2">
             <StackPanel.Resources>
                 <Style TargetType="Image">
@@ -62,10 +95,17 @@
         </StackPanel>
 
         <!--Alarm Details-->
-        <StackPanel Grid.Column="2" Margin="0,5,0,10">
+        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,10">
             <Label Name="lblAlarmName" FontSize="24" Content="{Binding ElementName=UI, Path=AlarmName, FallbackValue=Alarm}" FontFamily="Segoe UI SemiLight" Foreground="{DynamicResource HeaderBrush}"></Label>
             <Label Name="lblCreatedAt" FontSize="12" Content="{Binding AlarmCreated, FallbackValue=Created at: 1/1/2021 00:01AM}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
             <Label Name="lblRingsAt" FontSize="12" Content="{Binding TimeToRing, FallbackValue=Alarm rings at 12AM (in 7h)}" FontFamily="Segoe UI Light" Foreground="{DynamicResource DescriptionBrush}"></Label>
         </StackPanel>
+
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="4"
+                   Height="2"
+                   Margin="15,0,0,0"
+                   Fill="{DynamicResource BackgroundBrush}"
+                   VerticalAlignment="Bottom">
+        </Rectangle>
     </Grid>
 </UserControl>
