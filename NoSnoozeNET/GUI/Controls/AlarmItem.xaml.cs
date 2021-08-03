@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using NoSnoozeNET.Extensions.WPF;
+using NoSnoozeNET.GUI.Functionality.AlarmSystems;
 using NoSnoozeNET.PluginSystem;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
@@ -156,6 +157,23 @@ namespace NoSnoozeNET.GUI.Controls
             PluginPanel.Children.Remove(img);
         } 
 
+        private void AlarmItem_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1);
+            timer.Start();
+
+            timer.Tick += Timer_Tick;
+
+            ColorPlugins(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            AlarmHandler alarmHandler = new AlarmHandler();
+            alarmHandler.DetermineRing(this);
+        }
+
         public async void ColorOptions(SolidColorBrush brush)
         {
             //Make new instance Options Image to prevent mutability and coloring issues.
@@ -219,49 +237,6 @@ namespace NoSnoozeNET.GUI.Controls
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-                PropertyChanged(this, new PropertyChangedEventArgs("DisplayMember"));
-            }
-        }
-
-        private void AlarmItem_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show($"{_alarmName}: {_ringsAt}");
-
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Start();
-
-            timer.Tick += Timer_Tick;
-
-            ColorPlugins(MainWindow.GlobalConfig.BrushConfig.AlarmItemBrush.StopwatchBrush);
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            var now = DateTime.Now;
-            var secondsNow = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
-            var secondsTarget = new DateTime(RingsAt.Year, RingsAt.Month, RingsAt.Day, RingsAt.Hour, RingsAt.Minute, RingsAt.Second);
-
-            if (TimeSpan.Compare(secondsNow.TimeOfDay, secondsTarget.TimeOfDay) == 0 && !IsPreviewItem)
-            {
-                foreach (var plugin in PluginElements)
-                {
-                    PluginLoader.Plugins.First(x => x.Name == plugin.PluginInfo.PluginName).Execute(new string[0]);
-                }
-
-                SoundPlayer player = new SoundPlayer(@"C:\Users\Benjamin\OneDrive\Documents\Audacity\歌ってみたKING 百鬼あやめ cover.wav");
-                player.Load();
-                player.Play();
-            }
-        }
-
         private void miDelete_OnClick(object sender, RoutedEventArgs e)
         {
             MainWindow._alarmItemList.Remove(this);
@@ -300,6 +275,17 @@ namespace NoSnoozeNET.GUI.Controls
         {
             StyleSettings SS = new StyleSettings();
             SS.Show();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+                PropertyChanged(this, new PropertyChangedEventArgs("DisplayMember"));
+            }
         }
     }
 }

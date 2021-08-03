@@ -224,7 +224,9 @@
       <DependentUpon>PluginListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Converters\ColorToSolidColorBrushValueConverter.cs" />
+    <Compile Include="GUI\Functionality\AlarmSystems\AlarmHandler.cs" />
     <Compile Include="GUI\Functionality\PluginSettings\ControlDesigner.cs" />
+    <Compile Include="GUI\Functionality\PluginSystems\HandlePlugins.cs" />
     <Compile Include="GUI\Functionality\Theme\ThemeHandler.cs" />
     <Compile Include="GUI\Windows\CreateAlarm.xaml.cs">
       <DependentUpon>CreateAlarm.xaml</DependentUpon>
