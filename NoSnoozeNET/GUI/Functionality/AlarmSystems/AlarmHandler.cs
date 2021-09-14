@@ -4,9 +4,11 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using NoSnoozeNET.GUI.Controls;
 using NoSnoozeNET.GUI.Functionality.PluginSystems;
+using NoSnoozeNET.GUI.Windows;
 using NoSnoozeNET.PluginSystem;
 
 namespace NoSnoozeNET.GUI.Functionality.AlarmSystems
@@ -18,37 +20,33 @@ namespace NoSnoozeNET.GUI.Functionality.AlarmSystems
 
         private void PerformRing(AlarmItem alarmItem)
         {
-            //Dynamic Pop-up
+            MessageBox.Show($"{alarmItem.AlarmName} rang at {DateTime.Now:HH:mm:ss tt}");
+
+            PostRingSummary postRingSummary = new PostRingSummary(alarmItem);
+            postRingSummary.Show();
             //Ring sound
         }
 
         public void DetermineRing(AlarmItem alarmItem)
         {
-            var now = DateTime.Now;
-            var secondsNow = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
-            var secondsTarget = new DateTime(alarmItem.RingsAt.Year, alarmItem.RingsAt.Month, alarmItem.RingsAt.Day, alarmItem.RingsAt.Hour, alarmItem.RingsAt.Minute, alarmItem.RingsAt.Second);
-
-            if (TimeSpan.Compare(secondsNow.TimeOfDay, secondsTarget.TimeOfDay) == 0 && !alarmItem.IsPreviewItem)
+            HandlePlugins HP = new HandlePlugins();
+            if(!HP.CheckConditions(alarmItem.PluginElements))
             {
-                HandlePlugins HP = new HandlePlugins();
-                if(!HP.CheckConditions(alarmItem.PluginElements))
+                DispatcherTimer offsetTimer = new DispatcherTimer
                 {
-                    DispatcherTimer offsetTimer = new DispatcherTimer
-                    {
-                        Interval = TimeSpan.FromMilliseconds(1000)
-                    };
+                    Interval = TimeSpan.FromMilliseconds(1000)
+                };
 
-                    offsetTimer.Start();
-                    offsetTimer.Tick += OffsetTimer_Tick;
+                offsetTimer.Start();
+                offsetTimer.Tick += OffsetTimer_Tick;
 
-                    _activeTimer = offsetTimer;
-                    _ringingItem = alarmItem;
+                _activeTimer = offsetTimer;
+                _ringingItem = alarmItem;
 
-                    return;
-                }
-
-                PerformRing(alarmItem);
+                return;
             }
+
+            PerformRing(alarmItem);
         }
 
         private void OffsetTimer_Tick(object sender, EventArgs e)

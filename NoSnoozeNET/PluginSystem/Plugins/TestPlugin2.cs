@@ -22,9 +22,12 @@ namespace NoSnoozeNET.PluginSystem.Plugins
             IconBytes = ImageExt.ImageToByteArray(Image.FromFile(System.IO.Path.Combine(MainWindow.StartupDirectory, @"Assets\SimpleLeague.png"))),
             IconName = "TestPluginIcon"
         };
+
+        public Grid RingSummary { get; set; }
+
         public bool Execute(string[] parameters)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void CommitConfig()
@@ -35,6 +38,11 @@ namespace NoSnoozeNET.PluginSystem.Plugins
                 StringConfig = new Dictionary<string, string>()
             };
             config.StringConfig.Add("Some path", string.Empty);
+        }
+
+        public void SetGridProperties()
+        {
+            return;
         }
     }
 }

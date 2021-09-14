@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace NoSnoozeNET.PluginSystem.Interfaces
 {
@@ -24,6 +25,8 @@ namespace NoSnoozeNET.PluginSystem.Interfaces
         /// </summary>
         IconInfo Icon { get; }
 
+        Grid RingSummary { get; set; }
+
         /// <summary>
         /// Execution function for plugins.
         /// </summary>
@@ -35,6 +38,11 @@ namespace NoSnoozeNET.PluginSystem.Interfaces
         /// Function for commiting local plugin settings into the system.
         /// </summary>
         void CommitConfig();
+
+        /// <summary>
+        /// Function for setting RingSummary children. No styling required.
+        /// </summary>
+        void SetGridProperties();
 
     }
 

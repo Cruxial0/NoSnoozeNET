@@ -170,8 +170,16 @@ namespace NoSnoozeNET.GUI.Controls
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            AlarmHandler alarmHandler = new AlarmHandler();
-            alarmHandler.DetermineRing(this);
+            var now = DateTime.Now;
+            var secondsNow = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
+            var secondsTarget = new DateTime(RingsAt.Year, RingsAt.Month, RingsAt.Day, RingsAt.Hour, RingsAt.Minute, RingsAt.Second);
+
+            if (TimeSpan.Compare(secondsNow.TimeOfDay, secondsTarget.TimeOfDay) == 0 && !IsPreviewItem)
+            {
+                AlarmHandler alarmHandler = new AlarmHandler();
+                alarmHandler.DetermineRing(this);
+            }
+            
         }
 
         public async void ColorOptions(SolidColorBrush brush)

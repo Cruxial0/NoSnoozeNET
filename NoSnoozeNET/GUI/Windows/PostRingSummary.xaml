@@ -1,0 +1,74 @@
+﻿<Window x:Class="NoSnoozeNET.GUI.Windows.PostRingSummary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoSnoozeNET.GUI.Windows"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        FontFamily="Segoe UI Light"
+        Title="PostRingSummary" Height="450" Width="800" WindowStyle="None" ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Background="{DynamicResource BackgroundBrush}">
+    <Grid Name="ParentGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Name="TopBar" FlowDirection="RightToLeft"
+                    Orientation="Horizontal" Height="25" Grid.ColumnSpan="8"
+                    Background="{DynamicResource ControlBackgroundBrush}"
+                    MouseDown="TopBar_OnMouseDown">
+            <Button Name="btnClose" Width="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Click="BtnClose_OnClick">
+                <iconPacks:PackIconModern Kind="Power"  Foreground="{DynamicResource StopwatchColor}"/>
+            </Button>
+        </StackPanel>
+
+        <Label Content="Alarm Summary!"
+               Grid.Column="1" Grid.Row="2"
+               FontSize="16" FontFamily="Segoe UI DemiLight"
+               Foreground="{DynamicResource LabelBrush}"></Label>
+
+        <Grid Name="MainGrid"
+              Grid.Row="3" Grid.Column="1"
+              Background="{DynamicResource ControlBackgroundBrush}"
+              Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" 
+                   Content="Alarm Name:"
+                   Foreground="{DynamicResource HeaderBrush}"
+                   ></Label>
+            <Label Name="lblAlarmName"
+                   Grid.Column="1" Grid.Row="0"
+                   Content="Test Alarm"
+                   Foreground="{DynamicResource DescriptionBrush}"></Label>
+
+            <Label Grid.Column="0" Grid.Row="1" 
+                   Content="Plugin Count:"
+                   Foreground="{DynamicResource HeaderBrush}"
+            ></Label>
+            <Label Name="lblPluginCount"
+                   Grid.Column="1" Grid.Row="1"
+                   Content="0"
+                   Foreground="{DynamicResource DescriptionBrush}"></Label>
+        </Grid>
+    </Grid>
+</Window>
